@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		605A9EBA1DD719EA00B1740A /* ConnectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9EB91DD719EA00B1740A /* ConnectionService.m */; };
+		605A9EBB1DD719EA00B1740A /* ConnectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9EB91DD719EA00B1740A /* ConnectionService.m */; };
+		605A9EBD1DD71E1A00B1740A /* testConnectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9EBC1DD71E1A00B1740A /* testConnectionService.m */; };
+		605A9EC81DD747B800B1740A /* VacancyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9EC71DD747B800B1740A /* VacancyBuilder.m */; };
+		605A9EC91DD747B800B1740A /* VacancyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9EC71DD747B800B1740A /* VacancyBuilder.m */; };
+		605A9ECC1DD747DE00B1740A /* VacancyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9ECB1DD747DE00B1740A /* VacancyModel.m */; };
+		605A9ECD1DD747DE00B1740A /* VacancyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9ECB1DD747DE00B1740A /* VacancyModel.m */; };
+		605A9ECF1DD74CE000B1740A /* testVacancyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9ECE1DD74CE000B1740A /* testVacancyBuilder.m */; };
+		605A9ED21DD74DFA00B1740A /* testVacancies in Resources */ = {isa = PBXBuildFile; fileRef = 605A9ED11DD74DFA00B1740A /* testVacancies */; };
 		60EB78AA1DD70F630082775C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 60EB78A91DD70F630082775C /* main.m */; };
 		60EB78AD1DD70F630082775C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60EB78AC1DD70F630082775C /* AppDelegate.m */; };
 		60EB78B01DD70F630082775C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60EB78AF1DD70F630082775C /* ViewController.m */; };
@@ -28,7 +37,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		60EB78A51DD70F630082775C /* SmirnovSuperJobTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmirnovSuperJobTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		605A9EB81DD719EA00B1740A /* ConnectionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConnectionService.h; path = Classes/ConnectionService.h; sourceTree = "<group>"; };
+		605A9EB91DD719EA00B1740A /* ConnectionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConnectionService.m; path = Classes/ConnectionService.m; sourceTree = "<group>"; };
+		605A9EBC1DD71E1A00B1740A /* testConnectionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testConnectionService.m; sourceTree = "<group>"; };
+		605A9EC61DD747B800B1740A /* VacancyBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VacancyBuilder.h; path = Classes/VacancyBuilder.h; sourceTree = "<group>"; };
+		605A9EC71DD747B800B1740A /* VacancyBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VacancyBuilder.m; path = Classes/VacancyBuilder.m; sourceTree = "<group>"; };
+		605A9ECA1DD747DE00B1740A /* VacancyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VacancyModel.h; path = Classes/VacancyModel.h; sourceTree = "<group>"; };
+		605A9ECB1DD747DE00B1740A /* VacancyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VacancyModel.m; path = Classes/VacancyModel.m; sourceTree = "<group>"; };
+		605A9ECE1DD74CE000B1740A /* testVacancyBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testVacancyBuilder.m; sourceTree = "<group>"; };
+		605A9ED11DD74DFA00B1740A /* testVacancies */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testVacancies; sourceTree = "<group>"; };
+		60EB78A51DD70F630082775C /* SuperJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60EB78A91DD70F630082775C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		60EB78AB1DD70F630082775C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		60EB78AC1DD70F630082775C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -39,7 +57,7 @@
 		60EB78B71DD70F630082775C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		60EB78BA1DD70F630082775C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		60EB78BC1DD70F630082775C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		60EB78C11DD70F630082775C /* SmirnovSuperJobTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmirnovSuperJobTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		60EB78C11DD70F630082775C /* SuperJobTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperJobTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60EB78C51DD70F630082775C /* SmirnovSuperJobTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmirnovSuperJobTestTests.m; sourceTree = "<group>"; };
 		60EB78C71DD70F630082775C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,11 +80,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		605A9ED01DD74DFA00B1740A /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				605A9ED11DD74DFA00B1740A /* testVacancies */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
 		60EB789C1DD70F630082775C = {
 			isa = PBXGroup;
 			children = (
-				60EB78A71DD70F630082775C /* SmirnovSuperJobTest */,
-				60EB78C41DD70F630082775C /* SmirnovSuperJobTestTests */,
+				60EB78A71DD70F630082775C /* SuperJob */,
+				60EB78C41DD70F630082775C /* SuperJobTests */,
 				60EB78A61DD70F630082775C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,13 +100,13 @@
 		60EB78A61DD70F630082775C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				60EB78A51DD70F630082775C /* SmirnovSuperJobTest.app */,
-				60EB78C11DD70F630082775C /* SmirnovSuperJobTestTests.xctest */,
+				60EB78A51DD70F630082775C /* SuperJob.app */,
+				60EB78C11DD70F630082775C /* SuperJobTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		60EB78A71DD70F630082775C /* SmirnovSuperJobTest */ = {
+		60EB78A71DD70F630082775C /* SuperJob */ = {
 			isa = PBXGroup;
 			children = (
 				60EB78AB1DD70F630082775C /* AppDelegate.h */,
@@ -93,7 +119,14 @@
 				60EB78BC1DD70F630082775C /* Info.plist */,
 				60EB78B41DD70F630082775C /* SmirnovSuperJobTest.xcdatamodeld */,
 				60EB78A81DD70F630082775C /* Supporting Files */,
+				605A9EB81DD719EA00B1740A /* ConnectionService.h */,
+				605A9EB91DD719EA00B1740A /* ConnectionService.m */,
+				605A9ECA1DD747DE00B1740A /* VacancyModel.h */,
+				605A9ECB1DD747DE00B1740A /* VacancyModel.m */,
+				605A9EC61DD747B800B1740A /* VacancyBuilder.h */,
+				605A9EC71DD747B800B1740A /* VacancyBuilder.m */,
 			);
+			name = SuperJob;
 			path = SmirnovSuperJobTest;
 			sourceTree = "<group>";
 		};
@@ -105,21 +138,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		60EB78C41DD70F630082775C /* SmirnovSuperJobTestTests */ = {
+		60EB78C41DD70F630082775C /* SuperJobTests */ = {
 			isa = PBXGroup;
 			children = (
+				605A9ED01DD74DFA00B1740A /* assets */,
+				605A9EBC1DD71E1A00B1740A /* testConnectionService.m */,
+				605A9ECE1DD74CE000B1740A /* testVacancyBuilder.m */,
 				60EB78C51DD70F630082775C /* SmirnovSuperJobTestTests.m */,
 				60EB78C71DD70F630082775C /* Info.plist */,
 			);
+			name = SuperJobTests;
 			path = SmirnovSuperJobTestTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		60EB78A41DD70F630082775C /* SmirnovSuperJobTest */ = {
+		60EB78A41DD70F630082775C /* SuperJob */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 60EB78CA1DD70F630082775C /* Build configuration list for PBXNativeTarget "SmirnovSuperJobTest" */;
+			buildConfigurationList = 60EB78CA1DD70F630082775C /* Build configuration list for PBXNativeTarget "SuperJob" */;
 			buildPhases = (
 				60EB78A11DD70F630082775C /* Sources */,
 				60EB78A21DD70F630082775C /* Frameworks */,
@@ -129,14 +166,14 @@
 			);
 			dependencies = (
 			);
-			name = SmirnovSuperJobTest;
+			name = SuperJob;
 			productName = SmirnovSuperJobTest;
-			productReference = 60EB78A51DD70F630082775C /* SmirnovSuperJobTest.app */;
+			productReference = 60EB78A51DD70F630082775C /* SuperJob.app */;
 			productType = "com.apple.product-type.application";
 		};
-		60EB78C01DD70F630082775C /* SmirnovSuperJobTestTests */ = {
+		60EB78C01DD70F630082775C /* SuperJobTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 60EB78CD1DD70F630082775C /* Build configuration list for PBXNativeTarget "SmirnovSuperJobTestTests" */;
+			buildConfigurationList = 60EB78CD1DD70F630082775C /* Build configuration list for PBXNativeTarget "SuperJobTests" */;
 			buildPhases = (
 				60EB78BD1DD70F630082775C /* Sources */,
 				60EB78BE1DD70F630082775C /* Frameworks */,
@@ -147,9 +184,9 @@
 			dependencies = (
 				60EB78C31DD70F630082775C /* PBXTargetDependency */,
 			);
-			name = SmirnovSuperJobTestTests;
+			name = SuperJobTests;
 			productName = SmirnovSuperJobTestTests;
-			productReference = 60EB78C11DD70F630082775C /* SmirnovSuperJobTestTests.xctest */;
+			productReference = 60EB78C11DD70F630082775C /* SuperJobTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -174,7 +211,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 60EB78A01DD70F630082775C /* Build configuration list for PBXProject "SmirnovSuperJobTest" */;
+			buildConfigurationList = 60EB78A01DD70F630082775C /* Build configuration list for PBXProject "SuperJob" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -187,8 +224,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				60EB78A41DD70F630082775C /* SmirnovSuperJobTest */,
-				60EB78C01DD70F630082775C /* SmirnovSuperJobTestTests */,
+				60EB78A41DD70F630082775C /* SuperJob */,
+				60EB78C01DD70F630082775C /* SuperJobTests */,
 			);
 		};
 /* End PBXProject section */
@@ -208,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				605A9ED21DD74DFA00B1740A /* testVacancies in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,9 +257,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				60EB78B61DD70F630082775C /* SmirnovSuperJobTest.xcdatamodeld in Sources */,
+				605A9EC81DD747B800B1740A /* VacancyBuilder.m in Sources */,
 				60EB78B01DD70F630082775C /* ViewController.m in Sources */,
 				60EB78AD1DD70F630082775C /* AppDelegate.m in Sources */,
 				60EB78AA1DD70F630082775C /* main.m in Sources */,
+				605A9EBA1DD719EA00B1740A /* ConnectionService.m in Sources */,
+				605A9ECC1DD747DE00B1740A /* VacancyModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +270,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				605A9ECD1DD747DE00B1740A /* VacancyModel.m in Sources */,
+				605A9ECF1DD74CE000B1740A /* testVacancyBuilder.m in Sources */,
+				605A9EBD1DD71E1A00B1740A /* testConnectionService.m in Sources */,
 				60EB78C61DD70F630082775C /* SmirnovSuperJobTestTests.m in Sources */,
+				605A9EBB1DD719EA00B1740A /* ConnectionService.m in Sources */,
+				605A9EC91DD747B800B1740A /* VacancyBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +284,7 @@
 /* Begin PBXTargetDependency section */
 		60EB78C31DD70F630082775C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 60EB78A41DD70F630082775C /* SmirnovSuperJobTest */;
+			target = 60EB78A41DD70F630082775C /* SuperJob */;
 			targetProxy = 60EB78C21DD70F630082775C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -360,7 +406,7 @@
 				DEVELOPMENT_TEAM = 6H2GQX47PU;
 				INFOPLIST_FILE = SmirnovSuperJobTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = superjob.test.SmirnovSuperJobTest;
+				PRODUCT_BUNDLE_IDENTIFIER = superjob.test.SuperJob;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -372,7 +418,7 @@
 				DEVELOPMENT_TEAM = 6H2GQX47PU;
 				INFOPLIST_FILE = SmirnovSuperJobTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = superjob.test.SmirnovSuperJobTest;
+				PRODUCT_BUNDLE_IDENTIFIER = superjob.test.SuperJob;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -386,7 +432,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = superjob.test.SmirnovSuperJobTestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmirnovSuperJobTest.app/SmirnovSuperJobTest";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SuperJob.app/SuperJob";
 			};
 			name = Debug;
 		};
@@ -399,14 +445,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = superjob.test.SmirnovSuperJobTestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmirnovSuperJobTest.app/SmirnovSuperJobTest";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SuperJob.app/SuperJob";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		60EB78A01DD70F630082775C /* Build configuration list for PBXProject "SmirnovSuperJobTest" */ = {
+		60EB78A01DD70F630082775C /* Build configuration list for PBXProject "SuperJob" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60EB78C81DD70F630082775C /* Debug */,
@@ -415,21 +461,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		60EB78CA1DD70F630082775C /* Build configuration list for PBXNativeTarget "SmirnovSuperJobTest" */ = {
+		60EB78CA1DD70F630082775C /* Build configuration list for PBXNativeTarget "SuperJob" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60EB78CB1DD70F630082775C /* Debug */,
 				60EB78CC1DD70F630082775C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		60EB78CD1DD70F630082775C /* Build configuration list for PBXNativeTarget "SmirnovSuperJobTestTests" */ = {
+		60EB78CD1DD70F630082775C /* Build configuration list for PBXNativeTarget "SuperJobTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60EB78CE1DD70F630082775C /* Debug */,
 				60EB78CF1DD70F630082775C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
