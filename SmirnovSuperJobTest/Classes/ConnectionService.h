@@ -11,12 +11,12 @@
 @protocol ConnectionServiceDelegate;
 
 @interface ConnectionService : NSObject
-@property id<ConnectionServiceDelegate> delegate;
+@property (weak) id<ConnectionServiceDelegate> delegate;
 +(instancetype)sharedService;
 - (void)loadDataFromURL:(NSURL *)url;
 @end
 
 @protocol ConnectionServiceDelegate
 - (void)connectionServiceDidLoadData:(NSData *)data;
-- (void)connectionServiceDidFailLoadData;
+- (void)connectionDidFailWithError:(NSError *)error;
 @end

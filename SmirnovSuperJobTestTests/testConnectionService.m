@@ -11,8 +11,8 @@
 
 @interface testConnectionService : XCTestCase <ConnectionServiceDelegate>
 @property ConnectionService *connectionService;
-@property BOOL connectionServiceDidCallDidLoadData;
-@property BOOL connectionServiceDidCallDidFailLoadData;
+@property BOOL didCallbackLoad;
+@property BOOL didCallbackFail;
 @property NSData *data;
 @end
 
@@ -22,18 +22,17 @@
     [super setUp];
     self.connectionService = [ConnectionService sharedService];
     self.connectionService.delegate = self;
-    self.data = nil;
-    self.connectionServiceDidCallDidLoadData = NO;
-    self.connectionServiceDidCallDidFailLoadData = NO;
-    
 }
 
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+- (void)tearDown
+{
+    self.data = nil;
+    self.didCallbackLoad = NO;
+    self.didCallbackFail = NO;
     [super tearDown];
 }
 
-- (BOOL)waitForDelegateCallDidLoadWithTimeout:(NSTimeInterval)timeoutSecs
+- (BOOL)waitForLoad:(NSTimeInterval)timeoutSecs
 {
     NSDate *timeoutDate = [NSDate dateWithTimeIntervalSinceNow:timeoutSecs];
     
@@ -43,12 +42,12 @@
         {
             break;
         }
-    } while ( !self.connectionServiceDidCallDidLoadData );
+    } while ( !self.didCallbackLoad );
     
-    return self.connectionServiceDidCallDidLoadData;
+    return self.didCallbackLoad;
 }
 
-- (BOOL)waitForDelegateCallDidFailWithTimeout:(NSTimeInterval)timeoutSecs
+- (BOOL)waitForFail:(NSTimeInterval)timeoutSecs
 {
     NSDate *timeoutDate = [NSDate dateWithTimeIntervalSinceNow:timeoutSecs];
     
@@ -58,21 +57,21 @@
         {
             break;
         }
-    } while ( !self.connectionServiceDidCallDidFailLoadData );
+    } while ( !self.didCallbackFail );
     
-    return self.connectionServiceDidCallDidFailLoadData;
+    return self.didCallbackFail;
 }
 
 
 - (void)connectionServiceDidLoadData:(NSData *)data
 {
-    self.connectionServiceDidCallDidLoadData = YES;
+    self.didCallbackLoad = YES;
     self.data = data;
 };
 
-- (void)connectionServiceDidFailLoadData
+- (void)connectionDidFailWithError:(NSError *)error
 {
-    self.connectionServiceDidCallDidFailLoadData = YES;
+    self.didCallbackFail = YES;
     self.data = nil;
 };
 
@@ -81,16 +80,16 @@
 {
     NSURL *goodURL = [NSURL URLWithString:@"https://api.superjob.ru/:2.0/vacancies"];
     [self.connectionService loadDataFromURL:goodURL];
-    [self waitForDelegateCallDidLoadWithTimeout:10];
-    XCTAssertTrue( self.connectionServiceDidCallDidLoadData );
+    [self waitForLoad:100];
+    XCTAssertTrue( self.didCallbackLoad );
 }
 
 - (void)testConnectionServiceCallsItsDelegateOnLoadBadURL
 {
     NSURL *badURL = [NSURL URLWithString:@"nasty"];
     [self.connectionService loadDataFromURL:badURL];
-    [self waitForDelegateCallDidLoadWithTimeout:10];
-    XCTAssertTrue( self.connectionServiceDidCallDidFailLoadData );
+    [self waitForFail:100];
+    XCTAssertTrue( self.didCallbackFail );
 }
 
 @end

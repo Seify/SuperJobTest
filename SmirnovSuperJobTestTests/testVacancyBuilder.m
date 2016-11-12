@@ -10,7 +10,6 @@
 #import "VacancyBuilder.h"
 
 @interface testVacancyBuilder : XCTestCase
-@property id testJSON;
 @end
 
 @implementation testVacancyBuilder
@@ -18,18 +17,20 @@
 - (void)setUp
 {
     [super setUp];
+}
 
-    NSString *pathToTestData = [[NSBundle bundleForClass:[self class]] pathForResource:@"testVacancies" ofType:nil];
+- (id)JSONForResourceNamed:(NSString *)resourceName
+{
+    NSString *pathToTestData = [[NSBundle bundleForClass:[self class]] pathForResource:resourceName ofType:nil];
     XCTAssertNotNil(pathToTestData);
     
-    NSData *testVacancyResponse = [NSData dataWithContentsOfFile:pathToTestData];
-    XCTAssertNotNil(testVacancyResponse);
+    NSData *responseData = [NSData dataWithContentsOfFile:pathToTestData];
+    XCTAssertNotNil(responseData);
     
     NSError *error = nil;
-    self.testJSON = [NSJSONSerialization JSONObjectWithData:testVacancyResponse options:0 error:&error];
-    
+    id JSONObject = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
     XCTAssertNil(error);
-
+    return JSONObject;
 }
 
 - (void)tearDown {
@@ -40,7 +41,7 @@
 - (void)testBuilderReturnsRightModelsCount
 {
     // given
-    id testJSON = self.testJSON;
+    id testJSON = [self JSONForResourceNamed:@"testVacancies"];
     
     //when
     NSArray *models = [VacancyBuilder vacancyModelsFromJSON:testJSON];
@@ -51,8 +52,8 @@
 
 - (void)testBuilderFillsAllModelFields
 {
-    // given
-    id testJSON = self.testJSON;
+    //given
+    id testJSON = [self JSONForResourceNamed:@"testVacancies"];
     
     //when
     NSArray *models = [VacancyBuilder vacancyModelsFromJSON:testJSON];
@@ -67,6 +68,18 @@
     XCTAssertNotNil(vm.townName);
     XCTAssertNotNil(vm.educationName);
     XCTAssertNotNil(vm.experienceName);
+}
+
+- (void)testReturnsNilIfServerResponseError
+{
+    //given
+    id testJSON = [self JSONForResourceNamed:@"errorResponse"];
+    
+    //when
+    NSArray *models = [VacancyBuilder vacancyModelsFromJSON:testJSON];
+    
+    //then
+    XCTAssertNil(models);
 }
 
 @end

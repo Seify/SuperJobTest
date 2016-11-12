@@ -12,11 +12,22 @@
 
 + (NSArray *)vacancyModelsFromJSON:(id<NSObject>)JSONData
 {
-    NSAssert ([JSONData isKindOfClass:[NSDictionary class]], @"Unexpected data!");
+    // handle unexpected format
+    if ( ![JSONData isKindOfClass:[NSDictionary class]] )
+    {
+        return nil;
+    }
+
     NSDictionary *JSONDict = (NSDictionary *)JSONData;
+
+    //handle server error
+    if ( JSONData[@"error"] )
+    {
+        return nil;
+    }
     
+    //create model
     NSArray *objects = JSONDict[@"objects"];
-    
     NSMutableArray *models = [NSMutableArray array];
     for ( NSDictionary *objectDict in objects )
     {
