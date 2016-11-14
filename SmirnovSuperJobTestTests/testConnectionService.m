@@ -18,6 +18,8 @@
 
 @implementation testConnectionService
 
+#pragma mark - Setup
+
 - (void)setUp {
     [super setUp];
     self.connectionService = [ConnectionService sharedService];
@@ -31,6 +33,8 @@
     self.didCallbackFail = NO;
     [super tearDown];
 }
+
+#pragma mark - Helpers
 
 - (BOOL)waitForLoad:(NSTimeInterval)timeoutSecs
 {
@@ -62,6 +66,7 @@
     return self.didCallbackFail;
 }
 
+#pragma mark - ConnectionServiceDelegate methods
 
 - (void)connectionServiceDidLoadData:(NSData *)data
 {
@@ -75,12 +80,13 @@
     self.data = nil;
 };
 
+#pragma mark - Tests
 
 - (void)testConnectionServiceCallsItsDelegateOnLoadGoodURL
 {
     NSURL *goodURL = [NSURL URLWithString:@"https://api.superjob.ru/:2.0/vacancies"];
     [self.connectionService loadDataFromURL:goodURL];
-    [self waitForLoad:100];
+    [self waitForLoad:10];
     XCTAssertTrue( self.didCallbackLoad );
 }
 
@@ -88,7 +94,7 @@
 {
     NSURL *badURL = [NSURL URLWithString:@"nasty"];
     [self.connectionService loadDataFromURL:badURL];
-    [self waitForFail:100];
+    [self waitForFail:10];
     XCTAssertTrue( self.didCallbackFail );
 }
 

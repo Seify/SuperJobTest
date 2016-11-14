@@ -34,6 +34,8 @@
         return;
     }
     
+    //TODO: add keyword as a parameter here
+    
     ConnectionService *connectionService = [ConnectionService sharedService];
     connectionService.delegate = self;
     NSString *urlAsString = [NSString stringWithFormat:@"https://api.superjob.ru/2.0/vacancies"];

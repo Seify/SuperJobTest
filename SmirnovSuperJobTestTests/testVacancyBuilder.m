@@ -14,10 +14,19 @@
 
 @implementation testVacancyBuilder
 
+#pragma mark - Setup
+
 - (void)setUp
 {
     [super setUp];
 }
+
+- (void)tearDown {
+    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    [super tearDown];
+}
+
+#pragma mark - Helpers
 
 - (id)JSONForResourceNamed:(NSString *)resourceName
 {
@@ -33,10 +42,7 @@
     return JSONObject;
 }
 
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
+#pragma mark - Tests
 
 - (void)testBuilderReturnsRightModelsCount
 {

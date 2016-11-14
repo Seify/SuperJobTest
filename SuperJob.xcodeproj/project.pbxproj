@@ -21,9 +21,16 @@
 		605A9ED81DD787F300B1740A /* testSuperJobService.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9ED71DD787F300B1740A /* testSuperJobService.m */; };
 		605A9EDA1DD7BE6F00B1740A /* errorResponse in Resources */ = {isa = PBXBuildFile; fileRef = 605A9ED91DD7BE6F00B1740A /* errorResponse */; };
 		605A9EDB1DD7BE6F00B1740A /* errorResponse in Resources */ = {isa = PBXBuildFile; fileRef = 605A9ED91DD7BE6F00B1740A /* errorResponse */; };
+		605A9F2E1DDA3D9600B1740A /* SearchVacancyModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9F2D1DDA3D9600B1740A /* SearchVacancyModuleView.m */; };
+		605A9F2F1DDA3D9700B1740A /* SearchVacancyModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9F2D1DDA3D9600B1740A /* SearchVacancyModuleView.m */; };
+		605A9F321DDA477400B1740A /* testSearchVacancyModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9F311DDA477400B1740A /* testSearchVacancyModuleView.m */; };
+		605A9F351DDA513400B1740A /* SearchVacancyModulePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9F341DDA513400B1740A /* SearchVacancyModulePresenter.m */; };
+		605A9F361DDA513400B1740A /* SearchVacancyModulePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9F341DDA513400B1740A /* SearchVacancyModulePresenter.m */; };
+		605A9F381DDA534B00B1740A /* testSearchVacancyModulePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9F371DDA534B00B1740A /* testSearchVacancyModulePresenter.m */; };
+		605A9F3B1DDA59D000B1740A /* SearchVacancyModuleInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9F3A1DDA59D000B1740A /* SearchVacancyModuleInteractor.m */; };
+		605A9F3C1DDA59D000B1740A /* SearchVacancyModuleInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9F3A1DDA59D000B1740A /* SearchVacancyModuleInteractor.m */; };
 		60EB78AA1DD70F630082775C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 60EB78A91DD70F630082775C /* main.m */; };
 		60EB78AD1DD70F630082775C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60EB78AC1DD70F630082775C /* AppDelegate.m */; };
-		60EB78B01DD70F630082775C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60EB78AF1DD70F630082775C /* ViewController.m */; };
 		60EB78B31DD70F630082775C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60EB78B11DD70F630082775C /* Main.storyboard */; };
 		60EB78B61DD70F630082775C /* SmirnovSuperJobTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 60EB78B41DD70F630082775C /* SmirnovSuperJobTest.xcdatamodeld */; };
 		60EB78B81DD70F630082775C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60EB78B71DD70F630082775C /* Assets.xcassets */; };
@@ -54,12 +61,18 @@
 		605A9ED41DD7848300B1740A /* SuperJobService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SuperJobService.m; path = Classes/SuperJobService.m; sourceTree = "<group>"; };
 		605A9ED71DD787F300B1740A /* testSuperJobService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testSuperJobService.m; sourceTree = "<group>"; };
 		605A9ED91DD7BE6F00B1740A /* errorResponse */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = errorResponse; sourceTree = "<group>"; };
+		605A9F2C1DDA3D9600B1740A /* SearchVacancyModuleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchVacancyModuleView.h; path = Classes/SearchVacancyModuleView.h; sourceTree = "<group>"; };
+		605A9F2D1DDA3D9600B1740A /* SearchVacancyModuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchVacancyModuleView.m; path = Classes/SearchVacancyModuleView.m; sourceTree = "<group>"; };
+		605A9F311DDA477400B1740A /* testSearchVacancyModuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testSearchVacancyModuleView.m; sourceTree = "<group>"; };
+		605A9F331DDA513400B1740A /* SearchVacancyModulePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchVacancyModulePresenter.h; path = Classes/SearchVacancyModulePresenter.h; sourceTree = "<group>"; };
+		605A9F341DDA513400B1740A /* SearchVacancyModulePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchVacancyModulePresenter.m; path = Classes/SearchVacancyModulePresenter.m; sourceTree = "<group>"; };
+		605A9F371DDA534B00B1740A /* testSearchVacancyModulePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testSearchVacancyModulePresenter.m; sourceTree = "<group>"; };
+		605A9F391DDA59D000B1740A /* SearchVacancyModuleInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchVacancyModuleInteractor.h; path = Classes/SearchVacancyModuleInteractor.h; sourceTree = "<group>"; };
+		605A9F3A1DDA59D000B1740A /* SearchVacancyModuleInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchVacancyModuleInteractor.m; path = Classes/SearchVacancyModuleInteractor.m; sourceTree = "<group>"; };
 		60EB78A51DD70F630082775C /* SuperJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60EB78A91DD70F630082775C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		60EB78AB1DD70F630082775C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		60EB78AC1DD70F630082775C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		60EB78AE1DD70F630082775C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		60EB78AF1DD70F630082775C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		60EB78B21DD70F630082775C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		60EB78B51DD70F630082775C /* SmirnovSuperJobTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmirnovSuperJobTest.xcdatamodel; sourceTree = "<group>"; };
 		60EB78B71DD70F630082775C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -96,6 +109,19 @@
 			path = assets;
 			sourceTree = "<group>";
 		};
+		605A9F301DDA3DA200B1740A /* SearchVacancyModule */ = {
+			isa = PBXGroup;
+			children = (
+				605A9F2C1DDA3D9600B1740A /* SearchVacancyModuleView.h */,
+				605A9F2D1DDA3D9600B1740A /* SearchVacancyModuleView.m */,
+				605A9F331DDA513400B1740A /* SearchVacancyModulePresenter.h */,
+				605A9F341DDA513400B1740A /* SearchVacancyModulePresenter.m */,
+				605A9F391DDA59D000B1740A /* SearchVacancyModuleInteractor.h */,
+				605A9F3A1DDA59D000B1740A /* SearchVacancyModuleInteractor.m */,
+			);
+			name = SearchVacancyModule;
+			sourceTree = "<group>";
+		};
 		60EB789C1DD70F630082775C = {
 			isa = PBXGroup;
 			children = (
@@ -119,8 +145,6 @@
 			children = (
 				60EB78AB1DD70F630082775C /* AppDelegate.h */,
 				60EB78AC1DD70F630082775C /* AppDelegate.m */,
-				60EB78AE1DD70F630082775C /* ViewController.h */,
-				60EB78AF1DD70F630082775C /* ViewController.m */,
 				60EB78B11DD70F630082775C /* Main.storyboard */,
 				60EB78B71DD70F630082775C /* Assets.xcassets */,
 				60EB78B91DD70F630082775C /* LaunchScreen.storyboard */,
@@ -135,6 +159,7 @@
 				605A9EC71DD747B800B1740A /* VacancyBuilder.m */,
 				605A9ED31DD7848300B1740A /* SuperJobService.h */,
 				605A9ED41DD7848300B1740A /* SuperJobService.m */,
+				605A9F301DDA3DA200B1740A /* SearchVacancyModule */,
 			);
 			name = SuperJob;
 			path = SmirnovSuperJobTest;
@@ -151,6 +176,8 @@
 		60EB78C41DD70F630082775C /* SuperJobTests */ = {
 			isa = PBXGroup;
 			children = (
+				605A9F371DDA534B00B1740A /* testSearchVacancyModulePresenter.m */,
+				605A9F311DDA477400B1740A /* testSearchVacancyModuleView.m */,
 				605A9ED71DD787F300B1740A /* testSuperJobService.m */,
 				605A9ED01DD74DFA00B1740A /* assets */,
 				605A9EBC1DD71E1A00B1740A /* testConnectionService.m */,
@@ -268,14 +295,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				605A9F351DDA513400B1740A /* SearchVacancyModulePresenter.m in Sources */,
 				60EB78B61DD70F630082775C /* SmirnovSuperJobTest.xcdatamodeld in Sources */,
 				605A9EC81DD747B800B1740A /* VacancyBuilder.m in Sources */,
-				60EB78B01DD70F630082775C /* ViewController.m in Sources */,
 				60EB78AD1DD70F630082775C /* AppDelegate.m in Sources */,
 				60EB78AA1DD70F630082775C /* main.m in Sources */,
+				605A9F2E1DDA3D9600B1740A /* SearchVacancyModuleView.m in Sources */,
 				605A9EBA1DD719EA00B1740A /* ConnectionService.m in Sources */,
 				605A9ECC1DD747DE00B1740A /* VacancyModel.m in Sources */,
 				605A9ED51DD7848300B1740A /* SuperJobService.m in Sources */,
+				605A9F3B1DDA59D000B1740A /* SearchVacancyModuleInteractor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,10 +312,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				605A9F361DDA513400B1740A /* SearchVacancyModulePresenter.m in Sources */,
+				605A9F2F1DDA3D9700B1740A /* SearchVacancyModuleView.m in Sources */,
+				605A9F3C1DDA59D000B1740A /* SearchVacancyModuleInteractor.m in Sources */,
 				605A9ECD1DD747DE00B1740A /* VacancyModel.m in Sources */,
 				605A9ED61DD7848300B1740A /* SuperJobService.m in Sources */,
 				605A9ED81DD787F300B1740A /* testSuperJobService.m in Sources */,
+				605A9F321DDA477400B1740A /* testSearchVacancyModuleView.m in Sources */,
 				605A9ECF1DD74CE000B1740A /* testVacancyBuilder.m in Sources */,
+				605A9F381DDA534B00B1740A /* testSearchVacancyModulePresenter.m in Sources */,
 				605A9EBD1DD71E1A00B1740A /* testConnectionService.m in Sources */,
 				605A9EBB1DD719EA00B1740A /* ConnectionService.m in Sources */,
 				605A9EC91DD747B800B1740A /* VacancyBuilder.m in Sources */,

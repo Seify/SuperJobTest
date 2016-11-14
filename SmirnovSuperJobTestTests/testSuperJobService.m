@@ -19,12 +19,25 @@
 
 @implementation testSuperJobService
 
+#pragma mark - Setup
+
 - (void)setUp
 {
     [super setUp];
     self.superJobService = [SuperJobService sharedService];
     self.superJobService.delegate = self;
 }
+
+- (void)tearDown
+{
+    self.vacancies = nil;
+    self.errorText = nil;
+    self.didCallbackLoad = NO;
+    self.didCallbackFail = NO;
+    [super tearDown];
+}
+
+#pragma mark - SuperJobServiceDelegate methods
 
 - (void)didLoadVacancies:(NSArray *)vacancies
 {
@@ -38,14 +51,7 @@
     self.errorText = error.localizedDescription;
 };
 
-- (void)tearDown
-{
-    self.vacancies = nil;
-    self.errorText = nil;
-    self.didCallbackLoad = NO;
-    self.didCallbackFail = NO;
-    [super tearDown];
-}
+#pragma mark - Helpers
 
 - (BOOL)waitForFail:(NSTimeInterval)timeoutSecs
 {
@@ -76,6 +82,8 @@
     
     return self.didCallbackLoad;
 }
+
+#pragma mark - Tests
 
 - (void)testFailsOnEmptyKeyword
 {

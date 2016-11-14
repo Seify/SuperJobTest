@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "SearchVacancyModuleView.h"
 
 @interface AppDelegate ()
 
@@ -15,8 +16,14 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SearchVacancyModuleView"];
+    
+    [(UINavigationController *)self.window.rootViewController pushViewController:vc animated:YES];
+    
+    
     return YES;
 }
 
