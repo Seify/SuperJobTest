@@ -38,7 +38,17 @@
     
     ConnectionService *connectionService = [ConnectionService sharedService];
     connectionService.delegate = self;
-    NSString *urlAsString = [NSString stringWithFormat:@"https://api.superjob.ru/2.0/vacancies"];
+    NSString *escapedKeyword;
+    if ( [keyword respondsToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)] )
+    {
+        escapedKeyword = [keyword stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    }
+    else
+    {
+        escapedKeyword = [keyword stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
+    
+    NSString *urlAsString = [NSString stringWithFormat:@"https://api.superjob.ru/2.0/vacancies/?keyword=%@", escapedKeyword];
     NSURL *url = [[NSURL alloc] initWithString:urlAsString];
     connectionService.delegate = self;
     [connectionService loadDataFromURL:url];

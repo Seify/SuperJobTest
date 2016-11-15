@@ -19,4 +19,5 @@
 
 
 @interface SearchVacancyModuleInteractor : NSObject <SearchVacancyModuleInteractorInput>
+@property id<SearchVacancyModuleInteractorOutput> output;
 @end
