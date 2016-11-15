@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SearchVacancyModuleView.h"
 #import "SearchVacancyModuleInteractor.h"
+#import "SearchVacancyModuleRouter.h"
 
 @protocol SearchVacancyModuleInput <NSObject>
 - (void)configureModule;
@@ -19,5 +20,6 @@
 
 @interface SearchVacancyModulePresenter : NSObject <SearchVacancyModulePresenterInput>
 @property (weak)id<SearchVacancyModuleViewInput> view;
-@property (weak)id<SearchVacancyModuleInteractorInput> interactor;
+@property id<SearchVacancyModuleInteractorInput> interactor;
+@property id<SearchVacancyModuleRouterInput> router;
 @end

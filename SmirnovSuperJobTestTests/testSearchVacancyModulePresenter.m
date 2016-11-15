@@ -7,16 +7,19 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "VacancyModel.h"
 #import "SearchVacancyModulePresenter.h"
 #import "SearchVacancyModuleView.h"
 #import "SearchVacancyModuleInteractor.h"
 
-@interface testSearchVacancyModulePresenter : XCTestCase <SearchVacancyModuleViewInput, SearchVacancyModuleInteractorInput>
+@interface testSearchVacancyModulePresenter : XCTestCase <SearchVacancyModuleViewInput, SearchVacancyModuleInteractorInput, SearchVacancyModuleRouterInput>
 @property SearchVacancyModulePresenter *presenter;
 @property BOOL showErrorMessageCalled;
 @property BOOL dismissErrorMessageCalled;
 @property NSString *errorMessage;
 @property BOOL loadVacanciesForKeywordCalled;
+@property id nextModuleData;
+@property BOOL routeToTheNextModuleCalled;
 @end
 
 @implementation testSearchVacancyModulePresenter
@@ -29,6 +32,7 @@
     self.presenter = [[SearchVacancyModulePresenter alloc] init];
     self.presenter.view = self;
     self.presenter.interactor = self;
+    self.presenter.router = self;
 }
 
 - (void)tearDown
@@ -36,6 +40,8 @@
     self.showErrorMessageCalled = NO;
     self.dismissErrorMessageCalled = NO;
     self.errorMessage = nil;
+    self.routeToTheNextModuleCalled = NO;
+    self.nextModuleData = nil;
     [super tearDown];
 }
 
@@ -58,6 +64,24 @@
 {
     self.loadVacanciesForKeywordCalled = YES;
 };
+
+#pragma mark - SearchVacancyModuleRouterInput methods
+
+- (void)presentNextModuleWithData:(id)data
+{
+    self.nextModuleData = data;
+    self.routeToTheNextModuleCalled = YES;
+};
+
+#pragma mark - Helpers
+
+- (NSArray *)testVacancies
+{
+    VacancyModel *vm = [[VacancyModel alloc] init];
+    vm.profession = @"грузчик";
+    vm.educationName = @"средне-специальное";
+    return @[vm];
+}
 
 #pragma mark - Tests
 
@@ -84,10 +108,43 @@
     XCTAssertTrue(self.loadVacanciesForKeywordCalled);
 }
 
-//TODO: test show error if interactor returns error
+- (void)testShowErrorWhenLoadingFails
+{
+    //given
+    NSString *errorMessage = @"some error";
+    
+    //when
+    [self.presenter didFailLoadVacanciesWithErrorMessage:errorMessage];
+    
+    //then
+    XCTAssertTrue( self.showErrorMessageCalled );
+    XCTAssert([self.errorMessage isEqualToString:errorMessage]);
+}
 
-//TODO: test show error if interactor returns empty array
+- (void)testShowErrorWhenLoadedEmptyArray
+{
+    //given
+    NSArray *vacancies = @[];
+    
+    //when
+    [self.presenter didLoadVacancies:vacancies];
+    
+    //then
+    XCTAssertTrue(self.showErrorMessageCalled);
+    XCTAssert( [self.errorMessage isEqualToString:@"Nothing was found. Try another keywords."] );
+}
 
-//TODO: test call routing to the next module if interactor returns vacancies
+- (void)testCallRoutingToNextModuleWhenLoadedVacancies
+{
+    //given
+    NSArray *testVacansies = [self testVacancies];
+    
+    //when
+    [self.presenter didLoadVacancies:testVacansies];
+    
+    //then
+    XCTAssertTrue(self.routeToTheNextModuleCalled);
+    XCTAssert([testVacansies isEqual:self.nextModuleData]);
+}
 
 @end
