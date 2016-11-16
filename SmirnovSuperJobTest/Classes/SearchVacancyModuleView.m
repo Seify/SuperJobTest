@@ -38,14 +38,14 @@
 
 - (IBAction)searchButtonPressed:(id)sender
 {
-    
+    [self.output searchPressedForEnteredKeyword:self.searchField.text];
 }
 
 - (void)showErrorMessage:(NSString *)errorMessage
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
                                                                    message:errorMessage
-                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+                                                            preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK"
                                                  style:UIAlertActionStyleDefault
                                                handler:^(UIAlertAction * action)

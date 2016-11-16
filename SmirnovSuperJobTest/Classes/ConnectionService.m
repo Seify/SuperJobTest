@@ -36,11 +36,16 @@
     {
         if ( !error )
         {
-            [self.delegate connectionServiceDidLoadData:data];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.delegate connectionServiceDidLoadData:data];
+            });
+            
         }
         else
         {
-            [self.delegate connectionDidFailWithError:error];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.delegate connectionDidFailWithError:error];
+            });
         }
         
     }] resume];

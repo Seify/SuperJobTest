@@ -19,5 +19,5 @@
 
 
 @interface SearchVacancyModuleInteractor : NSObject <SearchVacancyModuleInteractorInput>
-@property id<SearchVacancyModuleInteractorOutput> output;
+@property (weak) id<SearchVacancyModuleInteractorOutput> output;
 @end

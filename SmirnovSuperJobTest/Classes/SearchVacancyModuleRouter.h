@@ -13,5 +13,4 @@
 @end
 
 @interface SearchVacancyModuleRouter : NSObject <SearchVacancyModuleRouterInput>
-
 @end

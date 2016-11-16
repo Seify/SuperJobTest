@@ -10,4 +10,9 @@
 
 @implementation SearchVacancyModuleRouter
 
+- (void)presentNextModuleWithData:(id)data
+{
+    
+};
+
 @end

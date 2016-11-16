@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "SearchVacancyModuleInteractor.h"
+#import "VacancyModel.h"
 
 @interface testSearchVacancyModuleInteractor : XCTestCase <SearchVacancyModuleInteractorOutput>
 @property SearchVacancyModuleInteractor *interactor;
@@ -112,8 +113,23 @@
     XCTAssert(self.vacancies.count == 0);
 }
 
-//TODO: test returns nonempty array of vacancy models on normal request
-//NSString *keyword = @"грузчик, кладовщик";
+- (void)testReturnsArrayOfVacanciesOnGoodKeyword
+{
+    //given
+    NSString *keyword = @"грузчик, кладовщик";
+    
+    //when
+    [self.interactor loadVacanciesForKeyword:keyword];
+    
+    //then
+    XCTAssertTrue([self waitForLoad:10]);
+    XCTAssert([self.vacancies isKindOfClass:[NSArray class]]);
+    for ( id vacancy in self.vacancies )
+    {
+        [vacancy isKindOfClass:[VacancyModel class]];
+    }
+    XCTAssert(self.vacancies.count > 0);
+}
 
 
 @end

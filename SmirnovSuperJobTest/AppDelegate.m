@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "SearchVacancyModuleView.h"
+#import "SearchVacancyModuleAssembler.h"
 
 @interface AppDelegate ()
 
@@ -15,14 +15,10 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SearchVacancyModuleView"];
-    
-    [(UINavigationController *)self.window.rootViewController pushViewController:vc animated:YES];
-    
+    UIViewController *searchModuleEntryPoint = [SearchVacancyModuleAssembler createModuleWithEntryPoint];
+    [(UINavigationController *)self.window.rootViewController pushViewController:searchModuleEntryPoint animated:YES];
     
     return YES;
 }
