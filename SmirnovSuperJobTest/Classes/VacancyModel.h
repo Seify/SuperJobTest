@@ -18,5 +18,6 @@
 @property NSString *townName;
 @property NSString *educationName;
 @property NSString *experienceName;
-@property NSDate *date_published;
+@property NSString *date_published;
+@property NSString *firmName;
 @end

@@ -70,6 +70,4 @@
     XCTAssertTrue(self.didLoadCalled);
 }
 
-
-
 @end

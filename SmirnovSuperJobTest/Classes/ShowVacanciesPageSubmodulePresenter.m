@@ -10,4 +10,9 @@
 
 @implementation ShowVacanciesPageSubmodulePresenter
 
+- (void)viewDidLoad
+{
+    
+}
+
 @end

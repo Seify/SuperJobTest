@@ -64,18 +64,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Gg-Nd-c1e">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Gg-Nd-c1e">
                                 <frame key="frameInset" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jne-iZ-BUB">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShowVacanciesPageSubmoduleViewVacancyCell" rowHeight="85" id="jne-iZ-BUB" customClass="ShowVacanciesPageSubmoduleViewVacancyCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jne-iZ-BUB" id="SFg-IU-dLC">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сегодня" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jfl-Lw-P1w">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Менеджер по работе с клиентами" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D1Y-Rt-hoF">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25000 - 120000 Р" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJ6-Bp-E5t">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Московская Зеркальная Фабрика, Москва" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mX2-dy-srP">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="mX2-dy-srP" firstAttribute="leading" secondItem="Jfl-Lw-P1w" secondAttribute="leading" id="74q-lO-Akj"/>
+                                                <constraint firstItem="D1Y-Rt-hoF" firstAttribute="leading" secondItem="Jfl-Lw-P1w" secondAttribute="leading" id="B8n-h3-XFC"/>
+                                                <constraint firstItem="mX2-dy-srP" firstAttribute="top" secondItem="mJ6-Bp-E5t" secondAttribute="bottom" id="LHi-K7-uoK"/>
+                                                <constraint firstItem="D1Y-Rt-hoF" firstAttribute="top" secondItem="Jfl-Lw-P1w" secondAttribute="bottom" constant="1" id="MYh-ra-Pv3"/>
+                                                <constraint firstItem="mJ6-Bp-E5t" firstAttribute="leading" secondItem="Jfl-Lw-P1w" secondAttribute="leading" id="QaU-yj-RY0"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="Jfl-Lw-P1w" secondAttribute="leading" id="jMf-dA-KFa"/>
+                                                <constraint firstItem="mJ6-Bp-E5t" firstAttribute="top" secondItem="D1Y-Rt-hoF" secondAttribute="bottom" constant="7" id="w1l-7A-YZx"/>
+                                                <constraint firstItem="Jfl-Lw-P1w" firstAttribute="top" secondItem="SFg-IU-dLC" secondAttribute="topMargin" constant="-8" id="yIy-23-FiJ"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="compensationLabel" destination="mJ6-Bp-E5t" id="wKw-HZ-1CC"/>
+                                            <outlet property="dateLabel" destination="Jfl-Lw-P1w" id="QkE-SB-pHE"/>
+                                            <outlet property="employerLabel" destination="mX2-dy-srP" id="WZW-AX-alG"/>
+                                            <outlet property="professionLabel" destination="D1Y-Rt-hoF" id="ZUC-7F-M68"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -86,6 +124,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="spinner" destination="e3Z-lv-8OZ" id="OFb-h9-Kzg"/>
+                        <outlet property="tableView" destination="4Gg-Nd-c1e" id="ILa-jW-aDe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vI4-Mt-rXA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

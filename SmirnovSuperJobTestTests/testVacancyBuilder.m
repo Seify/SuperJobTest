@@ -66,14 +66,16 @@
     
     //then
     VacancyModel *vm = [models lastObject];
-    XCTAssertNotNil(vm.profession);
-    XCTAssertNotNil(vm.date_published);
-    XCTAssertNotNil(vm.work);
-    XCTAssertNotNil(vm.compensation);
-    XCTAssertNotNil(vm.address);
-    XCTAssertNotNil(vm.townName);
-    XCTAssertNotNil(vm.educationName);
-    XCTAssertNotNil(vm.experienceName);
+    //TODO: XCTAssert([vm.profession isEqualToString:@"string"]) fails, maybe because vm.profession is NSCFString
+    XCTAssert([vm.profession isKindOfClass:[NSString class]]);
+    XCTAssert([vm.date_published isKindOfClass:[NSString class]]);
+    XCTAssert([vm.work isKindOfClass:[NSString class]]);
+    XCTAssert([vm.compensation isKindOfClass:[NSString class]]);
+    XCTAssert([vm.address isKindOfClass:[NSString class]] || [vm.address isKindOfClass:[NSNull class]]);
+    XCTAssert([vm.townName isKindOfClass:[NSString class]]);
+    XCTAssert([vm.educationName isKindOfClass:[NSString class]]);
+    XCTAssert([vm.experienceName isKindOfClass:[NSString class]]);
+    XCTAssert([vm.firmName isKindOfClass:[NSString class]]);
 }
 
 - (void)testReturnsNilIfServerResponseError

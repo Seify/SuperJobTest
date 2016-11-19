@@ -35,7 +35,15 @@
         
         vm.profession               = objectDict[@"profession"];
         int date_published_unixtime = [objectDict[@"profession"] intValue];
-        vm.date_published           = [NSDate dateWithTimeIntervalSince1970:date_published_unixtime];
+        
+        NSDate *date_published      = [NSDate dateWithTimeIntervalSince1970:date_published_unixtime];
+        NSString *format = [NSDateFormatter dateFormatFromTemplate:@"d MMM" options:0
+                                                            locale:[NSLocale currentLocale]];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:format];
+        NSString *formattedString   = [dateFormatter stringFromDate:date_published];
+        vm.date_published           = [date_published isEqualToDate:[NSDate date]] ? @"сегодня" : formattedString;
+        
         vm.work                     = objectDict[@"work"];
         NSString *compensationName  = objectDict[@"compensation"];
         if ( !compensationName )
@@ -47,6 +55,7 @@
         vm.townName                 = [objectDict[@"town"] objectForKey:@"title"];
         vm.educationName            = [objectDict[@"education"] objectForKey:@"title"];
         vm.experienceName           = [objectDict[@"experience"] objectForKey:@"title"];
+        vm.firmName                 = objectDict[@"firm_name"];
         [models addObject:vm];
     }
     return models;

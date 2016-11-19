@@ -10,4 +10,37 @@
 
 @implementation ShowVacanciesPageSubmoduleView
 
+@synthesize tableMaster = _tableMaster;
+
+- (ShowVacanciesPageSubmoduleViewTableMaster *)tableMaster
+{
+    if ( !_tableMaster )
+    {
+        _tableMaster = [[ShowVacanciesPageSubmoduleViewTableMaster alloc] init];
+        _tableMaster.tableView = self.tableView;
+    }
+    return _tableMaster;
+}
+
+- (void)viewDidLoad
+{
+    [self.output viewDidLoad];
+}
+
+- (void)showSpinner
+{
+    [self.spinner startAnimating];
+};
+
+- (void)hideSpinner
+{
+    [self.spinner stopAnimating];
+};
+
+- (void)showData:(id)data
+{
+    self.tableMaster.vacancies = data;
+    [self.tableMaster reloadTable];
+};
+
 @end
