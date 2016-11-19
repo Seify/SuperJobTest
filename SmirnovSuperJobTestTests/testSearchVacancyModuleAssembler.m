@@ -36,9 +36,10 @@
 - (void)testAllComponentsAndConnectionsAreSet
 {
     //given
+    UINavigationController *rootController = [[UINavigationController alloc] init];
     
     //when
-    SearchVacancyModuleView *view = (SearchVacancyModuleView *)[SearchVacancyModuleAssembler createModuleWithEntryPoint];
+    SearchVacancyModuleView *view = (SearchVacancyModuleView *)[SearchVacancyModuleAssembler createModuleWithRootController:rootController];
     SearchVacancyModulePresenter *presenter = (SearchVacancyModulePresenter *)view.output;
     SearchVacancyModuleInteractor *interactor = (SearchVacancyModuleInteractor *)presenter.interactor;
     SearchVacancyModuleRouter *router = (SearchVacancyModuleRouter *)presenter.router;
@@ -49,23 +50,17 @@
     XCTAssertNotNil(interactor);
     XCTAssertNotNil(router);
 
-    NSLog(@"view class = %@", NSStringFromClass([view class]));
-    
-//    XCTAssert( [view isMemberOfClass:[SearchVacancyModuleView class]] );
+    XCTAssert( [view isMemberOfClass:[SearchVacancyModuleView class]] );
     XCTAssert( [presenter isMemberOfClass:[SearchVacancyModulePresenter class]] );
     XCTAssert( [interactor isMemberOfClass:[SearchVacancyModuleInteractor class]] );
     XCTAssert( [router isMemberOfClass:[SearchVacancyModuleRouter class]] );
-
-//    NSAssert( [view isMemberOfClass:[SearchVacancyModuleView class]], @"[view isMemberOfClass:[SearchVacancyModuleView class]]");
-
-    
-//    XCTAssert( [view isMemberOfClass:[SearchVacancyModuleView class]] );
     
     XCTAssert( view.output == presenter );
     XCTAssert( presenter.view == view );
     XCTAssert( presenter.interactor == interactor );
     XCTAssert( presenter.router == router );
     XCTAssert( interactor.output == presenter );
+    XCTAssert( router.rootController == rootController );
 }
 
 @end

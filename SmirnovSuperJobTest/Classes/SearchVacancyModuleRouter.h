@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @protocol SearchVacancyModuleRouterInput
 - (void)presentNextModuleWithData:(id)data;
 @end
 
 @interface SearchVacancyModuleRouter : NSObject <SearchVacancyModuleRouterInput>
+@property (weak) UIViewController *rootController;
 @end

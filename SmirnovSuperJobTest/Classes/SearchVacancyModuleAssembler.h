@@ -10,5 +10,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchVacancyModuleAssembler : NSObject
-+ (UIViewController *)createModuleWithEntryPoint;
++ (UIViewController *)createModuleWithRootController:(UIViewController *)rootController;
 @end

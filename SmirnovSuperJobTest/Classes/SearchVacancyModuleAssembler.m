@@ -14,7 +14,7 @@
 
 @implementation SearchVacancyModuleAssembler
 
-+ (UIViewController *)createModuleWithEntryPoint
++ (UIViewController *)createModuleWithRootController:(UIViewController *)rootController
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     SearchVacancyModuleView *view = [storyboard instantiateViewControllerWithIdentifier:@"SearchVacancyModuleView"];
@@ -26,6 +26,7 @@
     presenter.interactor = interactor;
     presenter.router = router;
     interactor.output = presenter;
+    router.rootController = rootController;
     
     return view;
 };
