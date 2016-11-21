@@ -14,10 +14,14 @@
 - (void)showSpinner;
 - (void)hideSpinner;
 - (void)showData:(id)data;
+- (void)showErrorMessage:(NSString *)message;
 @end
 
 @protocol ShowVacanciesPageSubmoduleViewOutput
 - (void)viewDidLoad;
+- (void)userDidSwipeLeft;
+- (void)userDidSwipeRight;
+- (void)userPressedOK;
 @end
 
 @interface ShowVacanciesPageSubmoduleView : UIViewController<ShowVacanciesPageSubmoduleViewInput>

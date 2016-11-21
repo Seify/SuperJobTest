@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @protocol ShowVacanciesPageSubmoduleRouterInput
+- (void)showPrevPageSubmodule;
+- (void)showNextPageSubmodule;
+- (void)showNextModule;
 @end
 
 @protocol ShowVacanciesPageSubmoduleRouterOutput

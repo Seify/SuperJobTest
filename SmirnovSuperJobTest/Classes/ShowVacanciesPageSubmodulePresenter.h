@@ -22,4 +22,5 @@
 @property (weak) id<ShowVacanciesPageSubmoduleViewInput> view;
 @property id<ShowVacanciesPageSubmoduleInteractorInput> interactor;
 @property id<ShowVacanciesPageSubmoduleRouterInput> router;
+- (void)start;
 @end

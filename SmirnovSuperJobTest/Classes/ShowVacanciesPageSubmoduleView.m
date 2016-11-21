@@ -27,6 +27,8 @@
     [self.output viewDidLoad];
 }
 
+#pragma mark - ShowVacanciesPageSubmoduleViewInput methods
+
 - (void)showSpinner
 {
     [self.spinner startAnimating];
@@ -41,6 +43,11 @@
 {
     self.tableMaster.vacancies = data;
     [self.tableMaster reloadTable];
+};
+
+- (void)showErrorMessage:(NSString *)message
+{
+    
 };
 
 @end

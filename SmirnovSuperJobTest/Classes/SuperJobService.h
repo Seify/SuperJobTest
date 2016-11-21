@@ -15,6 +15,7 @@
 @property (weak) id<SuperJobServiceDelegate> delegate;
 + (instancetype)sharedService;
 - (void)loadVacanciesForKeyword:(NSString *)keyword;
+- (void)loadVacanciesForKeyword:(NSString *)keyword Page:(int)page;
 @end
 
 @protocol SuperJobServiceDelegate

@@ -11,10 +11,6 @@
 #import "SearchVacancyModuleInteractor.h"
 #import "SearchVacancyModuleRouter.h"
 
-@protocol SearchVacancyModuleInput <NSObject>
-- (void)configureModule;
-@end
-
 @protocol SearchVacancyModulePresenterInput <SearchVacancyModuleViewOutput, SearchVacancyModuleInteractorOutput>
 @end
 

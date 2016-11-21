@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @protocol ShowVacanciesPageSubmoduleInteractorInput
+- (void)requestVacanciesForKeyword:(NSString *)keyword Page:(int)page;
 @end
 
 @protocol ShowVacanciesPageSubmoduleInteractorOutput
+- (void)didLoadVacancies:(NSArray *)vacancies;
+- (void)didFailLoadVacanciesWithErrorMessage:(NSString *)errorMessage;
 @end
 
 

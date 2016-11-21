@@ -19,6 +19,8 @@
 		60286EAF1DE0D7D6000C6438 /* ShowVacanciesPageSubmoduleViewTableMaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 60286EAE1DE0D7D6000C6438 /* ShowVacanciesPageSubmoduleViewTableMaster.m */; };
 		60286EB31DE0DDA3000C6438 /* ShowVacanciesPageSubmoduleViewVacancyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60286EB21DE0DDA3000C6438 /* ShowVacanciesPageSubmoduleViewVacancyCell.m */; };
 		60286EB81DE0E85A000C6438 /* VacancyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9ECB1DD747DE00B1740A /* VacancyModel.m */; };
+		60286EBA1DE2FE09000C6438 /* testShowVacanciesPageSubmoduleInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 60286EB91DE2FE09000C6438 /* testShowVacanciesPageSubmoduleInteractor.m */; };
+		60286EBC1DE307C5000C6438 /* testShowVacanciesPageSubmodulePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 60286EBB1DE307C5000C6438 /* testShowVacanciesPageSubmodulePresenter.m */; };
 		605A9EBA1DD719EA00B1740A /* ConnectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9EB91DD719EA00B1740A /* ConnectionService.m */; };
 		605A9EBD1DD71E1A00B1740A /* testConnectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9EBC1DD71E1A00B1740A /* testConnectionService.m */; };
 		605A9EC81DD747B800B1740A /* VacancyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9EC71DD747B800B1740A /* VacancyBuilder.m */; };
@@ -77,6 +79,8 @@
 		60286EAE1DE0D7D6000C6438 /* ShowVacanciesPageSubmoduleViewTableMaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShowVacanciesPageSubmoduleViewTableMaster.m; path = Classes/ShowVacanciesPageSubmoduleViewTableMaster.m; sourceTree = "<group>"; };
 		60286EB11DE0DDA3000C6438 /* ShowVacanciesPageSubmoduleViewVacancyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShowVacanciesPageSubmoduleViewVacancyCell.h; path = Classes/ShowVacanciesPageSubmoduleViewVacancyCell.h; sourceTree = "<group>"; };
 		60286EB21DE0DDA3000C6438 /* ShowVacanciesPageSubmoduleViewVacancyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShowVacanciesPageSubmoduleViewVacancyCell.m; path = Classes/ShowVacanciesPageSubmoduleViewVacancyCell.m; sourceTree = "<group>"; };
+		60286EB91DE2FE09000C6438 /* testShowVacanciesPageSubmoduleInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testShowVacanciesPageSubmoduleInteractor.m; sourceTree = "<group>"; };
+		60286EBB1DE307C5000C6438 /* testShowVacanciesPageSubmodulePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testShowVacanciesPageSubmodulePresenter.m; sourceTree = "<group>"; };
 		605A9EB81DD719EA00B1740A /* ConnectionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConnectionService.h; path = Classes/ConnectionService.h; sourceTree = "<group>"; };
 		605A9EB91DD719EA00B1740A /* ConnectionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConnectionService.m; path = Classes/ConnectionService.m; sourceTree = "<group>"; };
 		605A9EBC1DD71E1A00B1740A /* testConnectionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testConnectionService.m; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 		60286EB71DE0DFF9000C6438 /* testShowVacanciesPageSubmodule */ = {
 			isa = PBXGroup;
 			children = (
+				60286EBB1DE307C5000C6438 /* testShowVacanciesPageSubmodulePresenter.m */,
 				60286EAB1DE0CFDF000C6438 /* testShowVacanciesPageSubmoduleView.m */,
 				60286EA91DE0BB71000C6438 /* testShowVacanciesPageSubmoduleAssembler.m */,
 			);
@@ -269,6 +274,7 @@
 		60B8822D1DDCE742000A20EF /* testHelpers */ = {
 			isa = PBXGroup;
 			children = (
+				60286EB91DE2FE09000C6438 /* testShowVacanciesPageSubmoduleInteractor.m */,
 				605A9ECE1DD74CE000B1740A /* testVacancyBuilder.m */,
 			);
 			name = testHelpers;
@@ -499,7 +505,9 @@
 				605A9F381DDA534B00B1740A /* testSearchVacancyModulePresenter.m in Sources */,
 				60286EAA1DE0BB71000C6438 /* testShowVacanciesPageSubmoduleAssembler.m in Sources */,
 				60AC15E21DDCD9D900CD60DD /* testSearchVacancyModuleAssembler.m in Sources */,
+				60286EBC1DE307C5000C6438 /* testShowVacanciesPageSubmodulePresenter.m in Sources */,
 				605A9EBD1DD71E1A00B1740A /* testConnectionService.m in Sources */,
+				60286EBA1DE2FE09000C6438 /* testShowVacanciesPageSubmoduleInteractor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

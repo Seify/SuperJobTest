@@ -109,5 +109,4 @@
     XCTAssert(self.showVacanciesPageSubmoduleView.tableMaster.vacancies == data );
 }
 
-
 @end

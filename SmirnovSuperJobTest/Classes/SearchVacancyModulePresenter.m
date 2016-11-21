@@ -16,11 +16,6 @@
 
 #pragma mark - SearchVacancyModuleInput
 
-- (void)configureModule
-{
-    
-};
-
 #pragma mark - SearchVacancyModuleViewOutput methods
 
 - (void)didLoad
