@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ReachabilityManager.h"
 
 @protocol SessionServiceDelegate
 - (void)connectionServiceDidLoadData:(NSData *)data TaskID:(NSUInteger)taskID;
@@ -21,5 +22,5 @@
 
 @interface SessionService : NSObject <SessionServiceProtocol>
 @property (weak) id<SessionServiceDelegate> delegate;
-- (instancetype)initWithSession:(NSURLSession *)session;
+- (instancetype)initWithSession:(NSURLSession *)session ReachabilityManager:(id<ReachabilityManagerProtocol>)reachabilityManager;
 @end

@@ -12,7 +12,7 @@
 typedef void(^DataTaskCompletionHandler)(NSData *data, NSURLResponse *response, NSError *error);
 typedef void(^GetAllTasksCompletionHandler)(NSArray<__kindof NSURLSessionTask *> *tasks);
 
-@interface testSessionService : XCTestCase <SessionServiceDelegate>
+@interface testSessionService : XCTestCase <SessionServiceDelegate, ReachabilityManagerProtocol>
 //sut
 @property SessionService *service;
 
@@ -34,6 +34,10 @@ typedef void(^GetAllTasksCompletionHandler)(NSArray<__kindof NSURLSessionTask *>
 @property NSData *testConnectionData;
 @property NSHTTPURLResponse *testResponse200;
 @property NSHTTPURLResponse *testResponse404;
+
+//response for sut from ReachabilityManager;
+@property BOOL isServerReachableAnswer;
+
 @end
 
 @interface SessionService()
@@ -47,7 +51,7 @@ typedef void(^GetAllTasksCompletionHandler)(NSArray<__kindof NSURLSessionTask *>
 - (void)setUp
 {
     [super setUp];
-    self.service = [[SessionService alloc] initWithSession:(NSURLSession *)self];
+    self.service = [[SessionService alloc] initWithSession:(NSURLSession *)self ReachabilityManager:self];
     self.service.delegate = self;
     self.testURL = [NSURL URLWithString:@"https://api.superjob.ru/2.0/vacancies/?keyword=ios&page=0"];
     NSString *pathToTestConnectionData = [[NSBundle bundleForClass:[self class]] pathForResource:@"testConnectionData" ofType:nil];
@@ -55,17 +59,24 @@ typedef void(^GetAllTasksCompletionHandler)(NSArray<__kindof NSURLSessionTask *>
     self.testResponse200 = [[NSHTTPURLResponse alloc] initWithURL:self.testURL statusCode:200 HTTPVersion:nil headerFields:nil];
     self.testResponse404 = [[NSHTTPURLResponse alloc] initWithURL:self.testURL statusCode:404 HTTPVersion:nil headerFields:nil];
     self.testTaskID = 15;
+    self.isServerReachableAnswer = YES;
 }
 
 - (void)tearDown
 {
+    self.service = nil;
+
     self.taskID = 0;
     self.data = nil;
     self.error = nil;
+
     self.dataTaskCompletionHandler = nil;
+    self.getAllTasksCompletionHandler = nil;
+    
     self.isServiseDidLoadDataCalled = NO;
     self.isServiseDidFailWithErrorCalled = NO;
     self.isCancelCalledOnTask = NO;
+    
     [super tearDown];
 }
 
@@ -110,6 +121,11 @@ typedef void(^GetAllTasksCompletionHandler)(NSArray<__kindof NSURLSessionTask *>
     self.isCancelCalledOnTask = YES;
 }
 
+- (BOOL)isServerReachable
+{
+    return self.isServerReachableAnswer;
+}
+
 #pragma mark - Helpers
 
 - (BOOL)waitForLoad:(NSTimeInterval)timeoutSecs
@@ -143,6 +159,18 @@ typedef void(^GetAllTasksCompletionHandler)(NSArray<__kindof NSURLSessionTask *>
 }
 
 #pragma mark - Tests
+
+- (void)testCallsDelegateDidFailWhenServerNotReachable
+{
+    //given
+    self.isServerReachableAnswer = NO;
+    
+    //when
+    [self.service loadDataFromURL:self.testURL TaskID:self.testTaskID];
+    
+    //then
+    XCTAssertTrue(self.isServiseDidFailWithErrorCalled);
+}
 
 - (void)testCallsDelegateDidFailWhenErrorWithAppropriateErrorAndTaskID
 {

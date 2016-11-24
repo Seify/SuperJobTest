@@ -36,7 +36,7 @@ const NSString *SuperJobAPIKey = @"v1.r0764bb4369e723b9d84160bb38d2718b2efb53d7f
 {
     if ( self = [super init] )
     {
-        self.sessionService = [[SessionService alloc] initWithSession:[self createSession]];
+        self.sessionService = [[SessionService alloc] initWithSession:[self createSession] ReachabilityManager:[ReachabilityManager sharedManager]];
         self.sessionService.delegate = self;
         self.taskCounter = 0;
         self.tasksData = [NSMutableDictionary dictionary];
@@ -64,12 +64,12 @@ const NSString *SuperJobAPIKey = @"v1.r0764bb4369e723b9d84160bb38d2718b2efb53d7f
 {
     NSURL *url = [self urlForKeyword:keyword PageID:pageID];
     int taskID = self.taskCounter++;
-    [self.sessionService loadDataFromURL:url TaskID:taskID];
-    
     NSDictionary *taskData = @{ @"delegate"   : delegate,
                                 @"pageID"   : @(pageID),
                                 @"keyword"  : keyword};
     self.tasksData[@(taskID)] = taskData;
+
+    [self.sessionService loadDataFromURL:url TaskID:taskID];
 };
 
 - (void)connectionServiceDidLoadData:(NSData *)data TaskID:(NSUInteger)taskID

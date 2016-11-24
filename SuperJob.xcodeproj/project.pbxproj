@@ -41,6 +41,8 @@
 		605A9F3F1DDB997300B1740A /* SearchVacancyModuleRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9F3E1DDB997300B1740A /* SearchVacancyModuleRouter.m */; };
 		605A9F451DDBA20800B1740A /* testSearchVacancyModuleInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9F441DDBA20800B1740A /* testSearchVacancyModuleInteractor.m */; };
 		60A6E5771DE6E2E7007C65BD /* testConnectionData in Resources */ = {isa = PBXBuildFile; fileRef = 60A6E5751DE6E23B007C65BD /* testConnectionData */; };
+		60A6E57C1DE71A31007C65BD /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A6E5781DE71A31007C65BD /* ReachabilityManager.m */; };
+		60A6E57D1DE71A31007C65BD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A6E57A1DE71A31007C65BD /* Reachability.m */; };
 		60AC15DF1DDCD52800CD60DD /* SearchVacancyModuleAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AC15DE1DDCD52800CD60DD /* SearchVacancyModuleAssembler.m */; };
 		60AC15E21DDCD9D900CD60DD /* testSearchVacancyModuleAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AC15E11DDCD9D900CD60DD /* testSearchVacancyModuleAssembler.m */; };
 		60B882301DDCE90C000A20EF /* ShowVacanciesModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B8822F1DDCE90C000A20EF /* ShowVacanciesModuleView.m */; };
@@ -117,6 +119,10 @@
 		605A9F3E1DDB997300B1740A /* SearchVacancyModuleRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchVacancyModuleRouter.m; path = Classes/SearchVacancyModuleRouter.m; sourceTree = "<group>"; };
 		605A9F441DDBA20800B1740A /* testSearchVacancyModuleInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testSearchVacancyModuleInteractor.m; sourceTree = "<group>"; };
 		60A6E5751DE6E23B007C65BD /* testConnectionData */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testConnectionData; sourceTree = "<group>"; };
+		60A6E5781DE71A31007C65BD /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReachabilityManager.m; path = Classes/ReachabilityManager.m; sourceTree = "<group>"; };
+		60A6E5791DE71A31007C65BD /* ReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReachabilityManager.h; path = Classes/ReachabilityManager.h; sourceTree = "<group>"; };
+		60A6E57A1DE71A31007C65BD /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Classes/Reachability.m; sourceTree = "<group>"; };
+		60A6E57B1DE71A31007C65BD /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Classes/Reachability.h; sourceTree = "<group>"; };
 		60AC15DD1DDCD52800CD60DD /* SearchVacancyModuleAssembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchVacancyModuleAssembler.h; path = Classes/SearchVacancyModuleAssembler.h; sourceTree = "<group>"; };
 		60AC15DE1DDCD52800CD60DD /* SearchVacancyModuleAssembler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchVacancyModuleAssembler.m; path = Classes/SearchVacancyModuleAssembler.m; sourceTree = "<group>"; };
 		60AC15E11DDCD9D900CD60DD /* testSearchVacancyModuleAssembler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testSearchVacancyModuleAssembler.m; sourceTree = "<group>"; };
@@ -254,6 +260,10 @@
 		60B882291DDCE6F3000A20EF /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				60A6E5781DE71A31007C65BD /* ReachabilityManager.m */,
+				60A6E5791DE71A31007C65BD /* ReachabilityManager.h */,
+				60A6E57A1DE71A31007C65BD /* Reachability.m */,
+				60A6E57B1DE71A31007C65BD /* Reachability.h */,
 				605A9EB81DD719EA00B1740A /* SessionService.h */,
 				605A9EB91DD719EA00B1740A /* SessionService.m */,
 				605A9ED31DD7848300B1740A /* SuperJobService.h */,
@@ -491,6 +501,7 @@
 				60286EAF1DE0D7D6000C6438 /* ShowVacanciesPageSubmoduleViewTableMaster.m in Sources */,
 				605A9EC81DD747B800B1740A /* VacancyBuilder.m in Sources */,
 				60B882341DDCE94C000A20EF /* ShowVacanciesModulePresenter.m in Sources */,
+				60A6E57D1DE71A31007C65BD /* Reachability.m in Sources */,
 				60EB78AD1DD70F630082775C /* AppDelegate.m in Sources */,
 				60B882301DDCE90C000A20EF /* ShowVacanciesModuleView.m in Sources */,
 				60EB78AA1DD70F630082775C /* main.m in Sources */,
@@ -499,6 +510,7 @@
 				60286EA21DE0B7AC000C6438 /* ShowVacanciesPageSubmoduleInteractor.m in Sources */,
 				60B8823A1DDCE97D000A20EF /* ShowVacanciesModuleRouter.m in Sources */,
 				605A9F2E1DDA3D9600B1740A /* SearchVacancyModuleView.m in Sources */,
+				60A6E57C1DE71A31007C65BD /* ReachabilityManager.m in Sources */,
 				605A9F3F1DDB997300B1740A /* SearchVacancyModuleRouter.m in Sources */,
 				60286EB81DE0E85A000C6438 /* VacancyModel.m in Sources */,
 				605A9EBA1DD719EA00B1740A /* SessionService.m in Sources */,
@@ -609,7 +621,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -651,7 +663,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

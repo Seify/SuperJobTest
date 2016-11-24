@@ -10,18 +10,19 @@
 
 @interface SessionService()
 @property NSURLSession *session;
+@property id<ReachabilityManagerProtocol> reachabilityManager;
 - (NSError *)errorForResponse:(NSURLResponse *)response;
 @end
 
 
-@implementation
-SessionService
+@implementation SessionService
 
-- (instancetype)initWithSession:(NSURLSession *)session
+- (instancetype)initWithSession:(NSURLSession *)session ReachabilityManager:(id<ReachabilityManagerProtocol>)reachabilityManager
 {
     if ( self = [super init] )
     {
         self.session = session;
+        self.reachabilityManager = reachabilityManager;
     }
     
     return self;
@@ -45,9 +46,8 @@ SessionService
     return nil;
 }
 
-- (void)loadDataFromURL:(NSURL *)url TaskID:(int)taskID
+- (void)sendRequest:(NSURLRequest *)request ForTaskID:(int)taskID
 {
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [[self.session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
       {
           if ( error )
@@ -73,6 +73,19 @@ SessionService
               }
           }
       }] resume];
+}
+
+- (void)loadDataFromURL:(NSURL *)url TaskID:(int)taskID
+{
+    if ( ![self.reachabilityManager isServerReachable] )
+    {
+        NSError *reachabilityError = [[NSError alloc] initWithDomain:@"reachabilityError domain" code:777 userInfo:@{NSLocalizedDescriptionKey : @"Сервер недоступен. Проверьте соединение с Интернетом."}];
+        [self.delegate connectionDidFailWithError:reachabilityError TaskID:taskID];
+    }
+    else
+    {
+        [self sendRequest:[NSURLRequest requestWithURL:url] ForTaskID:taskID];
+    }
 };
 
 - (void)stopAllTasks

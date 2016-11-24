@@ -10,6 +10,7 @@
 
 @interface ShowVacanciesPageSubmodulePresenter()
 @property BOOL viewLoaded;
+@property NSString *errorMessage;
 @end
 
 @implementation ShowVacanciesPageSubmodulePresenter
@@ -25,7 +26,12 @@
 {
     self.viewLoaded = YES;
     
-    if ( self.page )
+    if ( self.errorMessage )
+    {
+        [self.view showErrorMessage:self.errorMessage];
+        self.errorMessage = nil;
+    }
+    else if ( self.page )
     {
         [self.view showPage:self.page];
         [self.view hideSpinner];
@@ -58,7 +64,14 @@
 
 - (void)didFailLoadPageWithErrorMessage:(NSString *)errorMessage;
 {
-    [self.view showErrorMessage:errorMessage];
+    if ( self.viewLoaded )
+    {
+        [self.view showErrorMessage:errorMessage];
+    }
+    else
+    {
+        self.errorMessage = errorMessage;
+    }
 };
 
 

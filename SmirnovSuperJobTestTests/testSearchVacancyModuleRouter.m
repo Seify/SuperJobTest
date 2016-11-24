@@ -42,6 +42,11 @@
     self.presentCalled = YES;
 };
 
+- (void)popViewControllerAnimated:(BOOL)animated
+{
+    
+}
+
 #pragma mark - Tests
 
 - (void)testPresentsNextModule

@@ -15,7 +15,7 @@
 
 
 @interface ShowVacanciesPageSubmodulePresenter()
-@property NSArray *vacancies;
+@property NSString *errorMessage;
 @end
 
 @interface testShowVacanciesPageSubmodulePresenter : XCTestCase <ShowVacanciesPageSubmoduleViewInput, ShowVacanciesPageSubmoduleRouterInput, ShowVacanciesPageSubmoduleInteractorInput>
@@ -47,6 +47,7 @@
 
 - (void)tearDown
 {
+    self.presenter = nil;
     self.requestPageCalled = NO;
     self.showSpinnerCalled = NO;
     self.hideSpinnerCalled = NO;
@@ -109,6 +110,18 @@
     
     //then
     XCTAssertTrue(self.requestPageCalled);
+}
+
+- (void)testShowErrorOnViewDidLoadIfHasOne
+{
+    //given
+    self.presenter.errorMessage = @"Нет Интернета";
+    
+    //when
+    [self.presenter viewDidLoad];
+    
+    //then
+    XCTAssertTrue(self.showErrorCalled);
 }
 
 - (void)testShowsSpinnerOnViewDidLoadIfNoPage
@@ -180,9 +193,10 @@
     XCTAssertFalse(self.hideSpinnerCalled);
 }
 
-- (void)testShowsErrorWhenPageLoadingFails
+- (void)testShowsErrorWhenPageLoadingFailsIfViewLoaded
 {
     //given
+    [self.presenter viewDidLoad];
     
     //when
     [self.presenter didFailLoadPageWithErrorMessage:@"errorMessage"];

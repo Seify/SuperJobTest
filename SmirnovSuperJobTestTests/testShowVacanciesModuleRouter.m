@@ -89,9 +89,10 @@ static ShowVacanciesPageSubmoduleView *assembledSubmodule;
 
 #pragma mark - UINavigationController methods
 
-- (void)popViewControllerAnimated:(BOOL)animated
+- (nullable UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
     self.popCalled = YES;
+    return nil;
 };
 
 #pragma mark - Tests
