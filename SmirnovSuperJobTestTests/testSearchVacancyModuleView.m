@@ -9,8 +9,12 @@
 #import <XCTest/XCTest.h>
 #import "SearchVacancyModuleView.h"
 
+@interface SearchVacancyModuleView()
+@property (weak) UIAlertController *alert;
+@end
+
 @interface testSearchVacancyModuleView : XCTestCase <SearchVacancyModuleViewOutput>
-@property SearchVacancyModuleView *searchVacancyModuleView;
+@property SearchVacancyModuleView *view;
 @property BOOL didLoadCalled;
 @end
 
@@ -21,13 +25,16 @@
 - (void)setUp
 {
     [super setUp];
-    self.searchVacancyModuleView = [[SearchVacancyModuleView alloc] init];
-    self.searchVacancyModuleView.output = self;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    self.view = [storyboard instantiateViewControllerWithIdentifier:@"SearchVacancyModuleView"];
+    self.view.output = self;
+    [self.view view]; //to call ViewDidLoad
+    [self waitForDidLoad:2];
 }
 
 - (void)tearDown
 {
-    self.searchVacancyModuleView = nil;
+    self.view = nil;
     self.didLoadCalled = NO;
     [super tearDown];
 }
@@ -40,6 +47,11 @@
 };
 
 - (void)searchPressedForEnteredKeyword:(NSString *)keyword
+{
+    
+};
+
+- (void)errorOkPressed
 {
     
 };
@@ -68,10 +80,8 @@
     //given
     
     //when
-    [self.searchVacancyModuleView viewDidLoad];
     
     //then
-    [self waitForDidLoad:2];
     XCTAssertTrue(self.didLoadCalled);
 }
 
@@ -81,23 +91,22 @@
     NSString *errorMessage = @"Empty keyword";
     
     //when
-    [self.searchVacancyModuleView showErrorMessage:errorMessage];
+    [self.view showErrorMessage:errorMessage];
     
     //then
-    XCTAssert([errorMessage isEqualToString:self.searchVacancyModuleView.alert.message]);
+    XCTAssert([errorMessage isEqualToString:self.view.alert.message]);
 }
 
 - (void)testErrorMessageDismissal
 {
     //given
     NSString *errorMessage = @"Empty keyword";
-    [self.searchVacancyModuleView showErrorMessage:errorMessage];
+    [self.view showErrorMessage:errorMessage];
     
     //when
-    [self.searchVacancyModuleView dismissErrorMessage];
+    [self.view dismissErrorMessage];
     
     //then
-    XCTAssertNil(self.searchVacancyModuleView.alert);
+    XCTAssertNil(self.view.alert);
 }
-
 @end

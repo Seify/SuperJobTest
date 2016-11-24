@@ -8,57 +8,157 @@
 
 #import "VacancyBuilder.h"
 
+@interface VacancyBuilder()
++ (NSString *)dayAndMonthStringFromDate:(NSDate *)date_published WithLocale:(NSLocale *)locale;
++ (BOOL)isDateToday:(NSDate *)date;
++ (NSString *)dateFromUnixtime:(int)unixtime;
++ (NSString *)paymentNameFromPaymentFrom:(NSNumber *)paymentFrom PaymentTo:(NSNumber *)paymentTo;
++ (NSString *)paymentNameFromDictionary:(NSDictionary *)objectDict;
++ (VacancyModel *)vacancyFromDictionary:(NSDictionary *)objectDict;
++ (NSError *)errorFromJSON:(id<NSObject>)JSONData;
++ (NSArray *)vacanciesFromJSON:(NSDictionary *)JSONDict;
++ (VacanciesPageModel *)pageFromJSON:(NSDictionary *)JSONDict PageID:(int)pageID Keyword:(NSString *)keyword;
+@end
+
 @implementation VacancyBuilder
 
-+ (NSArray *)vacancyModelsFromJSON:(id<NSObject>)JSONData
++ (NSString *)dayAndMonthStringFromDate:(NSDate *)date_published WithLocale:(NSLocale *)locale
 {
-    // handle unexpected format
-    if ( ![JSONData isKindOfClass:[NSDictionary class]] )
-    {
-        return nil;
-    }
+    NSString *format = [NSDateFormatter dateFormatFromTemplate:@"d MMM" options:0
+                                                        locale:locale];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.locale = locale;
+    [dateFormatter setDateFormat:format];
+    return [dateFormatter stringFromDate:date_published];
+}
 
-    NSDictionary *JSONDict = (NSDictionary *)JSONData;
-
-    //handle server error
-    if ( JSONData[@"error"] )
-    {
-        return nil;
-    }
++ (BOOL)isDateToday:(NSDate *)date
+{
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *components = [cal components:(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
+    NSDate *today = [cal dateFromComponents:components];
     
-    //create model
+    components = [cal components:(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
+    NSDate *date_day = [cal dateFromComponents:components];
+    
+    return [today isEqualToDate:date_day];
+}
+
++ (NSString *)dateFromUnixtime:(int)unixtime
+{
+    NSDate *date_published = [NSDate dateWithTimeIntervalSince1970:unixtime];
+    if ( [self isDateToday:date_published] )
+    {
+        return @"Сегодня";
+    }
+    else
+    {
+        return [self dayAndMonthStringFromDate:date_published WithLocale:[NSLocale currentLocale]];
+    }
+}
+
++ (NSString *)paymentNameFromPaymentFrom:(NSNumber *)paymentFrom PaymentTo:(NSNumber *)paymentTo
+{
+    if ( [paymentFrom intValue] && [paymentTo intValue] )
+    {
+        return [NSString stringWithFormat:@"%dР - %dР", [paymentFrom intValue], [paymentTo intValue]];
+    }
+    else if ( [paymentFrom intValue] )
+    {
+        return [NSString stringWithFormat:@"от %dР", [paymentFrom intValue]];
+    }
+    else if ( [paymentTo intValue] )
+    {
+        return [NSString stringWithFormat:@"до %dР", [paymentTo intValue]];
+    }
+    else
+    {
+        return nil;
+    }
+}
+
++ (NSString *)paymentNameFromDictionary:(NSDictionary *)objectDict
+{
+    if ( [objectDict[@"agreement"] boolValue] )
+    {
+        return @"По договоренности";
+    }
+    else
+    {
+        return [self paymentNameFromPaymentFrom:objectDict[@"payment_from"] PaymentTo:objectDict[@"payment_to"]];
+    }
+}
+
++ (VacancyModel *)vacancyFromDictionary:(NSDictionary *)objectDict
+{
+    VacancyModel *vm = [[VacancyModel alloc] init];
+
+    vm.profession               = objectDict[@"profession"];
+    vm.date_published           = [self dateFromUnixtime:[objectDict[@"date_published"] intValue]];
+    vm.work                     = objectDict[@"work"];
+    vm.payment                  = [self paymentNameFromDictionary:objectDict];
+    vm.address                  = objectDict[@"address"];
+    vm.townName                 = [objectDict[@"town"] objectForKey:@"title"];
+    vm.educationName            = [objectDict[@"education"] objectForKey:@"title"];
+    vm.experienceName           = [objectDict[@"experience"] objectForKey:@"title"];
+    vm.firmName                 = objectDict[@"firm_name"];
+
+    return vm;
+}
+
++ (NSError *)errorFromJSON:(NSDictionary *)JSONDict
+{
+    NSDictionary *errorDict = JSONDict[@"error"];
+    if ( errorDict )
+    {
+        NSString *errorMessage = errorDict[@"message"];
+        NSNumber *errorCode = errorDict[@"code"];
+        NSNumber *errorReason = errorDict[@"error"];
+        
+        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: errorMessage, NSLocalizedFailureReasonErrorKey : errorReason };
+        return [NSError errorWithDomain:@"SuperJob server error domain"
+                                   code:[errorCode integerValue]
+                               userInfo:userInfo];
+    }
+    else
+    {
+        return nil;
+    }
+}
+
++ (NSArray *)vacanciesFromJSON:(NSDictionary *)JSONDict
+{
     NSArray *objects = JSONDict[@"objects"];
-    NSMutableArray *models = [NSMutableArray array];
+    NSMutableArray *vacancies = [NSMutableArray array];
     for ( NSDictionary *objectDict in objects )
     {
-        VacancyModel *vm = [[VacancyModel alloc] init];
-        
-        vm.profession               = objectDict[@"profession"];
-        int date_published_unixtime = [objectDict[@"profession"] intValue];
-        
-        NSDate *date_published      = [NSDate dateWithTimeIntervalSince1970:date_published_unixtime];
-        NSString *format = [NSDateFormatter dateFormatFromTemplate:@"d MMM" options:0
-                                                            locale:[NSLocale currentLocale]];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:format];
-        NSString *formattedString   = [dateFormatter stringFromDate:date_published];
-        vm.date_published           = [date_published isEqualToDate:[NSDate date]] ? @"сегодня" : formattedString;
-        
-        vm.work                     = objectDict[@"work"];
-        NSString *compensationName  = objectDict[@"compensation"];
-        if ( !compensationName )
-        {
-            compensationName = [NSString stringWithFormat:@"%d - %d", [objectDict[@"payment_from"] intValue], [objectDict[@"payment_to"] intValue]];
-        }
-        vm.compensation             = compensationName;
-        vm.address                  = objectDict[@"address"];
-        vm.townName                 = [objectDict[@"town"] objectForKey:@"title"];
-        vm.educationName            = [objectDict[@"education"] objectForKey:@"title"];
-        vm.experienceName           = [objectDict[@"experience"] objectForKey:@"title"];
-        vm.firmName                 = objectDict[@"firm_name"];
-        [models addObject:vm];
+        VacancyModel *vm = [self vacancyFromDictionary:objectDict];
+        [vacancies addObject:vm];
     }
-    return models;
+    return vacancies;
+}
+
++ (VacanciesPageModel *)pageFromJSON:(NSDictionary *)JSONDict PageID:(int)pageID Keyword:(NSString *)keyword
+{
+    VacanciesPageModel *pageModel = [[VacanciesPageModel alloc] init];
+    pageModel.vacancies = [self vacanciesFromJSON:JSONDict];
+    pageModel.hasMore = [JSONDict[@"more"] boolValue];
+    pageModel.pageID = pageID;
+    pageModel.keyword = keyword;
+    return pageModel;
+}
+
++ (VacanciesPageModel *)pageFromJSON:(NSDictionary *)JSONDict PageID:(int)pageID Keyword:(NSString *)keyword Error:(NSError **)error
+{
+    *error = [self errorFromJSON:JSONDict];
+    if (*error)
+    {
+        return nil;
+    }
+    else
+    {
+        return [self pageFromJSON:JSONDict PageID:pageID Keyword:keyword];
+    }
 };
 
 @end

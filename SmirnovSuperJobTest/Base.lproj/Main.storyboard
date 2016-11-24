@@ -64,9 +64,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Gg-Nd-c1e">
-                                <frame key="frameInset" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Gg-Nd-c1e">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShowVacanciesPageSubmoduleViewVacancyCell" rowHeight="85" id="jne-iZ-BUB" customClass="ShowVacanciesPageSubmoduleViewVacancyCell">
@@ -82,12 +80,12 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Менеджер по работе с клиентами" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D1Y-Rt-hoF">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25000 - 120000 Р" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJ6-Bp-E5t">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -117,12 +115,17 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="e3Z-lv-8OZ">
-                                <frame key="frameInset" minX="177" minY="323" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="e3Z-lv-8OZ"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="e3Z-lv-8OZ" firstAttribute="centerY" secondItem="og5-zY-i1b" secondAttribute="centerY" id="8Ah-hm-6e1"/>
+                            <constraint firstItem="e3Z-lv-8OZ" firstAttribute="centerX" secondItem="og5-zY-i1b" secondAttribute="centerX" id="FAs-Vn-vqn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4Gg-Nd-c1e" secondAttribute="trailing" constant="-16" id="HR8-pf-Yrq"/>
+                            <constraint firstItem="gVf-Jn-bCr" firstAttribute="top" secondItem="4Gg-Nd-c1e" secondAttribute="bottom" id="Md3-h2-oWH"/>
+                            <constraint firstItem="4Gg-Nd-c1e" firstAttribute="leading" secondItem="og5-zY-i1b" secondAttribute="leadingMargin" constant="-16" id="Zpd-eQ-IfR"/>
+                            <constraint firstItem="4Gg-Nd-c1e" firstAttribute="top" secondItem="nej-u5-a8w" secondAttribute="bottom" id="tr1-qm-MVJ"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="spinner" destination="e3Z-lv-8OZ" id="OFb-h9-Kzg"/>
@@ -131,12 +134,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vI4-Mt-rXA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2829.5999999999999" y="122.78860569715144"/>
+            <point key="canvasLocation" x="2830" y="123"/>
         </scene>
         <!--Show Vacancies Module View-->
         <scene sceneID="sSe-mW-bgz">
             <objects>
-                <pageViewController storyboardIdentifier="ShowVacanciesModuleView" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="xFY-26-qqE" customClass="ShowVacanciesModuleView" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="ShowVacanciesModuleView" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="xFY-26-qqE" customClass="ShowVacanciesModuleView" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ge2-wA-TyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2049" y="123"/>

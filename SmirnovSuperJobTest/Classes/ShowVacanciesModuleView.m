@@ -8,8 +8,7 @@
 
 #import "ShowVacanciesModuleView.h"
 
-@interface ShowVacanciesModuleView ()
-
+@interface ShowVacanciesModuleView ()<UIPageViewControllerDataSource>
 @end
 
 @implementation ShowVacanciesModuleView
@@ -17,8 +16,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.dataSource = self;
     
     [self.output viewDidLoad];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -26,14 +31,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - ShowVacanciesModuleViewInput methods
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+- (void)showPageSubmodule:(UIViewController *)pageSubmodule
+{
+    [self setViewControllers:@[pageSubmodule] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+};
+
+- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+{
+    return [self.output pageSubmoduleViewBeforePageSubmoduleView:viewController];
+};
+
+- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    return [self.output pageSubmoduleViewAfterPageSubmoduleView:viewController];
+};
 
 @end

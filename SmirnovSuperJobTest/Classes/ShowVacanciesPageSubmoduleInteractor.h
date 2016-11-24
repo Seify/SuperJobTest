@@ -7,14 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VacancyModel.h"
 
 @protocol ShowVacanciesPageSubmoduleInteractorInput
-- (void)requestVacanciesForKeyword:(NSString *)keyword Page:(int)page;
+- (void)requestPageForKeyword:(NSString *)keyword PageID:(int)pageID;
 @end
 
 @protocol ShowVacanciesPageSubmoduleInteractorOutput
-- (void)didLoadVacancies:(NSArray *)vacancies;
-- (void)didFailLoadVacanciesWithErrorMessage:(NSString *)errorMessage;
+- (void)didLoadPage:(VacanciesPageModel *)page;
+- (void)didFailLoadPageWithErrorMessage:(NSString *)errorMessage;
 @end
 
 

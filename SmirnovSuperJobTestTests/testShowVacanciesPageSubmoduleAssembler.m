@@ -21,38 +21,33 @@
 
 @implementation testShowVacanciesPageSubmoduleAssembler
 
-- (void)setUp {
+#pragma mark - Setup
+
+- (void)setUp
+{
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
-- (void)tearDown {
+- (void)tearDown
+{
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
 #pragma mark - Tests
-
 - (void)testAllComponentsAndConnectionsAreSet
 {
     //given
-    id<ShowVacanciesPageSubmoduleRouterOutput> routerOutput = (id<ShowVacanciesPageSubmoduleRouterOutput>)[[NSObject alloc] init];
-    id data = nil;
-    int page = 3;
-    NSString *keyword = @"грузчик";
+    id<ShowVacanciesModuleRouterInput> parentRouter = (id<ShowVacanciesModuleRouterInput>)[[NSObject alloc] init];
     
     //when
-    ShowVacanciesPageSubmoduleView *view = (ShowVacanciesPageSubmoduleView *)[ShowVacanciesPageSubmoduleAssembler submoduleWithRooterOutput:routerOutput Data:data Page:page Keyword:keyword];
+    ShowVacanciesPageSubmoduleView *view = (ShowVacanciesPageSubmoduleView *)[ShowVacanciesPageSubmoduleAssembler submoduleWithParentRouter:parentRouter Page:0 Keyword:@"грузчик"];
     ShowVacanciesPageSubmodulePresenter *presenter = (ShowVacanciesPageSubmodulePresenter *)view.output;
     ShowVacanciesPageSubmoduleInteractor *interactor = (ShowVacanciesPageSubmoduleInteractor *)presenter.interactor;
     ShowVacanciesPageSubmoduleRouter *router = (ShowVacanciesPageSubmoduleRouter *)presenter.router;
     
     //then
-    XCTAssertNotNil(view);
-    XCTAssertNotNil(presenter);
-    XCTAssertNotNil(interactor);
-    XCTAssertNotNil(router);
-    
     XCTAssert( [view isMemberOfClass:[ShowVacanciesPageSubmoduleView class]] );
     XCTAssert( [presenter isMemberOfClass:[ShowVacanciesPageSubmodulePresenter class]] );
     XCTAssert( [interactor isMemberOfClass:[ShowVacanciesPageSubmoduleInteractor class]] );
@@ -63,7 +58,7 @@
     XCTAssert( presenter.interactor == interactor );
     XCTAssert( presenter.router == router );
     XCTAssert( interactor.output == presenter );
-    XCTAssert( router.output == routerOutput );
+    XCTAssert( router.output == presenter );
+    XCTAssert( router.parentRouter == parentRouter );
 }
-
 @end

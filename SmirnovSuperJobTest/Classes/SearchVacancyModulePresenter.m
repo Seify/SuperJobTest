@@ -14,8 +14,6 @@
 
 @implementation SearchVacancyModulePresenter
 
-#pragma mark - SearchVacancyModuleInput
-
 #pragma mark - SearchVacancyModuleViewOutput methods
 
 - (void)didLoad
@@ -23,32 +21,21 @@
     self.viewDidLoad = YES;
 };
 
+- (void)searchPressedForEnteredKeyword:(NSString *)keyword
+{
+    if ( [self.interactor isGoodKeyword:keyword] )
+    {
+        [self.router presentNextModuleWithKeyword:keyword];
+    }
+    else
+    {
+        [self.view showErrorMessage:@"Try another keyword."];
+    };
+};
+
 - (void)errorOkPressed
 {
     [self.view dismissErrorMessage];
 };
 
-- (void)searchPressedForEnteredKeyword:(NSString *)keyword
-{
-    [self.interactor loadVacanciesForKeyword:keyword];
-};
-
-#pragma mark - SearchVacancyModuleInteractorOutput methods
-
-- (void)didFailLoadVacanciesWithErrorMessage:(NSString *)errorMessage
-{
-    [self.view showErrorMessage:errorMessage];
-};
-
-- (void)didLoadVacancies:(NSArray *)vacancies
-{
-    if ( vacancies.count == 0 )
-    {
-        [self.view showErrorMessage:@"Nothing was found. Try another keywords."];
-    }
-    else
-    {
-        [self.router presentNextModuleWithData:vacancies];
-    }
-};
 @end

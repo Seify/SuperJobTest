@@ -9,24 +9,25 @@
 #import <Foundation/Foundation.h>
 #import "ShowVacanciesPageSubmoduleViewTableMaster.h"
 #import <UIKit/UIKit.h>
+#import "VacancyModel.h"
 
 @protocol ShowVacanciesPageSubmoduleViewInput
+@property VacanciesPageModel *page;
 - (void)showSpinner;
 - (void)hideSpinner;
-- (void)showData:(id)data;
+- (void)showPage:(id)data;
 - (void)showErrorMessage:(NSString *)message;
+- (void)dismissErrorMessage;
 @end
 
 @protocol ShowVacanciesPageSubmoduleViewOutput
 - (void)viewDidLoad;
-- (void)userDidSwipeLeft;
-- (void)userDidSwipeRight;
-- (void)userPressedOK;
+- (void)errorOkPressed;
 @end
 
 @interface ShowVacanciesPageSubmoduleView : UIViewController<ShowVacanciesPageSubmoduleViewInput>
+@property VacanciesPageModel *page;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property id<ShowVacanciesPageSubmoduleViewOutput>output;
-@property (readonly) ShowVacanciesPageSubmoduleViewTableMaster *tableMaster;
 @end

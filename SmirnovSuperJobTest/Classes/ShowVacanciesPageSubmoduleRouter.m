@@ -9,5 +9,14 @@
 #import "ShowVacanciesPageSubmoduleRouter.h"
 
 @implementation ShowVacanciesPageSubmoduleRouter
+- (void)showPrevModule
+{
+    [self.parentRouter routeToPrevModule];
+}
+
+- (void)showNextModuleWithVacancy:(id)vacancy
+{
+    [self.parentRouter routeToNextModuleWithVacancy:vacancy];
+};
 
 @end

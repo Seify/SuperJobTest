@@ -10,40 +10,48 @@
 #import "SuperJobService.h"
 
 @interface ShowVacanciesPageSubmoduleInteractor()<SuperJobServiceDelegate>
-
+@property (weak) id<SuperJobServiceProtocol> service;
 @end
 
 @implementation ShowVacanciesPageSubmoduleInteractor
 
-- (void)requestVacanciesForKeyword:(NSString *)keyword Page:(int)page
+- (instancetype)init
+{
+    if ( self = [super init] )
+    {
+        self.service = [SuperJobService sharedService];
+    }
+    
+    return self;
+}
+
+- (void)requestPageForKeyword:(NSString *)keyword PageID:(int)pageID
 {
     if ( keyword.length == 0 )
     {
-        [self.output didFailLoadVacanciesWithErrorMessage:@"Empty keyword."];
+        [self.output didFailLoadPageWithErrorMessage:@"Empty keyword."];
         return;
     }
     
-    if ( page < 0 )
+    if ( pageID < 0 )
     {
-        [self.output didFailLoadVacanciesWithErrorMessage:@"Wrong page."];
+        [self.output didFailLoadPageWithErrorMessage:@"Wrong page."];
         return;
     }
     
-    SuperJobService *service = [SuperJobService sharedService];
-    service.delegate = self;
-    [service loadVacanciesForKeyword:keyword Page:page];
+    [self.service loadPageForKeyword:keyword PageID:pageID Delegate:self];
 };
 
 #pragma mark - SuperJobServiceDelegate methods
 
-- (void)didLoadVacancies:(NSArray *)vacancies
+- (void)didLoadPage:(VacanciesPageModel *)page
 {
-    [self.output didLoadVacancies:vacancies];
+    [self.output didLoadPage:page];
 };
 
-- (void)didFailLoadVacanciesWithError:(NSError *)error
+- (void)didFailLoadPageWithError:(NSError *)error
 {
-    [self.output didFailLoadVacanciesWithErrorMessage:error.localizedDescription];
+    [self.output didFailLoadPageWithErrorMessage:error.localizedDescription];
 };
 
 @end

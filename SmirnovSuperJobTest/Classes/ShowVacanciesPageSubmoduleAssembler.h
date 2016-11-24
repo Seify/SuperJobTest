@@ -11,5 +11,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ShowVacanciesPageSubmoduleAssembler : NSObject
-+ (UIViewController *)submoduleWithRooterOutput:(id<ShowVacanciesPageSubmoduleRouterOutput>)routerOutput Data:(id)data Page:(int)page Keyword:(NSString *)keyword;
++ (UIViewController *)submoduleWithParentRouter:(id)parentRouter Page:(int)page Keyword:(NSString *)keyword;
 @end

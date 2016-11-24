@@ -21,25 +21,14 @@
 @interface testShowVacanciesPageSubmodulePresenter : XCTestCase <ShowVacanciesPageSubmoduleViewInput, ShowVacanciesPageSubmoduleRouterInput, ShowVacanciesPageSubmoduleInteractorInput>
 @property ShowVacanciesPageSubmodulePresenter *presenter;
 
-@property BOOL showVacanciesCalled;
+@property BOOL requestPageCalled;
 @property BOOL showSpinnerCalled;
 @property BOOL hideSpinnerCalled;
-@property BOOL requestDataCalled;
+@property BOOL showPageCalled;
 @property BOOL showErrorCalled;
-@property BOOL showNextPageSubmoduleCalled;
-@property BOOL showPrevPageSubmoduleCalled;
-@property BOOL showNextModuleCalled;
+@property BOOL dismissErrorCalled;
+@property BOOL showPrevModuleCalled;
 @end
-
-//@interface testSearchVacancyModulePresenter : XCTestCase <SearchVacancyModuleViewInput, SearchVacancyModuleInteractorInput, SearchVacancyModuleRouterInput>
-//@property SearchVacancyModulePresenter *presenter;
-//@property BOOL showErrorMessageCalled;
-//@property BOOL dismissErrorMessageCalled;
-//@property NSString *errorMessage;
-//@property BOOL loadVacanciesForKeywordCalled;
-//@property id nextModuleData;
-//@property BOOL routeToTheNextModuleCalled;
-//@end
 
 @implementation testShowVacanciesPageSubmodulePresenter
 
@@ -48,19 +37,24 @@
 - (void)setUp
 {
     [super setUp];
+    
     self.presenter = [[ShowVacanciesPageSubmodulePresenter alloc] init];
     self.presenter.view = self;
     self.presenter.interactor = self;
     self.presenter.router = self;
+    [self.presenter startWithPageID:0 Keyword:@"директор"];
 }
 
 - (void)tearDown
 {
+    self.requestPageCalled = NO;
     self.showSpinnerCalled = NO;
     self.hideSpinnerCalled = NO;
-    self.showVacanciesCalled = NO;
-    self.requestDataCalled = NO;
+    self.showPageCalled = NO;
     self.showErrorCalled = NO;
+    self.dismissErrorCalled = NO;
+    self.showPrevModuleCalled = NO;
+
     [super tearDown];
 }
 
@@ -76,9 +70,9 @@
     self.hideSpinnerCalled = YES;
 };
 
-- (void)showData:(id)data
+- (void)showPage:(VacanciesPageModel *)page
 {
-    self.showVacanciesCalled = YES;
+    self.showPageCalled = YES;
 };
 
 - (void)showErrorMessage:(NSString *)errorMessage
@@ -86,86 +80,40 @@
     self.showErrorCalled = YES;
 }
 
+- (void)dismissErrorMessage
+{
+    self.dismissErrorCalled = YES;
+};
+
 #pragma mark - ShowVacanciesPageSubmoduleInteractorInput
 
-- (void)requestVacanciesForKeyword:(NSString *)keyword Page:(int)page
+- (void)requestPageForKeyword:(NSString *)keyword PageID:(int)pageID
 {
-    self.requestDataCalled = YES;
+    self.requestPageCalled = YES;
 }
 
 #pragma mark - ShowVacanciesPageSubmoduleRouterInput
 
-- (void)showPrevPageSubmodule
+- (void)showPrevModule
 {
-    self.showPrevPageSubmoduleCalled = YES;
-};
-
-- (void)showNextPageSubmodule
-{
-    self.showNextPageSubmoduleCalled = YES;
-};
-
-- (void)showNextModule
-{
-    self.showNextModuleCalled = YES;
+    self.showPrevModuleCalled = YES;
 };
 
 #pragma mark - Tests
 
-- (void)testRequestsVacanciesOnStartIfNoVacancies
+- (void)testRequestsPageOnStart
 {
     //given
-    self.presenter.vacancies = nil;
-    
+
     //when
-    [self.presenter start];
     
     //then
-    XCTAssertTrue(self.requestDataCalled);
+    XCTAssertTrue(self.requestPageCalled);
 }
 
-- (void)testCallsShowVacanciesWhenLoadedIfViewIsLoaded
+- (void)testShowsSpinnerOnViewDidLoadIfNoPage
 {
     //given
-    VacancyModel *vm = [[VacancyModel alloc] init];
-    [self.presenter viewDidLoad];
-    
-    //when
-    [self.presenter didLoadVacancies:@[vm]];
-    
-    //then
-    XCTAssertTrue(self.showVacanciesCalled);
-}
-
-- (void)testCallsShowErrorWhenVacancyLoadingFails
-{
-    //given
-    NSString *errorMessage = @"errorMessage";
-    
-    //when
-    [self.presenter didFailLoadVacanciesWithErrorMessage:errorMessage];
-    
-    //then
-    XCTAssertTrue(self.showErrorCalled);
-}
-
-- (void)testShowsVacanciesOnLoadIfHasAny
-{
-    //given
-    VacancyModel *vm = [[VacancyModel alloc] init];
-    self.presenter.vacancies = @[vm];
-    
-    //when
-    [self.presenter viewDidLoad];
-    
-    //then
-    XCTAssertTrue(self.showVacanciesCalled);
-}
-
-- (void)testShowsSpinnerOnLoadIfNoData
-{
-    //given
-    self.presenter.vacancies = nil;
     
     //when
     [self.presenter viewDidLoad];
@@ -174,26 +122,95 @@
     XCTAssertTrue(self.showSpinnerCalled);
 }
 
-- (void)testCallsShowPrevPageOnSwipeLeft
+- (void)testDoesntShowSpinnerOnViewDidLoadIfHasPage
 {
     //given
+    self.presenter.page = [[VacanciesPageModel alloc] init];
     
     //when
-    [self.presenter userDidSwipeLeft];
+    [self.presenter viewDidLoad];
     
     //then
-    XCTAssertTrue(self.showPrevPageSubmoduleCalled);
+    XCTAssertFalse(self.showSpinnerCalled);
 }
 
-- (void)testCallsShowNextPageOnSwipeRight
+- (void)testCallsShowVacanciesWhenLoadedIfViewIsLoaded
+{
+    //given
+    [self.presenter viewDidLoad];
+    
+    //when
+    [self.presenter didLoadPage:[[VacanciesPageModel alloc] init]];
+    
+    //then
+    XCTAssertTrue(self.showPageCalled);
+}
+
+- (void)testDoesntCallShowVacanciesWhenLoadedIfViewIsNotLoaded
 {
     //given
     
     //when
-    [self.presenter userDidSwipeRight];
+    [self.presenter didLoadPage:[[VacanciesPageModel alloc] init]];
     
     //then
-    XCTAssertTrue(self.showNextPageSubmoduleCalled);
+    XCTAssertFalse(self.showPageCalled);
+}
+
+- (void)testHidesSpinnerWhenPageLoadedIfViewIsLoaded
+{
+    //given
+    [self.presenter viewDidLoad];
+    
+    //when
+    [self.presenter didLoadPage:[[VacanciesPageModel alloc] init]];
+    
+    //then
+    XCTAssertTrue(self.hideSpinnerCalled);
+}
+
+- (void)testDoesntHideSpinnerWhenPageLoadedIfViewIsNotLoaded
+{
+    //given
+    
+    //when
+    [self.presenter didLoadPage:[[VacanciesPageModel alloc] init]];
+    
+    //then
+    XCTAssertFalse(self.hideSpinnerCalled);
+}
+
+- (void)testShowsErrorWhenPageLoadingFails
+{
+    //given
+    
+    //when
+    [self.presenter didFailLoadPageWithErrorMessage:@"errorMessage"];
+    
+    //then
+    XCTAssertTrue(self.showErrorCalled);
+}
+
+- (void)testDismissesErrorWhenOKPressed
+{
+    //given
+    
+    //when
+    [self.presenter errorOkPressed];
+    
+    //then
+    XCTAssertTrue(self.dismissErrorCalled);
+}
+
+- (void)testRoutesToPreviousModuleWhenOKPressed
+{
+    //given
+    
+    //when
+    [self.presenter errorOkPressed];
+    
+    //then
+    XCTAssertTrue(self.showPrevModuleCalled);
 }
 
 @end

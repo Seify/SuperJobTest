@@ -9,12 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @protocol SearchVacancyModuleInteractorInput
-- (void)loadVacanciesForKeyword:(NSString *)keyword;
+- (BOOL)isGoodKeyword:(NSString *)keyword;
 @end
 
 @protocol SearchVacancyModuleInteractorOutput
-- (void)didLoadVacancies:(NSArray *)vacancies;
-- (void)didFailLoadVacanciesWithErrorMessage:(NSString *)errorMessage;
 @end
 
 

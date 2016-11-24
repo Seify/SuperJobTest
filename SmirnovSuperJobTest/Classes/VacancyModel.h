@@ -13,11 +13,18 @@
 @interface VacancyModel : NSObject
 @property NSString *profession;
 @property NSString *work;
-@property NSString *compensation;
+@property NSString *payment;
 @property NSString *address;
 @property NSString *townName;
 @property NSString *educationName;
 @property NSString *experienceName;
 @property NSString *date_published;
 @property NSString *firmName;
+@end
+
+@interface VacanciesPageModel : NSObject
+@property NSArray *vacancies;
+@property int pageID;
+@property NSString *keyword;
+@property BOOL hasMore;
 @end

@@ -9,13 +9,34 @@
 #import <XCTest/XCTest.h>
 #import "SuperJobService.h"
 
-@interface testSuperJobService : XCTestCase <SuperJobServiceDelegate>
-@property SuperJobService *superJobService;
-@property BOOL didCallbackLoad;
-@property BOOL didCallbackFail;
-@property NSArray *vacancies;
-@property NSString *errorText;
+@interface SuperJobService()
+@property id<SessionServiceProtocol> sessionService;
+@property Class JSONSerializationClass;
+@property Class VacasyBuilderClass;
+@property (atomic) NSMutableDictionary *tasksData;
+@property int taskCounter;
 @end
+
+@interface testSuperJobService : XCTestCase <SuperJobServiceDelegate, SessionServiceProtocol>
+
+//sut
+@property SuperJobService *superJobService;
+
+//just to comform protocol
+@property (weak) id<SessionServiceDelegate> delegate;
+
+//markers for methods being called
+@property BOOL isServiceCalledLoadDataOnDelegate;
+@property BOOL isServiceCalledFailedOnDelegate;
+@property BOOL isCancelAllTasksCalledOnService;
+
+@property VacanciesPageModel *pageReturnedToDelegate;
+@property NSError *error;
+@end
+
+static NSError *serializationError;
+static NSError *builderError;
+static VacanciesPageModel *pageToReturnToSuperjobService;
 
 @implementation testSuperJobService
 
@@ -24,31 +45,66 @@
 - (void)setUp
 {
     [super setUp];
-    self.superJobService = [SuperJobService sharedService];
-    self.superJobService.delegate = self;
+    self.superJobService = [[SuperJobService alloc] init];
+    self.superJobService.sessionService = self;
+    self.superJobService.JSONSerializationClass = [self class];
+    self.superJobService.VacasyBuilderClass = [self class];
 }
 
 - (void)tearDown
 {
-    self.vacancies = nil;
-    self.errorText = nil;
-    self.didCallbackLoad = NO;
-    self.didCallbackFail = NO;
+    serializationError = nil;
+    builderError = nil;
+    pageToReturnToSuperjobService = nil;
+    
+    self.pageReturnedToDelegate = nil;
+    self.error = nil;
+    self.isServiceCalledLoadDataOnDelegate = NO;
+    self.isServiceCalledFailedOnDelegate = NO;
+    self.isCancelAllTasksCalledOnService = NO;
     [super tearDown];
 }
 
 #pragma mark - SuperJobServiceDelegate methods
 
-- (void)didLoadVacancies:(NSArray *)vacancies
+- (void)didLoadPage:(VacanciesPageModel *)page
 {
-    self.vacancies = vacancies;
-    self.didCallbackLoad = YES;
+    self.pageReturnedToDelegate = page;
+    self.isServiceCalledLoadDataOnDelegate = YES;
 };
 
-- (void)didFailLoadVacanciesWithError:(NSError *)error
+- (void)didFailLoadPageWithError:(NSError *)error
 {
-    self.didCallbackFail = YES;
-    self.errorText = error.localizedDescription;
+    self.isServiceCalledFailedOnDelegate = YES;
+    self.error = error;
+};
+
+#pragma mark - NSJSONSerialization methods
+
++ (nullable id)JSONObjectWithData:(NSData *)data options:(NSJSONReadingOptions)opt error:(NSError **)error
+{
+    *error = serializationError;
+    return nil;
+};
+
+#pragma mark - VacancyBuilderProtocol methods
+
++ (VacanciesPageModel *)pageFromJSON:(NSDictionary *)JSONDict PageID:(int)pageID Keyword:(NSString *)keyword Error:(NSError **)error
+{
+    *error = builderError;
+    return pageToReturnToSuperjobService;
+}
+
+#pragma mark - SessionServiceProtocol methods
+
+- (void)loadDataFromURL:(NSURL *)url TaskID:(int)taskID
+{
+    
+};
+
+- (void)stopAllTasks
+{
+    self.isCancelAllTasksCalledOnService = YES;
 };
 
 #pragma mark - Helpers
@@ -63,9 +119,9 @@
         {
             break;
         }
-    } while ( !self.didCallbackFail );
+    } while ( !self.isServiceCalledFailedOnDelegate );
     
-    return self.didCallbackFail;
+    return self.isServiceCalledFailedOnDelegate;
 }
 
 - (BOOL)waitForLoad:(NSTimeInterval)timeoutSecs
@@ -78,37 +134,82 @@
         {
             break;
         }
-    } while ( !self.didCallbackLoad );
+    } while ( !self.isServiceCalledLoadDataOnDelegate );
     
-    return self.didCallbackLoad;
+    return self.isServiceCalledLoadDataOnDelegate;
 }
 
 #pragma mark - Tests
 
-- (void)testFailsOnEmptyKeyword
+- (void)testCallsFailOnSerializationError
 {
     //given
-    NSString *emptyString = @"";
+    serializationError = [[NSError alloc] initWithDomain:@"serializationError" code:123 userInfo:nil];
     
     //when
-    [self.superJobService loadVacanciesForKeyword:emptyString];
+    [self.superJobService loadPageForKeyword:@"test" PageID:0 Delegate:self];
+    [self.superJobService connectionServiceDidLoadData:[NSData data] TaskID:0];
+    [self waitForFail:1];
     
     //then
-    XCTAssertTrue([self waitForFail:1]);
-    XCTAssertTrue([self.errorText isEqualToString:@"Empty keyword."]);
+    XCTAssertTrue(self.isServiceCalledFailedOnDelegate);
+    XCTAssertEqualObjects(self.error, serializationError);
 }
 
-- (void)testReturnsNonemptyArray
+- (void)testCallsFailOnBuilderError
 {
     //given
-    NSString *keyword = @"разработчик";
+    builderError = [[NSError alloc] initWithDomain:@"builderError" code:123 userInfo:nil];
     
     //when
-    [self.superJobService loadVacanciesForKeyword:keyword];
+    [self.superJobService loadPageForKeyword:@"test" PageID:0 Delegate:self];
+    [self.superJobService connectionServiceDidLoadData:[NSData data] TaskID:0];
+    [self waitForFail:1];
     
     //then
-    XCTAssertTrue([self waitForLoad:5]);
-    XCTAssertGreaterThan(self.vacancies.count, 0);
+    XCTAssertTrue(self.isServiceCalledFailedOnDelegate);
+    XCTAssertEqualObjects(self.error, builderError);
 }
 
+- (void)testCallsDidLoadIfNoSerializationOrBuilderError
+{
+    //given
+    builderError = nil;
+    serializationError = nil;
+    pageToReturnToSuperjobService = [[VacanciesPageModel alloc] init];
+    
+    //when
+    [self.superJobService loadPageForKeyword:@"test" PageID:0 Delegate:self];
+    [self.superJobService connectionServiceDidLoadData:[NSData data] TaskID:0];
+    [self waitForLoad:1];
+    
+    //then
+    XCTAssertTrue(self.isServiceCalledLoadDataOnDelegate);
+    XCTAssertEqualObjects(self.pageReturnedToDelegate, pageToReturnToSuperjobService);
+}
+
+- (void)testCallsFailIfServiceFails
+{
+    NSError *serviceError = [NSError errorWithDomain:@"serviceError" code:567 userInfo:nil];
+    
+    //when
+    [self.superJobService loadPageForKeyword:@"test" PageID:0 Delegate:self];
+    [self.superJobService connectionDidFailWithError:serviceError TaskID:0];
+    [self waitForFail:1];
+    
+    //then
+    XCTAssertTrue(self.isServiceCalledFailedOnDelegate);
+    XCTAssertEqualObjects(self.error, serviceError);
+}
+
+- (void)testCallsServisesCancelAllTasks
+{
+    //given
+    
+    //when
+    [self.superJobService cancelAllTasks];
+    
+    //then
+    XCTAssertTrue(self.isCancelAllTasksCalledOnService);
+}
 @end

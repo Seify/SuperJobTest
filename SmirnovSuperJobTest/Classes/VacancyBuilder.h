@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "VacancyModel.h"
 
-@interface VacancyBuilder : NSObject
-+ (NSArray *)vacancyModelsFromJSON:(id<NSObject>)JSONData;
+@protocol VacancyBuilderProtocol
++ (VacanciesPageModel *)pageFromJSON:(NSDictionary *)JSONDict PageID:(int)pageID Keyword:(NSString *)keyword Error:(NSError **)error;
+@end
+
+@interface VacancyBuilder : NSObject<VacancyBuilderProtocol>
 @end

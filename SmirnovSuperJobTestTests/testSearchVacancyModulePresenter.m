@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "VacancyModel.h"
 #import "SearchVacancyModulePresenter.h"
 #import "SearchVacancyModuleView.h"
 #import "SearchVacancyModuleInteractor.h"
@@ -16,10 +15,7 @@
 @property SearchVacancyModulePresenter *presenter;
 @property BOOL showErrorMessageCalled;
 @property BOOL dismissErrorMessageCalled;
-@property NSString *errorMessage;
-@property BOOL loadVacanciesForKeywordCalled;
-@property id nextModuleData;
-@property BOOL routeToTheNextModuleCalled;
+@property BOOL presentNextModuleCalled;
 @end
 
 @implementation testSearchVacancyModulePresenter
@@ -39,9 +35,7 @@
 {
     self.showErrorMessageCalled = NO;
     self.dismissErrorMessageCalled = NO;
-    self.errorMessage = nil;
-    self.routeToTheNextModuleCalled = NO;
-    self.nextModuleData = nil;
+    self.presentNextModuleCalled = NO;
     [super tearDown];
 }
 
@@ -49,7 +43,6 @@
 
 - (void)showErrorMessage:(NSString *)errorMessage
 {
-    self.errorMessage = errorMessage;
     self.showErrorMessageCalled = YES;
 };
 
@@ -60,32 +53,56 @@
 
 #pragma mark - SearchVacancyModuleInteractorInput methods
 
-- (void)loadVacanciesForKeyword:(NSString *)keyword
+- (BOOL)isGoodKeyword:(NSString *)keyword
 {
-    self.loadVacanciesForKeywordCalled = YES;
-};
+    return keyword.length > 0;
+}
 
 #pragma mark - SearchVacancyModuleRouterInput methods
 
-- (void)presentNextModuleWithData:(id)data
+- (void)presentNextModuleWithKeyword:(NSString *)keyword
 {
-    self.nextModuleData = data;
-    self.routeToTheNextModuleCalled = YES;
+    self.presentNextModuleCalled = YES;
 };
-
-#pragma mark - Helpers
-
-- (NSArray *)testVacancies
-{
-    VacancyModel *vm = [[VacancyModel alloc] init];
-    vm.profession = @"грузчик";
-    vm.educationName = @"средне-специальное";
-    return @[vm];
-}
 
 #pragma mark - Tests
 
-- (void)testDismissesErrorAlertOnOKPressed
+- (void)testShowsNextModuleOnGoodKeyword
+{
+    //given
+    NSString *goodKeyword = @"GoodKeyword";
+    
+    //when
+    [self.presenter searchPressedForEnteredKeyword:goodKeyword];
+    
+    //then
+    XCTAssertTrue(self.presentNextModuleCalled);
+}
+
+- (void)testShowsErrorOnNilKeyword
+{
+    //given
+    
+    //when
+    [self.presenter searchPressedForEnteredKeyword:nil];
+    
+    //then
+    XCTAssertTrue(self.showErrorMessageCalled);
+}
+
+
+- (void)testShowsErrorOnEmptyKeyword
+{
+    //given
+    
+    //when
+    [self.presenter searchPressedForEnteredKeyword:@""];
+    
+    //then
+    XCTAssertTrue(self.showErrorMessageCalled);
+}
+
+- (void)testDismissesErrorMessageWhenPressedOK
 {
     //given
     
@@ -95,56 +112,4 @@
     //then
     XCTAssertTrue(self.dismissErrorMessageCalled);
 }
-
-- (void)testCallLoadVacanciesOnSearchPressed
-{
-    //given
-    NSString *keyword = @"some keyword";
-    
-    //when
-    [self.presenter searchPressedForEnteredKeyword:keyword];
-    
-    //then
-    XCTAssertTrue(self.loadVacanciesForKeywordCalled);
-}
-
-- (void)testShowErrorWhenLoadingFails
-{
-    //given
-    NSString *errorMessage = @"some error";
-    
-    //when
-    [self.presenter didFailLoadVacanciesWithErrorMessage:errorMessage];
-    
-    //then
-    XCTAssertTrue( self.showErrorMessageCalled );
-    XCTAssert([self.errorMessage isEqualToString:errorMessage]);
-}
-
-- (void)testShowErrorWhenLoadedEmptyArray
-{
-    //given
-    NSArray *vacancies = @[];
-    
-    //when
-    [self.presenter didLoadVacancies:vacancies];
-    
-    //then
-    XCTAssertTrue(self.showErrorMessageCalled);
-    XCTAssert( [self.errorMessage isEqualToString:@"Nothing was found. Try another keywords."] );
-}
-
-- (void)testCallRoutingToNextModuleWhenLoadedVacancies
-{
-    //given
-    NSArray *testVacansies = [self testVacancies];
-    
-    //when
-    [self.presenter didLoadVacancies:testVacansies];
-    
-    //then
-    XCTAssertTrue(self.routeToTheNextModuleCalled);
-    XCTAssert([testVacansies isEqual:self.nextModuleData]);
-}
-
 @end

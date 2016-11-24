@@ -7,19 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ConnectionService.h"
-
-@protocol SuperJobServiceDelegate;
-
-@interface SuperJobService : NSObject<ConnectionServiceDelegate>
-@property (weak) id<SuperJobServiceDelegate> delegate;
-+ (instancetype)sharedService;
-- (void)loadVacanciesForKeyword:(NSString *)keyword;
-- (void)loadVacanciesForKeyword:(NSString *)keyword Page:(int)page;
-@end
+#import "SessionService.h"
+#import "VacancyModel.h"
 
 @protocol SuperJobServiceDelegate
-- (void)didLoadVacancies:(NSArray *)vacancies;
-- (void)didFailLoadVacanciesWithError:(NSError *)error;
+- (void)didLoadPage:(VacanciesPageModel *)pageModel;
+- (void)didFailLoadPageWithError:(NSError *)error;
 @end
 
+@protocol SuperJobServiceProtocol
+- (void)loadPageForKeyword:(NSString *)keyword PageID:(int)pageID Delegate:(id<SuperJobServiceDelegate>)delegate;
+- (void)cancelAllTasks;
+@end
+
+@interface SuperJobService : NSObject<SuperJobServiceProtocol, SessionServiceDelegate>
++ (instancetype)sharedService;
+@end

@@ -37,20 +37,14 @@
 {
     //given
     UINavigationController *rootController = [[UINavigationController alloc] init];
-    id data = nil;
     
     //when
-    ShowVacanciesModuleView *view = (ShowVacanciesModuleView *)[ShowVacanciesModuleAssembler moduleWithRootController:rootController Data:data];
+    ShowVacanciesModuleView *view = (ShowVacanciesModuleView *)[ShowVacanciesModuleAssembler moduleWithRootController:rootController Keyword:@"грузчик"];
     ShowVacanciesModulePresenter *presenter = (ShowVacanciesModulePresenter *)view.output;
     ShowVacanciesModuleInteractor *interactor = (ShowVacanciesModuleInteractor *)presenter.interactor;
     ShowVacanciesModuleRouter *router = (ShowVacanciesModuleRouter *)presenter.router;
     
     //then
-    XCTAssertNotNil(view);
-    XCTAssertNotNil(presenter);
-    XCTAssertNotNil(interactor);
-    XCTAssertNotNil(router);
-    
     XCTAssert( [view isMemberOfClass:[ShowVacanciesModuleView class]] );
     XCTAssert( [presenter isMemberOfClass:[ShowVacanciesModulePresenter class]] );
     XCTAssert( [interactor isMemberOfClass:[ShowVacanciesModuleInteractor class]] );

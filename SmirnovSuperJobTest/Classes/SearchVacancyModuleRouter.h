@@ -10,9 +10,9 @@
 #import <UIKit/UIKit.h>
 
 @protocol SearchVacancyModuleRouterInput
-- (void)presentNextModuleWithData:(id)data;
+- (void)presentNextModuleWithKeyword:(NSString *)keyword; 
 @end
 
 @interface SearchVacancyModuleRouter : NSObject <SearchVacancyModuleRouterInput>
-@property (weak) UIViewController *rootController;
+@property (weak) UINavigationController *rootController;
 @end

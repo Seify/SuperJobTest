@@ -12,10 +12,6 @@
 
 @interface testSearchVacancyModuleInteractor : XCTestCase <SearchVacancyModuleInteractorOutput>
 @property SearchVacancyModuleInteractor *interactor;
-@property BOOL didLoadCalled;
-@property NSArray *vacancies;
-@property BOOL didFailCalled;
-@property NSString *errorMessage;
 @end
 
 @implementation testSearchVacancyModuleInteractor
@@ -31,105 +27,39 @@
 
 - (void)tearDown
 {
-    self.didLoadCalled = NO;
-    self.vacancies = nil;
-    self.didFailCalled = NO;
-    self.errorMessage = nil;
+    self.interactor = nil;
     [super tearDown];
 }
 
-#pragma mark - SearchVacancyModuleInteractorOutput methods
-
-- (void)didLoadVacancies:(NSArray *)vacancies
-{
-    self.didLoadCalled = YES;
-    self.vacancies = vacancies;
-};
-
-- (void)didFailLoadVacanciesWithErrorMessage:(NSString *)errorMessage
-{
-    self.didFailCalled = YES;
-    self.errorMessage = errorMessage;
-};
-
-#pragma mark - Helpers
-
-- (BOOL)waitForLoad:(NSTimeInterval)timeoutSecs
-{
-    NSDate *timeoutDate = [NSDate dateWithTimeIntervalSinceNow:timeoutSecs];
-    
-    do {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:timeoutDate];
-        if([timeoutDate timeIntervalSinceNow] < 0.0)
-        {
-            break;
-        }
-    } while ( !self.didLoadCalled );
-    
-    return self.didLoadCalled;
-}
-
-
 #pragma mark - Tests
 
-- (void)testFailsOnNilKeyword
+- (void)testNilKeywordIsBad
 {
     //given
-    NSString *keyword = nil;
     
     //when
-    [self.interactor loadVacanciesForKeyword:keyword];
     
     //then
-    XCTAssertTrue(self.didFailCalled);
-    XCTAssert([self.errorMessage isEqualToString:@"Empty keyword."]);
+    XCTAssertFalse( [self.interactor isGoodKeyword:nil] );
 }
 
-- (void)testFailsOnEmptyKeyword
+- (void)testEmptyKeywordIsBad
 {
     //given
-    NSString *keyword = @"";
     
     //when
-    [self.interactor loadVacanciesForKeyword:keyword];
     
     //then
-    XCTAssertTrue(self.didFailCalled);
-    XCTAssert([self.errorMessage isEqualToString:@"Empty keyword."]);
+    XCTAssertFalse( [self.interactor isGoodKeyword:@""] );
 }
 
-//TODO: make mocks for interactor's services
-- (void)testReturnsEmptyArrayForNonexistingKeyword
+- (void)testNormalKeywordIsGood
 {
     //given
-    NSString *keyword = @"dfgsdfgsdfhdsfhdfshfdghdffg";
     
     //when
-    [self.interactor loadVacanciesForKeyword:keyword];
     
     //then
-    XCTAssertTrue([self waitForLoad:10]);
-    XCTAssert([self.vacancies isKindOfClass:[NSArray class]]);
-    XCTAssert(self.vacancies.count == 0);
+    XCTAssertTrue( [self.interactor isGoodKeyword:@"грузчик, кладовщик"] );
 }
-
-- (void)testReturnsArrayOfVacanciesOnGoodKeyword
-{
-    //given
-    NSString *keyword = @"грузчик, кладовщик";
-    
-    //when
-    [self.interactor loadVacanciesForKeyword:keyword];
-    
-    //then
-    XCTAssertTrue([self waitForLoad:10]);
-    XCTAssert([self.vacancies isKindOfClass:[NSArray class]]);
-    for ( id vacancy in self.vacancies )
-    {
-        [vacancy isKindOfClass:[VacancyModel class]];
-    }
-    XCTAssert(self.vacancies.count > 0);
-}
-
-
 @end

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol ShowVacanciesModuleInteractorInput
+- (void)stopAllTasks;
 @end
 
 @protocol ShowVacanciesModuleInteractorOutput

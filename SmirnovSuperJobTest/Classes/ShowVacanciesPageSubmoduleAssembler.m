@@ -14,7 +14,7 @@
 
 @implementation ShowVacanciesPageSubmoduleAssembler
 
-+ (UIViewController *)submoduleWithRooterOutput:(id<ShowVacanciesPageSubmoduleRouterOutput>)routerOutput Data:(id)data Page:(int)page Keyword:(NSString *)keyword
++ (UIViewController *)submoduleWithParentRouter:(id)parentRouter Page:(int)pageID Keyword:(NSString *)keyword
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     ShowVacanciesPageSubmoduleView *view = [storyboard instantiateViewControllerWithIdentifier:@"ShowVacanciesPageSubmoduleView"];
@@ -26,7 +26,10 @@
     presenter.interactor = interactor;
     presenter.router = router;
     interactor.output = presenter;
-    router.output = routerOutput;
+    router.output = presenter;
+    router.parentRouter = parentRouter;
+    
+    [presenter startWithPageID:pageID Keyword:keyword];
     
     return view;
 

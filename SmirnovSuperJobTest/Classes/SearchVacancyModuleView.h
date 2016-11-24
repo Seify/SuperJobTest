@@ -15,13 +15,12 @@
 
 @protocol SearchVacancyModuleViewOutput
 - (void)didLoad;
-- (void)errorOkPressed;
 - (void)searchPressedForEnteredKeyword:(NSString *)keyword;
+- (void)errorOkPressed;
 @end
 
 @interface SearchVacancyModuleView : UIViewController <SearchVacancyModuleViewInput>
 @property id<SearchVacancyModuleViewOutput> output;
 @property (weak, nonatomic) IBOutlet UITextField *searchField;
-@property (weak) UIAlertController *alert;
 - (IBAction)searchButtonPressed:(id)sender;
 @end

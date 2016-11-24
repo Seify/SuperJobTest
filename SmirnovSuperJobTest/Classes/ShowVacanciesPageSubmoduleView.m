@@ -8,22 +8,28 @@
 
 #import "ShowVacanciesPageSubmoduleView.h"
 
+@interface ShowVacanciesPageSubmoduleView()
+@property (weak) UIAlertController *alert;
+@property ShowVacanciesPageSubmoduleViewTableMaster *tableMaster;
+@end
+
 @implementation ShowVacanciesPageSubmoduleView
 
-@synthesize tableMaster = _tableMaster;
 
-- (ShowVacanciesPageSubmoduleViewTableMaster *)tableMaster
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    if ( !_tableMaster )
+    if (self = [super initWithCoder:aDecoder])
     {
-        _tableMaster = [[ShowVacanciesPageSubmoduleViewTableMaster alloc] init];
-        _tableMaster.tableView = self.tableView;
+        self.tableMaster = [[ShowVacanciesPageSubmoduleViewTableMaster alloc] init];
     }
-    return _tableMaster;
+    return self;
 }
 
 - (void)viewDidLoad
 {
+    self.tableView.delegate = self.tableMaster;
+    self.tableView.dataSource = self.tableMaster;
+
     [self.output viewDidLoad];
 }
 
@@ -39,15 +45,33 @@
     [self.spinner stopAnimating];
 };
 
-- (void)showData:(id)data
+- (void)showPage:(VacanciesPageModel *)page
 {
-    self.tableMaster.vacancies = data;
-    [self.tableMaster reloadTable];
+    self.page = page;
+    self.tableMaster.vacancies = page.vacancies;
+    [self.tableView reloadData];
 };
 
-- (void)showErrorMessage:(NSString *)message
+- (void)showErrorMessage:(NSString *)errorMessage
 {
-    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                   message:errorMessage
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action)
+                         {
+                             [self.output errorOkPressed];
+                         }];
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+    self.alert = alert;
+};
+
+- (void)dismissErrorMessage
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    self.alert = nil;
 };
 
 @end

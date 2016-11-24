@@ -9,17 +9,19 @@
 #import <XCTest/XCTest.h>
 #import "ShowVacanciesPageSubmoduleInteractor.h"
 #import "VacancyModel.h"
+#import "SuperJobService.h"
 
-@interface ShowVacanciesPageSubmoduleInteractor()
-- (void)didFailLoadVacanciesWithError:(NSError *)error;
+@interface ShowVacanciesPageSubmoduleInteractor()<SuperJobServiceDelegate>
+@property (weak) id<SuperJobServiceProtocol> service;
 @end
 
-@interface testShowVacanciesPageSubmoduleInteractor : XCTestCase<ShowVacanciesPageSubmoduleInteractorOutput>
+@interface testShowVacanciesPageSubmoduleInteractor : XCTestCase<ShowVacanciesPageSubmoduleInteractorOutput, SuperJobServiceProtocol>
 @property ShowVacanciesPageSubmoduleInteractor *interactor;
 @property BOOL didLoadCalled;
-@property NSArray *vacancies;
 @property BOOL didFailCalled;
 @property NSString *errorMessage;
+@property VacanciesPageModel *page;
+@property BOOL loadPageCalled;
 @end
 
 @implementation testShowVacanciesPageSubmoduleInteractor
@@ -30,48 +32,46 @@
 {
     [super setUp];
     self.interactor = [[ShowVacanciesPageSubmoduleInteractor alloc] init];
+    self.interactor.service = self;
     self.interactor.output = self;
 }
 
 - (void)tearDown
 {
+    self.interactor = nil;
     self.didLoadCalled = NO;
-    self.vacancies = nil;
     self.didFailCalled = NO;
+    self.loadPageCalled = NO;
     self.errorMessage = nil;
+    self.page = nil;
     [super tearDown];
 }
 
 #pragma mark - ShowVacanciesPageSubmoduleInteractorOutput methods
 
-- (void)didLoadVacancies:(NSArray *)vacancies
+- (void)didLoadPage:(VacanciesPageModel *)page
 {
+    self.page = page;
     self.didLoadCalled = YES;
-    self.vacancies = vacancies;
 };
 
-- (void)didFailLoadVacanciesWithErrorMessage:(NSString *)errorMessage
+- (void)didFailLoadPageWithErrorMessage:(NSString *)errorMessage
 {
     self.didFailCalled = YES;
     self.errorMessage = errorMessage;
 };
 
-#pragma mark - Helpers
+#pragma mark - SuperJobServiceProtocol methods
 
-- (BOOL)waitForLoad:(NSTimeInterval)timeoutSecs
+- (void)loadPageForKeyword:(NSString *)keyword PageID:(int)pageID Delegate:(id<SuperJobServiceDelegate>)delegate
 {
-    NSDate *timeoutDate = [NSDate dateWithTimeIntervalSinceNow:timeoutSecs];
+    self.loadPageCalled = YES;
+};
+
+- (void)cancelAllTasks
+{
     
-    do {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:timeoutDate];
-        if([timeoutDate timeIntervalSinceNow] < 0.0)
-        {
-            break;
-        }
-    } while ( !self.didLoadCalled );
-    
-    return self.didLoadCalled;
-}
+};
 
 
 #pragma mark - Tests
@@ -79,94 +79,74 @@
 - (void)testFailsOnNilKeyword
 {
     //given
-    NSString *keyword = nil;
-    int page = 0;
     
     //when
-    [self.interactor requestVacanciesForKeyword:keyword Page:page];
+    [self.interactor requestPageForKeyword:nil PageID:0];
     
     //then
     XCTAssertTrue(self.didFailCalled);
-    XCTAssert([self.errorMessage isEqualToString:@"Empty keyword."]);
 }
 
 - (void)testFailsOnEmptyKeyword
 {
     //given
-    NSString *keyword = @"";
-    int page = 0;
     
     //when
-    [self.interactor requestVacanciesForKeyword:keyword Page:page];
+    [self.interactor requestPageForKeyword:@"" PageID:0];
     
     //then
     XCTAssertTrue(self.didFailCalled);
-    XCTAssert([self.errorMessage isEqualToString:@"Empty keyword."]);
-}
-
-- (void)testReturnsEmptyArrayForNonexistingKeyword
-{
-    //given
-    NSString *keyword = @"dfgsdfgsdfhdsfhdfshfdghdffg";
-    int page = 0;
-    
-    //when
-    [self.interactor requestVacanciesForKeyword:keyword Page:page];
-    
-    //then
-    XCTAssertTrue([self waitForLoad:10]);
-    XCTAssert([self.vacancies isKindOfClass:[NSArray class]]);
-    XCTAssert(self.vacancies.count == 0);
 }
 
 - (void)testFailsOnNegativePage
 {
     //given
-    NSString *keyword = @"грузчик";
-    int page = -1;
     
     //when
-    [self.interactor requestVacanciesForKeyword:keyword Page:page];
+    [self.interactor requestPageForKeyword:@"слесарь" PageID:-1];
     
     //then
     XCTAssertTrue(self.didFailCalled);
-    XCTAssert([self.errorMessage isEqualToString:@"Wrong page."]);
 }
 
-- (void)testReturnsArrayOfVacanciesOnGoodKeywordAndPage
+- (void)testSendsRequestToServiceIfBothPageAndKeywordAreGood
 {
     //given
-    NSString *keyword = @"грузчик, кладовщик";
-    int page = 0;
     
     //when
-    [self.interactor requestVacanciesForKeyword:keyword Page:page];
-     
-     //then
-     XCTAssertTrue([self waitForLoad:10]);
-     XCTAssert([self.vacancies isKindOfClass:[NSArray class]]);
-     for ( id vacancy in self.vacancies )
-     {
-         [vacancy isKindOfClass:[VacancyModel class]];
-     }
-     XCTAssert(self.vacancies.count > 0);
+    [self.interactor requestPageForKeyword:@"слесарь" PageID:0];
+    
+    //then
+    XCTAssertTrue(self.loadPageCalled);
 }
 
-- (void)testNotifiesDelegateOnFailWithErrorMessage
+- (void)testCallsDidLoadWhenPageLoadedAndPassesPage
+{
+    //given
+    VacanciesPageModel *page = [[VacanciesPageModel alloc] init];
+    
+    //when
+    [self.interactor didLoadPage:page];
+    
+    //then
+    XCTAssertTrue(self.didLoadCalled);
+    XCTAssertEqualObjects(self.page, page);
+}
+
+- (void)testNotifiesOnFailWithError
 {
     //given
     NSString *errorMessage = @"errorMessage";
-    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: NSLocalizedString(errorMessage, nil) };
+    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : errorMessage };
     NSError *error = [NSError errorWithDomain:@"test error domain"
                                          code:111
                                      userInfo:userInfo];
     
     //when
-    [self.interactor didFailLoadVacanciesWithError:error];
+    [self.interactor didFailLoadPageWithError:error];
     
     //then
     XCTAssertTrue(self.didFailCalled);
     XCTAssertEqualObjects(self.errorMessage, errorMessage);
 }
-
 @end

@@ -11,6 +11,4 @@
 
 @interface ShowVacanciesPageSubmoduleViewTableMaster : NSObject<UITableViewDelegate, UITableViewDataSource>
 @property NSArray *vacancies;
-@property UITableView *tableView;
-- (void)reloadTable;
 @end

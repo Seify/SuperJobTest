@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ShowVacanciesModuleRouter.h"
 
 @protocol ShowVacanciesPageSubmoduleRouterInput
-- (void)showPrevPageSubmodule;
-- (void)showNextPageSubmodule;
-- (void)showNextModule;
+- (void)showNextModuleWithVacancy:(id)vacancy;
+- (void)showPrevModule;
 @end
 
 @protocol ShowVacanciesPageSubmoduleRouterOutput
@@ -19,4 +19,5 @@
 
 @interface ShowVacanciesPageSubmoduleRouter : NSObject<ShowVacanciesPageSubmoduleRouterInput>
 @property (weak) id<ShowVacanciesPageSubmoduleRouterOutput> output;
+@property (weak) id<ShowVacanciesModuleRouterInput> parentRouter;
 @end

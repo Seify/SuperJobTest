@@ -7,31 +7,107 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "ConnectionService.h"
+#import "SessionService.h"
 
-@interface testConnectionService : XCTestCase <ConnectionServiceDelegate>
-@property ConnectionService *connectionService;
-@property BOOL didCallbackLoad;
-@property BOOL didCallbackFail;
+typedef void(^DataTaskCompletionHandler)(NSData *data, NSURLResponse *response, NSError *error);
+typedef void(^GetAllTasksCompletionHandler)(NSArray<__kindof NSURLSessionTask *> *tasks);
+
+@interface testSessionService : XCTestCase <SessionServiceDelegate>
+//sut
+@property SessionService *service;
+
+//markers for methods calls
+@property BOOL isServiseDidLoadDataCalled;
+@property BOOL isServiseDidFailWithErrorCalled;
+@property BOOL isCancelCalledOnTask;
+
+//returned by ConnectionService values
+@property NSUInteger taskID;
 @property NSData *data;
+@property NSError *error;
+@property DataTaskCompletionHandler dataTaskCompletionHandler;
+@property GetAllTasksCompletionHandler getAllTasksCompletionHandler;
+
+//test values
+@property NSURL *testURL;
+@property int testTaskID;
+@property NSData *testConnectionData;
+@property NSHTTPURLResponse *testResponse200;
+@property NSHTTPURLResponse *testResponse404;
 @end
 
-@implementation testConnectionService
+@interface SessionService()
+@property NSURLSession *session;
+@end
+
+@implementation testSessionService
 
 #pragma mark - Setup
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
-    self.connectionService = [ConnectionService sharedService];
-    self.connectionService.delegate = self;
+    self.service = [[SessionService alloc] initWithSession:(NSURLSession *)self];
+    self.service.delegate = self;
+    self.testURL = [NSURL URLWithString:@"https://api.superjob.ru/2.0/vacancies/?keyword=ios&page=0"];
+    NSString *pathToTestConnectionData = [[NSBundle bundleForClass:[self class]] pathForResource:@"testConnectionData" ofType:nil];
+    self.testConnectionData = [NSData dataWithContentsOfFile:pathToTestConnectionData];
+    self.testResponse200 = [[NSHTTPURLResponse alloc] initWithURL:self.testURL statusCode:200 HTTPVersion:nil headerFields:nil];
+    self.testResponse404 = [[NSHTTPURLResponse alloc] initWithURL:self.testURL statusCode:404 HTTPVersion:nil headerFields:nil];
+    self.testTaskID = 15;
 }
 
 - (void)tearDown
 {
+    self.taskID = 0;
     self.data = nil;
-    self.didCallbackLoad = NO;
-    self.didCallbackFail = NO;
+    self.error = nil;
+    self.dataTaskCompletionHandler = nil;
+    self.isServiseDidLoadDataCalled = NO;
+    self.isServiseDidFailWithErrorCalled = NO;
+    self.isCancelCalledOnTask = NO;
     [super tearDown];
+}
+
+#pragma mark - ConnectionServiceDelegate methods
+
+- (void)connectionServiceDidLoadData:(NSData *)data TaskID:(NSUInteger)taskID;
+{
+    self.isServiseDidLoadDataCalled = YES;
+    self.taskID = taskID;
+    self.data = data;
+};
+
+- (void)connectionDidFailWithError:(NSError *)error TaskID:(NSUInteger)taskID;
+{
+    self.isServiseDidFailWithErrorCalled = YES;
+    self.taskID = taskID;
+    self.error = error;
+};
+
+#pragma mark - NSURLSession methods
+
+- (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler
+{
+    self.dataTaskCompletionHandler = completionHandler;
+    return (NSURLSessionDataTask *)self;
+};
+
+- (void)getAllTasksWithCompletionHandler:(void (^)(NSArray<__kindof NSURLSessionTask *> *tasks))completionHandler
+{
+    self.getAllTasksCompletionHandler = completionHandler;
+}
+
+#pragma mark - NSURLSessionDataTask methods
+
+- (void)resume
+{
+    
+}
+
+- (void)cancel
+{
+    self.isCancelCalledOnTask = YES;
 }
 
 #pragma mark - Helpers
@@ -46,9 +122,9 @@
         {
             break;
         }
-    } while ( !self.didCallbackLoad );
+    } while ( !self.isServiseDidLoadDataCalled );
     
-    return self.didCallbackLoad;
+    return self.isServiseDidLoadDataCalled;
 }
 
 - (BOOL)waitForFail:(NSTimeInterval)timeoutSecs
@@ -61,41 +137,67 @@
         {
             break;
         }
-    } while ( !self.didCallbackFail );
+    } while ( !self.isServiseDidFailWithErrorCalled );
     
-    return self.didCallbackFail;
+    return self.isServiseDidFailWithErrorCalled;
 }
-
-#pragma mark - ConnectionServiceDelegate methods
-
-- (void)connectionServiceDidLoadData:(NSData *)data
-{
-    self.didCallbackLoad = YES;
-    self.data = data;
-};
-
-- (void)connectionDidFailWithError:(NSError *)error
-{
-    self.didCallbackFail = YES;
-    self.data = nil;
-};
 
 #pragma mark - Tests
 
-- (void)testConnectionServiceCallsItsDelegateOnLoadGoodURL
+- (void)testCallsDelegateDidFailWhenErrorWithAppropriateErrorAndTaskID
 {
-    NSURL *goodURL = [NSURL URLWithString:@"https://api.superjob.ru/:2.0/vacancies"];
-    [self.connectionService loadDataFromURL:goodURL];
-    [self waitForLoad:10];
-    XCTAssertTrue( self.didCallbackLoad );
+    //given
+    NSError *error = [[NSError alloc] init];
+    
+    //when
+    [self.service loadDataFromURL:self.testURL TaskID:self.testTaskID];
+    self.dataTaskCompletionHandler( self.testConnectionData, self.testResponse200, error );
+    [self waitForFail:1];
+    
+    //then
+    XCTAssertTrue(self.isServiseDidFailWithErrorCalled);
+    XCTAssertEqualObjects(self.error, error);
+    XCTAssertEqual(self.taskID, self.testTaskID);
 }
 
-- (void)testConnectionServiceCallsItsDelegateOnLoadBadURL
+- (void)testCallsDelegateDidFailWhenResponseCodeNot200
 {
-    NSURL *badURL = [NSURL URLWithString:@"nasty"];
-    [self.connectionService loadDataFromURL:badURL];
-    [self waitForFail:10];
-    XCTAssertTrue( self.didCallbackFail );
+    //given
+    
+    //when
+    [self.service loadDataFromURL:self.testURL TaskID:self.testTaskID];
+    self.dataTaskCompletionHandler( self.testConnectionData, self.testResponse404, nil );
+    [self waitForFail:1];
+    
+    //then
+    XCTAssertTrue(self.isServiseDidFailWithErrorCalled);
+}
+
+- (void)testCallsDelegateDataLoadedWhenResponse200WithAppropriateDataAndTaskID
+{
+    //given
+    
+    //when
+    [self.service loadDataFromURL:self.testURL TaskID:self.testTaskID];
+    self.dataTaskCompletionHandler( self.testConnectionData, self.testResponse200, nil );
+    [self waitForLoad:1];
+
+    //then
+    XCTAssertTrue(self.isServiseDidLoadDataCalled);
+    XCTAssertEqualObjects(self.data, self.testConnectionData);
+    XCTAssertEqual(self.taskID, self.testTaskID);
+}
+
+- (void)testCallsCancelOnTasksWhenShouldStopsAllTasks
+{
+    //given
+    
+    //when
+    [self.service stopAllTasks];
+    self.getAllTasksCompletionHandler(@[self]);
+    
+    //then
+    XCTAssertTrue(self.isCancelCalledOnTask);
 }
 
 @end

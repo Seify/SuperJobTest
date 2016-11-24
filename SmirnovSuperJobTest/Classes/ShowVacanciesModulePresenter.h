@@ -18,4 +18,5 @@
 @property (weak) id<ShowVacanciesModuleViewInput> view;
 @property id<ShowVacanciesModuleRouterInput> router;
 @property id<ShowVacanciesModuleInteractorInput> interactor;
+- (void)startWithKeyword:(NSString *)keyword;
 @end

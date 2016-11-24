@@ -11,10 +11,15 @@
 #import "VacancyModel.h"
 #import "ShowVacanciesPageSubmoduleViewVacancyCell.h"
 
+@interface ShowVacanciesPageSubmoduleView()
+@property ShowVacanciesPageSubmoduleViewTableMaster *tableMaster;
+@property (weak) UIAlertController *alert;
+@end
+
 @interface testShowVacanciesPageSubmoduleView : XCTestCase <ShowVacanciesPageSubmoduleViewOutput>
 @property BOOL didLoadCalled;
-@property ShowVacanciesPageSubmoduleView *showVacanciesPageSubmoduleView;
-@property ShowVacanciesPageSubmoduleViewTableMaster *showVacanciesPageSubmoduleViewTableMaster;
+@property ShowVacanciesPageSubmoduleView *view;
+@property NSArray *vacancies;
 @end
 
 @implementation testShowVacanciesPageSubmoduleView
@@ -25,17 +30,31 @@
 {
     [super setUp];
     UIStoryboard *s = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    self.showVacanciesPageSubmoduleView = [s instantiateViewControllerWithIdentifier:@"ShowVacanciesPageSubmoduleView"];
-    self.showVacanciesPageSubmoduleView.output = self;
-    [self.showVacanciesPageSubmoduleView view]; //calls viewDidLoad
+    self.view = [s instantiateViewControllerWithIdentifier:@"ShowVacanciesPageSubmoduleView"];
+    self.view.output = self;
+    self.view.tableMaster = (ShowVacanciesPageSubmoduleViewTableMaster *)self;
+    [self.view view]; //calls viewDidLoad
     [self waitForDidLoad:2];
 }
 
 - (void)tearDown
 {
-    self.showVacanciesPageSubmoduleView = nil;
+    self.view = nil;
     self.didLoadCalled = NO;
+    self.vacancies = nil;
     [super tearDown];
+}
+
+#pragma mark - ShowVacanciesPageSubmoduleViewTableMaster methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+};
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
 }
 
 #pragma mark - ShowVacanciesModuleViewOutput methods
@@ -44,6 +63,11 @@
 {
     self.didLoadCalled = YES;
 }
+
+- (void)errorOkPressed
+{
+    
+};
 
 #pragma mark - Helpers
 
@@ -79,10 +103,10 @@
     //given
 
     //when
-    [self.showVacanciesPageSubmoduleView showSpinner];
+    [self.view showSpinner];
     
     //then
-    XCTAssert(self.showVacanciesPageSubmoduleView.spinner.animating);
+    XCTAssert(self.view.spinner.animating);
 }
 
 - (void)testStopsAnimatingSpinner
@@ -90,23 +114,49 @@
     //given
     
     //when
-    [self.showVacanciesPageSubmoduleView showSpinner];
-    [self.showVacanciesPageSubmoduleView hideSpinner];
+    [self.view showSpinner];
+    [self.view hideSpinner];
     
     //then
-    XCTAssertFalse(self.showVacanciesPageSubmoduleView.spinner.animating);
+    XCTAssertFalse(self.view.spinner.animating);
 }
 
 - (void)testPassesDataToTableMaster
 {
     //given
-    id data = [[NSObject alloc] init];
+    VacanciesPageModel *page = [[VacanciesPageModel alloc] init];
+    page.vacancies = @[];
     
     //when
-    [self.showVacanciesPageSubmoduleView showData:data];
+    [self.view showPage:page];
     
     //then
-    XCTAssert(self.showVacanciesPageSubmoduleView.tableMaster.vacancies == data );
+    XCTAssert(self.vacancies == page.vacancies );
+}
+
+- (void)testErrorMessageStringIsCorrect
+{
+    //given
+    NSString *errorMessage = @"Some error";
+    
+    //when
+    [self.view showErrorMessage:errorMessage];
+    
+    //then
+    XCTAssert([errorMessage isEqualToString:self.view.alert.message]);
+}
+
+- (void)testErrorMessageDismissal
+{
+    //given
+    NSString *errorMessage = @"Empty keyword";
+    [self.view showErrorMessage:errorMessage];
+    
+    //when
+    [self.view dismissErrorMessage];
+    
+    //then
+    XCTAssertNil(self.view.alert);
 }
 
 @end

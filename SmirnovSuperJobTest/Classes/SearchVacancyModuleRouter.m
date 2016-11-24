@@ -7,12 +7,14 @@
 //
 
 #import "SearchVacancyModuleRouter.h"
+#import "ShowVacanciesModuleAssembler.h"
 
 @implementation SearchVacancyModuleRouter
 
-- (void)presentNextModuleWithData:(id)data
+- (void)presentNextModuleWithKeyword:(NSString *)keyword
 {
-    
+    UIViewController *showVacanciesModule = [ShowVacanciesModuleAssembler moduleWithRootController:self.rootController Keyword:keyword];
+    [self.rootController pushViewController:showVacanciesModule animated:YES];
 };
 
 @end

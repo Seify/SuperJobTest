@@ -9,9 +9,14 @@
 #import <XCTest/XCTest.h>
 #import "ShowVacanciesModuleView.h"
 
+@interface ShowVacanciesModuleView ()<UIPageViewControllerDataSource>
+@end
+
 @interface testShowVacanciesModuleView : XCTestCase <ShowVacanciesModuleViewOutput>
-@property ShowVacanciesModuleView *showVacanciesModuleView;
+@property ShowVacanciesModuleView *view;
 @property BOOL didLoadCalled;
+@property UIViewController *prevView;
+@property UIViewController *nextView;
 @end
 
 @implementation testShowVacanciesModuleView
@@ -21,14 +26,22 @@
 - (void)setUp
 {
     [super setUp];
-    self.showVacanciesModuleView = [[ShowVacanciesModuleView alloc] init];
-    self.showVacanciesModuleView.output = self;
+    UIStoryboard *s = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    self.view = [s instantiateViewControllerWithIdentifier:@"ShowVacanciesModuleView"];
+    self.view.output = self;
+    [self.view view]; //calls viewDidLoad
+    [self waitForDidLoad:2];
+    
+    self.prevView = [[UIViewController alloc] init];
+    self.nextView = [[UIViewController alloc] init];
 }
 
 - (void)tearDown
 {
-    self.showVacanciesModuleView = nil;
+    self.view = nil;
     self.didLoadCalled = NO;
+    self.prevView = nil;
+    self.nextView = nil;
     [super tearDown];
 }
 
@@ -38,6 +51,16 @@
 {
     self.didLoadCalled = YES;
 }
+
+- (UIViewController *)pageSubmoduleViewBeforePageSubmoduleView:(UIViewController *)pageSubmoduleView
+{
+    return self.prevView;
+};
+
+- (UIViewController *)pageSubmoduleViewAfterPageSubmoduleView:(UIViewController *)pageSubmoduleView
+{
+    return self.nextView;
+};
 
 #pragma mark - Helpers
 
@@ -63,11 +86,32 @@
     //given
     
     //when
-    [self.showVacanciesModuleView viewDidLoad];
     
     //then
-    [self waitForDidLoad:2];
     XCTAssertTrue(self.didLoadCalled);
 }
+
+- (void)testReturnsPrevControllerFromPresenter
+{
+    //given
+    
+    //when
+    UIViewController *prevView = [self.view pageViewController:[[UIPageViewController alloc] init] viewControllerBeforeViewController:[[UIViewController alloc] init]];
+    
+    //then
+    XCTAssertEqualObjects( prevView, self.prevView );
+}
+
+- (void)testReturnsNextControllerFromPresenter
+{
+    //given
+    
+    //when
+    UIViewController *nextView = [self.view pageViewController:[[UIPageViewController alloc] init] viewControllerAfterViewController:[[UIViewController alloc] init]];
+    
+    //then
+    XCTAssertEqualObjects( nextView, self.nextView );
+}
+
 
 @end

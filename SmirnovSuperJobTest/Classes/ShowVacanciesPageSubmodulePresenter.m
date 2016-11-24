@@ -9,20 +9,14 @@
 #import "ShowVacanciesPageSubmodulePresenter.h"
 
 @interface ShowVacanciesPageSubmodulePresenter()
-@property NSString *keyword;
-@property int page;
-@property NSArray *vacancies;
 @property BOOL viewLoaded;
 @end
 
 @implementation ShowVacanciesPageSubmodulePresenter
 
-- (void)start
+- (void)startWithPageID:(int)pageID Keyword:(NSString *)keyword
 {
-    if ( !self.vacancies )
-    {
-        [self.interactor requestVacanciesForKeyword:self.keyword Page:self.page];
-    }
+    [self.interactor requestPageForKeyword:keyword PageID:pageID];
 };
 
 #pragma mark - ShowVacanciesPageSubmoduleViewOutput methods
@@ -31,9 +25,10 @@
 {
     self.viewLoaded = YES;
     
-    if ( self.vacancies )
+    if ( self.page )
     {
-        [self.view showData:self.vacancies];
+        [self.view showPage:self.page];
+        [self.view hideSpinner];
     }
     else
     {
@@ -41,33 +36,27 @@
     }
 }
 
-- (void)userDidSwipeLeft
+- (void)errorOkPressed
 {
-    [self.router showPrevPageSubmodule];
-};
-
-- (void)userDidSwipeRight
-{
-    [self.router showNextPageSubmodule];
-};
-
-//- (void)userPressedOK
-//{
-//    
-//};
+    [self.view dismissErrorMessage];
+    [self.router showPrevModule];
+}
 
 #pragma mark - ShowVacanciesPageSubmoduleInteractorOutput methods
 
-- (void)didLoadVacancies:(NSArray *)vacancies
+- (void)didLoadPage:(VacanciesPageModel *)page
 {
-    self.vacancies = vacancies;
+    NSAssert(page, @"nil page!");
+    
+    self.page = page;
     if ( self.viewLoaded )
     {
-        [self.view showData:vacancies];
+        [self.view showPage:page];
+        [self.view hideSpinner];
     }
 };
 
-- (void)didFailLoadVacanciesWithErrorMessage:(NSString *)errorMessage
+- (void)didFailLoadPageWithErrorMessage:(NSString *)errorMessage;
 {
     [self.view showErrorMessage:errorMessage];
 };

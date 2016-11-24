@@ -10,13 +10,19 @@
 #import <UIKit/UIKit.h>
 
 @protocol ShowVacanciesModuleRouterInput
+- (UIViewController *)pageSubmoduleWithPage:(int)page Keyword:(NSString *)keyword;
+- (UIViewController *)pageSubmoduleViewBeforePageSubmoduleView:(UIViewController *)pageSubmoduleView;
+- (UIViewController *)pageSubmoduleViewAfterPageSubmoduleView:(UIViewController *)pageSubmoduleView;
+- (void)routeToPrevModule;
+- (void)routeToNextModuleWithVacancy:(id)vacancy;
 @end
 
 @protocol ShowVacanciesModuleRouterOutput
+- (void)willRouteToPrevModule;
 @end
-
 
 @interface ShowVacanciesModuleRouter : NSObject<ShowVacanciesModuleRouterInput>
 @property (weak) id<ShowVacanciesModuleRouterOutput> output;
-@property (weak) UIViewController *rootController;
+@property (weak) UINavigationController *rootController;
+
 @end

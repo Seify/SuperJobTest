@@ -22,5 +22,7 @@
 @property (weak) id<ShowVacanciesPageSubmoduleViewInput> view;
 @property id<ShowVacanciesPageSubmoduleInteractorInput> interactor;
 @property id<ShowVacanciesPageSubmoduleRouterInput> router;
-- (void)start;
+@property VacanciesPageModel *page;
+
+- (void)startWithPageID:(int)pageID Keyword:(NSString *)keyword;
 @end

@@ -14,7 +14,7 @@
 
 @implementation ShowVacanciesModuleAssembler
 
-+ (UIViewController *)moduleWithRootController:(UIViewController *)rootController Data:(id)data
++ (UIViewController *)moduleWithRootController:(UIViewController *)rootController Keyword:(NSString *)keyword
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     ShowVacanciesModuleView *view = [storyboard instantiateViewControllerWithIdentifier:@"ShowVacanciesModuleView"];
@@ -27,6 +27,8 @@
     presenter.router = router;
     interactor.output = presenter;
     router.rootController = rootController;
+    
+    [presenter startWithKeyword:keyword];
     
     return view;
 };

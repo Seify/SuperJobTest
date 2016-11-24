@@ -45,11 +45,6 @@
     SearchVacancyModuleRouter *router = (SearchVacancyModuleRouter *)presenter.router;
     
     //then
-    XCTAssertNotNil(view);
-    XCTAssertNotNil(presenter);
-    XCTAssertNotNil(interactor);
-    XCTAssertNotNil(router);
-
     XCTAssert( [view isMemberOfClass:[SearchVacancyModuleView class]] );
     XCTAssert( [presenter isMemberOfClass:[SearchVacancyModulePresenter class]] );
     XCTAssert( [interactor isMemberOfClass:[SearchVacancyModuleInteractor class]] );

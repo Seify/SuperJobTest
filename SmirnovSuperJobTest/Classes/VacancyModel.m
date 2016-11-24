@@ -9,5 +9,8 @@
 #import "VacancyModel.h"
 
 @implementation VacancyModel
-
 @end
+
+@implementation VacanciesPageModel
+@end
+
