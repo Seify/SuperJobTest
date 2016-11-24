@@ -1,1 +1,0 @@
-{"error":{"code":400,"message":"Необходимо передать ключ приложения. Зарегистрироваться можно по адресу https:\/\/api.superjob.ru\/register\/","error":"app_key_required"}}

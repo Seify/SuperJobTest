@@ -11,6 +11,6 @@
 
 @interface ShowVacanciesModuleAssembler : NSObject
 
-+ (UIViewController *)moduleWithRootController:(UIViewController *)rootController Keyword:(NSString *)keyword;
++ (UIViewController *)moduleWithRootController:(UINavigationController *)rootController Keyword:(NSString *)keyword;
 
 @end

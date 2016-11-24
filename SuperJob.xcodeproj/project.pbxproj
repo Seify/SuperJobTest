@@ -29,10 +29,8 @@
 		605A9EBD1DD71E1A00B1740A /* testConnectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9EBC1DD71E1A00B1740A /* testConnectionService.m */; };
 		605A9EC81DD747B800B1740A /* VacancyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9EC71DD747B800B1740A /* VacancyBuilder.m */; };
 		605A9ECF1DD74CE000B1740A /* testVacancyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9ECE1DD74CE000B1740A /* testVacancyBuilder.m */; };
-		605A9ED21DD74DFA00B1740A /* testVacancies in Resources */ = {isa = PBXBuildFile; fileRef = 605A9ED11DD74DFA00B1740A /* testVacancies */; };
 		605A9ED51DD7848300B1740A /* SuperJobService.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9ED41DD7848300B1740A /* SuperJobService.m */; };
 		605A9ED81DD787F300B1740A /* testSuperJobService.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9ED71DD787F300B1740A /* testSuperJobService.m */; };
-		605A9EDB1DD7BE6F00B1740A /* errorResponse in Resources */ = {isa = PBXBuildFile; fileRef = 605A9ED91DD7BE6F00B1740A /* errorResponse */; };
 		605A9F2E1DDA3D9600B1740A /* SearchVacancyModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9F2D1DDA3D9600B1740A /* SearchVacancyModuleView.m */; };
 		605A9F321DDA477400B1740A /* testSearchVacancyModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9F311DDA477400B1740A /* testSearchVacancyModuleView.m */; };
 		605A9F351DDA513400B1740A /* SearchVacancyModulePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 605A9F341DDA513400B1740A /* SearchVacancyModulePresenter.m */; };
@@ -102,11 +100,9 @@
 		605A9ECA1DD747DE00B1740A /* VacancyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VacancyModel.h; path = Classes/VacancyModel.h; sourceTree = "<group>"; };
 		605A9ECB1DD747DE00B1740A /* VacancyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VacancyModel.m; path = Classes/VacancyModel.m; sourceTree = "<group>"; };
 		605A9ECE1DD74CE000B1740A /* testVacancyBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testVacancyBuilder.m; sourceTree = "<group>"; };
-		605A9ED11DD74DFA00B1740A /* testVacancies */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testVacancies; sourceTree = "<group>"; };
 		605A9ED31DD7848300B1740A /* SuperJobService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SuperJobService.h; path = Classes/SuperJobService.h; sourceTree = "<group>"; };
 		605A9ED41DD7848300B1740A /* SuperJobService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SuperJobService.m; path = Classes/SuperJobService.m; sourceTree = "<group>"; };
 		605A9ED71DD787F300B1740A /* testSuperJobService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testSuperJobService.m; sourceTree = "<group>"; };
-		605A9ED91DD7BE6F00B1740A /* errorResponse */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = errorResponse; sourceTree = "<group>"; };
 		605A9F2C1DDA3D9600B1740A /* SearchVacancyModuleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchVacancyModuleView.h; path = Classes/SearchVacancyModuleView.h; sourceTree = "<group>"; };
 		605A9F2D1DDA3D9600B1740A /* SearchVacancyModuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchVacancyModuleView.m; path = Classes/SearchVacancyModuleView.m; sourceTree = "<group>"; };
 		605A9F311DDA477400B1740A /* testSearchVacancyModuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testSearchVacancyModuleView.m; sourceTree = "<group>"; };
@@ -200,13 +196,11 @@
 		60286EB61DE0DFE6000C6438 /* testShowVacanciesModule */ = {
 			isa = PBXGroup;
 			children = (
-				60FB13221DE5CBA200C62BA0 /* testShowVacanciesModuleRouter.m */,
-				60FB13201DE5C80F00C62BA0 /* testShowVacanciesModuleInteractor.m */,
-				60286EC81DE5AA54000C6438 /* testSearchVacancyModuleRouter.m */,
-				60286EC61DE57FF9000C6438 /* testShowVacanciesPageSubmoduleViewTableMaster.m */,
-				60286EBD1DE3413D000C6438 /* testShowVacanciesModulePresenter.m */,
-				60286E961DE0B100000C6438 /* testShowVacanciesModuleView.m */,
 				60286E941DE0A9FA000C6438 /* testShowVacanciesModuleAssembler.m */,
+				60286E961DE0B100000C6438 /* testShowVacanciesModuleView.m */,
+				60FB13201DE5C80F00C62BA0 /* testShowVacanciesModuleInteractor.m */,
+				60286EBD1DE3413D000C6438 /* testShowVacanciesModulePresenter.m */,
+				60FB13221DE5CBA200C62BA0 /* testShowVacanciesModuleRouter.m */,
 			);
 			name = testShowVacanciesModule;
 			sourceTree = "<group>";
@@ -214,9 +208,12 @@
 		60286EB71DE0DFF9000C6438 /* testShowVacanciesPageSubmodule */ = {
 			isa = PBXGroup;
 			children = (
-				60286EBB1DE307C5000C6438 /* testShowVacanciesPageSubmodulePresenter.m */,
-				60286EAB1DE0CFDF000C6438 /* testShowVacanciesPageSubmoduleView.m */,
 				60286EA91DE0BB71000C6438 /* testShowVacanciesPageSubmoduleAssembler.m */,
+				60286EAB1DE0CFDF000C6438 /* testShowVacanciesPageSubmoduleView.m */,
+				60286EC61DE57FF9000C6438 /* testShowVacanciesPageSubmoduleViewTableMaster.m */,
+				60286EB91DE2FE09000C6438 /* testShowVacanciesPageSubmoduleInteractor.m */,
+				60286EBB1DE307C5000C6438 /* testShowVacanciesPageSubmodulePresenter.m */,
+				60286ECC1DE5ACBA000C6438 /* testShowVacanciesPageSubmoduleRouter.m */,
 			);
 			name = testShowVacanciesPageSubmodule;
 			sourceTree = "<group>";
@@ -225,8 +222,6 @@
 			isa = PBXGroup;
 			children = (
 				60A6E5751DE6E23B007C65BD /* testConnectionData */,
-				605A9ED91DD7BE6F00B1740A /* errorResponse */,
-				605A9ED11DD74DFA00B1740A /* testVacancies */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -248,16 +243,7 @@
 			name = SearchVacancyModule;
 			sourceTree = "<group>";
 		};
-		60B882281DDCE6E5000A20EF /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				605A9EC61DD747B800B1740A /* VacancyBuilder.h */,
-				605A9EC71DD747B800B1740A /* VacancyBuilder.m */,
-			);
-			name = Helpers;
-			sourceTree = "<group>";
-		};
-		60B882291DDCE6F3000A20EF /* Services */ = {
+		60B882291DDCE6F3000A20EF /* ServicesAndHelpers */ = {
 			isa = PBXGroup;
 			children = (
 				60A6E5781DE71A31007C65BD /* ReachabilityManager.m */,
@@ -268,8 +254,10 @@
 				605A9EB91DD719EA00B1740A /* SessionService.m */,
 				605A9ED31DD7848300B1740A /* SuperJobService.h */,
 				605A9ED41DD7848300B1740A /* SuperJobService.m */,
+				605A9EC61DD747B800B1740A /* VacancyBuilder.h */,
+				605A9EC71DD747B800B1740A /* VacancyBuilder.m */,
 			);
-			name = Services;
+			name = ServicesAndHelpers;
 			sourceTree = "<group>";
 		};
 		60B8822A1DDCE6FD000A20EF /* SharedModel */ = {
@@ -288,27 +276,19 @@
 				605A9F311DDA477400B1740A /* testSearchVacancyModuleView.m */,
 				605A9F441DDBA20800B1740A /* testSearchVacancyModuleInteractor.m */,
 				605A9F371DDA534B00B1740A /* testSearchVacancyModulePresenter.m */,
+				60286EC81DE5AA54000C6438 /* testSearchVacancyModuleRouter.m */,
 			);
 			name = testSearchVacancyModule;
 			sourceTree = "<group>";
 		};
-		60B8822C1DDCE732000A20EF /* testServices */ = {
+		60B8822C1DDCE732000A20EF /* testServicesAndHelpers */ = {
 			isa = PBXGroup;
 			children = (
-				60286ECC1DE5ACBA000C6438 /* testShowVacanciesPageSubmoduleRouter.m */,
 				605A9EBC1DD71E1A00B1740A /* testConnectionService.m */,
 				605A9ED71DD787F300B1740A /* testSuperJobService.m */,
-			);
-			name = testServices;
-			sourceTree = "<group>";
-		};
-		60B8822D1DDCE742000A20EF /* testHelpers */ = {
-			isa = PBXGroup;
-			children = (
-				60286EB91DE2FE09000C6438 /* testShowVacanciesPageSubmoduleInteractor.m */,
 				605A9ECE1DD74CE000B1740A /* testVacancyBuilder.m */,
 			);
-			name = testHelpers;
+			name = testServicesAndHelpers;
 			sourceTree = "<group>";
 		};
 		60B882311DDCE913000A20EF /* ShowVacanciesModule */ = {
@@ -356,9 +336,8 @@
 				60EB78B91DD70F630082775C /* LaunchScreen.storyboard */,
 				60EB78BC1DD70F630082775C /* Info.plist */,
 				60EB78A81DD70F630082775C /* Supporting Files */,
-				60B882291DDCE6F3000A20EF /* Services */,
+				60B882291DDCE6F3000A20EF /* ServicesAndHelpers */,
 				60B8822A1DDCE6FD000A20EF /* SharedModel */,
-				60B882281DDCE6E5000A20EF /* Helpers */,
 				605A9F301DDA3DA200B1740A /* SearchVacancyModule */,
 				60B882311DDCE913000A20EF /* ShowVacanciesModule */,
 				60286E9C1DE0B779000C6438 /* ShowVacanciesPageSubmodule */,
@@ -378,13 +357,12 @@
 		60EB78C41DD70F630082775C /* SuperJobTests */ = {
 			isa = PBXGroup;
 			children = (
-				605A9ED01DD74DFA00B1740A /* assets */,
 				60EB78C71DD70F630082775C /* Info.plist */,
+				605A9ED01DD74DFA00B1740A /* assets */,
 				60B8822B1DDCE715000A20EF /* testSearchVacancyModule */,
 				60286EB71DE0DFF9000C6438 /* testShowVacanciesPageSubmodule */,
 				60286EB61DE0DFE6000C6438 /* testShowVacanciesModule */,
-				60B8822C1DDCE732000A20EF /* testServices */,
-				60B8822D1DDCE742000A20EF /* testHelpers */,
+				60B8822C1DDCE732000A20EF /* testServicesAndHelpers */,
 			);
 			name = SuperJobTests;
 			path = SmirnovSuperJobTestTests;
@@ -484,8 +462,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				605A9EDB1DD7BE6F00B1740A /* errorResponse in Resources */,
-				605A9ED21DD74DFA00B1740A /* testVacancies in Resources */,
 				60A6E5771DE6E2E7007C65BD /* testConnectionData in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

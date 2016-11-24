@@ -20,7 +20,6 @@
 
 @interface testShowVacanciesPageSubmodulePresenter : XCTestCase <ShowVacanciesPageSubmoduleViewInput, ShowVacanciesPageSubmoduleRouterInput, ShowVacanciesPageSubmoduleInteractorInput>
 @property ShowVacanciesPageSubmodulePresenter *presenter;
-
 @property BOOL requestPageCalled;
 @property BOOL showSpinnerCalled;
 @property BOOL hideSpinnerCalled;
@@ -28,6 +27,7 @@
 @property BOOL showErrorCalled;
 @property BOOL dismissErrorCalled;
 @property BOOL showPrevModuleCalled;
+@property VacanciesPageModel *page;
 @end
 
 @implementation testShowVacanciesPageSubmodulePresenter
@@ -98,6 +98,11 @@
 - (void)showPrevModule
 {
     self.showPrevModuleCalled = YES;
+};
+
+- (void)showNextModuleWithVacancy:(id)vacancy
+{
+    
 };
 
 #pragma mark - Tests
@@ -191,6 +196,19 @@
     
     //then
     XCTAssertFalse(self.hideSpinnerCalled);
+}
+
+- (void)testSavesErrorForLaterShowWhenPageLoadingFailsIfViewNotLoaded
+{
+    //given
+    NSString *errorMessageToShow = @"errorMessageToShow";
+    
+    //when
+    [self.presenter didFailLoadPageWithErrorMessage:errorMessageToShow];
+    
+    //then
+    XCTAssertFalse(self.showErrorCalled);
+    XCTAssertEqualObjects(errorMessageToShow, self.presenter.errorMessage);
 }
 
 - (void)testShowsErrorWhenPageLoadingFailsIfViewLoaded

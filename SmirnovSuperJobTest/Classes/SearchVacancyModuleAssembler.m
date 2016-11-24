@@ -14,7 +14,7 @@
 
 @implementation SearchVacancyModuleAssembler
 
-+ (UIViewController *)createModuleWithRootController:(UIViewController *)rootController
++ (UIViewController *)createModuleWithRootController:(UINavigationController *)rootController
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     SearchVacancyModuleView *view = [storyboard instantiateViewControllerWithIdentifier:@"SearchVacancyModuleView"];

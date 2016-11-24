@@ -17,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UIViewController *searchModuleEntryPoint = [SearchVacancyModuleAssembler createModuleWithRootController:self.window.rootViewController];
+    UIViewController *searchModuleEntryPoint = [SearchVacancyModuleAssembler createModuleWithRootController:(UINavigationController *)self.window.rootViewController];
     [(UINavigationController *)self.window.rootViewController pushViewController:searchModuleEntryPoint animated:YES];
     
     return YES;

@@ -14,7 +14,7 @@
 
 @implementation ShowVacanciesModuleAssembler
 
-+ (UIViewController *)moduleWithRootController:(UIViewController *)rootController Keyword:(NSString *)keyword
++ (UIViewController *)moduleWithRootController:(UINavigationController *)rootController Keyword:(NSString *)keyword
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     ShowVacanciesModuleView *view = [storyboard instantiateViewControllerWithIdentifier:@"ShowVacanciesModuleView"];
