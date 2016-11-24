@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--SuperJob-->
+        <!--Super Job-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="SearchVacancyModuleView" id="BYZ-38-t0r" customClass="SearchVacancyModuleView" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchVacancyModuleView" title="Super Job" id="BYZ-38-t0r" customClass="SearchVacancyModuleView" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -71,7 +71,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jne-iZ-BUB" id="SFg-IU-dLC">
-                                            <frame key="frameInset" width="375" height="84"/>
+                                            <frame key="frameInset" width="375" height="84.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сегодня" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jfl-Lw-P1w">
@@ -135,6 +135,93 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vI4-Mt-rXA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2830" y="123"/>
+        </scene>
+        <!--Вакансия-->
+        <scene sceneID="vXO-My-n2w">
+            <objects>
+                <viewController storyboardIdentifier="ShowVacancyDetailsModuleView" title="Вакансия" id="997-lU-bfq" customClass="ShowVacancyDetailsModuleView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ts5-nC-9fi"/>
+                        <viewControllerLayoutGuide type="bottom" id="1ho-QI-Rmc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zvK-MX-0US">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сегодня" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ED-EY-ZtL">
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Менеджер по работе с клиентами" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="whU-LE-nkh">
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25000 - 120000 Р" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBN-3j-wNp">
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Москва" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9Z-6e-vlI">
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сменный график работы" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cv-Lv-N5f">
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="С опытом от года" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmT-70-Tet">
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Среднее специальное образование" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ly-xr-csM">
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cmT-70-Tet" firstAttribute="leading" secondItem="3ED-EY-ZtL" secondAttribute="leading" id="3JG-P9-7Qt"/>
+                            <constraint firstItem="3ED-EY-ZtL" firstAttribute="top" secondItem="ts5-nC-9fi" secondAttribute="bottom" id="4XM-nA-CUq"/>
+                            <constraint firstItem="cmT-70-Tet" firstAttribute="trailing" secondItem="3ED-EY-ZtL" secondAttribute="trailing" id="8jb-oJ-weo"/>
+                            <constraint firstItem="3ED-EY-ZtL" firstAttribute="leading" secondItem="zvK-MX-0US" secondAttribute="leadingMargin" constant="10" id="8xd-Ml-Tgu"/>
+                            <constraint firstItem="xBN-3j-wNp" firstAttribute="top" secondItem="3ED-EY-ZtL" secondAttribute="bottom" constant="7.5" id="BFL-eL-oqc"/>
+                            <constraint firstItem="whU-LE-nkh" firstAttribute="leading" secondItem="3ED-EY-ZtL" secondAttribute="leading" id="EJB-e9-j5u"/>
+                            <constraint firstItem="xBN-3j-wNp" firstAttribute="leading" secondItem="3ED-EY-ZtL" secondAttribute="leading" id="L42-PW-aJQ"/>
+                            <constraint firstItem="whU-LE-nkh" firstAttribute="top" secondItem="xBN-3j-wNp" secondAttribute="bottom" constant="8" id="LcX-0V-EeO"/>
+                            <constraint firstItem="whU-LE-nkh" firstAttribute="trailing" secondItem="3ED-EY-ZtL" secondAttribute="trailing" id="OuG-if-ckZ"/>
+                            <constraint firstItem="2ly-xr-csM" firstAttribute="leading" secondItem="3ED-EY-ZtL" secondAttribute="leading" id="Vmn-eC-DvW"/>
+                            <constraint firstItem="E9Z-6e-vlI" firstAttribute="trailing" secondItem="3ED-EY-ZtL" secondAttribute="trailing" id="XhN-Kq-g9F"/>
+                            <constraint firstItem="2cv-Lv-N5f" firstAttribute="leading" secondItem="3ED-EY-ZtL" secondAttribute="leading" id="adZ-O5-fjN"/>
+                            <constraint firstItem="2cv-Lv-N5f" firstAttribute="top" secondItem="E9Z-6e-vlI" secondAttribute="bottom" constant="8" id="aeG-nn-3bB"/>
+                            <constraint firstItem="2ly-xr-csM" firstAttribute="top" secondItem="cmT-70-Tet" secondAttribute="bottom" constant="8" id="eEE-Dt-oVE"/>
+                            <constraint firstItem="xBN-3j-wNp" firstAttribute="trailing" secondItem="3ED-EY-ZtL" secondAttribute="trailing" id="eYa-ik-MMX"/>
+                            <constraint firstItem="E9Z-6e-vlI" firstAttribute="leading" secondItem="3ED-EY-ZtL" secondAttribute="leading" id="eZa-eb-YQY"/>
+                            <constraint firstItem="2cv-Lv-N5f" firstAttribute="trailing" secondItem="3ED-EY-ZtL" secondAttribute="trailing" id="hmL-3E-pia"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3ED-EY-ZtL" secondAttribute="trailing" id="ktc-Nz-1Qh"/>
+                            <constraint firstItem="2ly-xr-csM" firstAttribute="trailing" secondItem="3ED-EY-ZtL" secondAttribute="trailing" id="tjX-Ew-YFo"/>
+                            <constraint firstItem="cmT-70-Tet" firstAttribute="top" secondItem="2cv-Lv-N5f" secondAttribute="bottom" constant="8" id="uUJ-tR-vHH"/>
+                            <constraint firstItem="E9Z-6e-vlI" firstAttribute="top" secondItem="whU-LE-nkh" secondAttribute="bottom" constant="7.5" id="ua6-qZ-ez9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dateLabel" destination="3ED-EY-ZtL" id="ZFx-l0-ptp"/>
+                        <outlet property="educationLabel" destination="2ly-xr-csM" id="6Ni-26-axv"/>
+                        <outlet property="experienceLabel" destination="cmT-70-Tet" id="fyg-XP-PNG"/>
+                        <outlet property="paymentLabel" destination="xBN-3j-wNp" id="PfR-2h-Azz"/>
+                        <outlet property="professionLabel" destination="whU-LE-nkh" id="dio-nh-Mn5"/>
+                        <outlet property="scheduleLabel" destination="2cv-Lv-N5f" id="xgq-0r-pzU"/>
+                        <outlet property="townLabel" destination="E9Z-6e-vlI" id="Shw-vn-zc0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z3x-fg-Xg2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3877.5999999999999" y="122.78860569715144"/>
         </scene>
         <!--Show Vacancies Module View-->
         <scene sceneID="sSe-mW-bgz">
