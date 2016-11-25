@@ -27,7 +27,8 @@ static ShowVacanciesPageSubmoduleView *assembledSubmodule;
 @property ShowVacanciesPageSubmoduleView *firstPageSubmodule;
 @property ShowVacanciesPageSubmoduleView *secondPageSubmodule;
 @property BOOL willRouteToPrevModuleCalled;
-@property BOOL popCalled;
+@property BOOL isPopCalledOnRootViewController;
+@property BOOL isPushCalledOnRootController;
 @end
 
 @implementation testShowVacanciesModuleRouter
@@ -64,7 +65,8 @@ static ShowVacanciesPageSubmoduleView *assembledSubmodule;
     assembledSubmodule = nil;
     assemblingCalled = NO;
     self.willRouteToPrevModuleCalled = NO;
-    self.popCalled = NO;
+    self.isPopCalledOnRootViewController = NO;
+    self.isPushCalledOnRootController = NO;
     [super tearDown];
 }
 
@@ -91,8 +93,13 @@ static ShowVacanciesPageSubmoduleView *assembledSubmodule;
 
 - (nullable UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
-    self.popCalled = YES;
+    self.isPopCalledOnRootViewController = YES;
     return nil;
+};
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    self.isPushCalledOnRootController = YES;
 };
 
 #pragma mark - Tests
@@ -185,9 +192,19 @@ static ShowVacanciesPageSubmoduleView *assembledSubmodule;
     [self.router routeToPrevModule];
     
     //then
-    XCTAssertTrue(self.popCalled);
+    XCTAssertTrue(self.isPopCalledOnRootViewController);
 }
 
-#warning Test routeToNextModuleWithVacancy!
+- (void)testRoutesToNextModule
+{
+    //given
+    VacancyModel *testVacancy = [[VacancyModel alloc] init];
+    
+    //when
+    [self.router routeToNextModuleWithVacancy:testVacancy];
+    
+    //then
+    XCTAssertTrue(self.isPushCalledOnRootController);
+}
 
 @end

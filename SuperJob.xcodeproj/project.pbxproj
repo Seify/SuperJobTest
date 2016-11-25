@@ -14,6 +14,8 @@
 		601B24EE1DE763A1000F4663 /* ShowVacancyDetailsModulePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 601B24ED1DE763A1000F4663 /* ShowVacancyDetailsModulePresenter.m */; };
 		601B24F11DE764F8000F4663 /* ShowVacancyDetailsModuleAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = 601B24F01DE764F8000F4663 /* ShowVacancyDetailsModuleAssembler.m */; };
 		601B24F31DE76658000F4663 /* testShowVacancyDetailsAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = 601B24F21DE76658000F4663 /* testShowVacancyDetailsAssembler.m */; };
+		601B24F61DE76EDA000F4663 /* testShowVacancyDetailsModulePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 601B24F51DE76EDA000F4663 /* testShowVacancyDetailsModulePresenter.m */; };
+		601B24F81DE771DC000F4663 /* testShowVacancyDetailsModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 601B24F71DE771DC000F4663 /* testShowVacancyDetailsModuleView.m */; };
 		60286E951DE0A9FA000C6438 /* testShowVacanciesModuleAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = 60286E941DE0A9FA000C6438 /* testShowVacanciesModuleAssembler.m */; };
 		60286E971DE0B100000C6438 /* testShowVacanciesModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60286E961DE0B100000C6438 /* testShowVacanciesModuleView.m */; };
 		60286E9B1DE0B769000C6438 /* ShowVacanciesPageSubmoduleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60286E9A1DE0B768000C6438 /* ShowVacanciesPageSubmoduleView.m */; };
@@ -87,6 +89,8 @@
 		601B24EF1DE764F8000F4663 /* ShowVacancyDetailsModuleAssembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShowVacancyDetailsModuleAssembler.h; path = Classes/ShowVacancyDetailsModuleAssembler.h; sourceTree = "<group>"; };
 		601B24F01DE764F8000F4663 /* ShowVacancyDetailsModuleAssembler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShowVacancyDetailsModuleAssembler.m; path = Classes/ShowVacancyDetailsModuleAssembler.m; sourceTree = "<group>"; };
 		601B24F21DE76658000F4663 /* testShowVacancyDetailsAssembler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = testShowVacancyDetailsAssembler.m; path = SmirnovSuperJobTestTests/testShowVacancyDetailsAssembler.m; sourceTree = "<group>"; };
+		601B24F51DE76EDA000F4663 /* testShowVacancyDetailsModulePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = testShowVacancyDetailsModulePresenter.m; path = SmirnovSuperJobTestTests/testShowVacancyDetailsModulePresenter.m; sourceTree = "<group>"; };
+		601B24F71DE771DC000F4663 /* testShowVacancyDetailsModuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = testShowVacancyDetailsModuleView.m; path = SmirnovSuperJobTestTests/testShowVacancyDetailsModuleView.m; sourceTree = "<group>"; };
 		60286E941DE0A9FA000C6438 /* testShowVacanciesModuleAssembler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testShowVacanciesModuleAssembler.m; sourceTree = "<group>"; };
 		60286E961DE0B100000C6438 /* testShowVacanciesModuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testShowVacanciesModuleView.m; sourceTree = "<group>"; };
 		60286E991DE0B768000C6438 /* ShowVacanciesPageSubmoduleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShowVacanciesPageSubmoduleView.h; path = Classes/ShowVacanciesPageSubmoduleView.h; sourceTree = "<group>"; };
@@ -201,6 +205,8 @@
 		601B24F41DE76675000F4663 /* testShowVacancyDetailsModule */ = {
 			isa = PBXGroup;
 			children = (
+				601B24F71DE771DC000F4663 /* testShowVacancyDetailsModuleView.m */,
+				601B24F51DE76EDA000F4663 /* testShowVacancyDetailsModulePresenter.m */,
 				601B24F21DE76658000F4663 /* testShowVacancyDetailsAssembler.m */,
 			);
 			name = testShowVacancyDetailsModule;
@@ -565,6 +571,7 @@
 				60286EC71DE57FFA000C6438 /* testShowVacanciesPageSubmoduleViewTableMaster.m in Sources */,
 				60286E951DE0A9FA000C6438 /* testShowVacanciesModuleAssembler.m in Sources */,
 				605A9ECF1DD74CE000B1740A /* testVacancyBuilder.m in Sources */,
+				601B24F81DE771DC000F4663 /* testShowVacancyDetailsModuleView.m in Sources */,
 				601B24F31DE76658000F4663 /* testShowVacancyDetailsAssembler.m in Sources */,
 				605A9F381DDA534B00B1740A /* testSearchVacancyModulePresenter.m in Sources */,
 				60286EAA1DE0BB71000C6438 /* testShowVacanciesPageSubmoduleAssembler.m in Sources */,
@@ -572,6 +579,7 @@
 				60AC15E21DDCD9D900CD60DD /* testSearchVacancyModuleAssembler.m in Sources */,
 				60286EC91DE5AA54000C6438 /* testSearchVacancyModuleRouter.m in Sources */,
 				60286EBC1DE307C5000C6438 /* testShowVacanciesPageSubmodulePresenter.m in Sources */,
+				601B24F61DE76EDA000F4663 /* testShowVacancyDetailsModulePresenter.m in Sources */,
 				60FB13211DE5C80F00C62BA0 /* testShowVacanciesModuleInteractor.m in Sources */,
 				605A9EBD1DD71E1A00B1740A /* testConnectionService.m in Sources */,
 				60286EBA1DE2FE09000C6438 /* testShowVacanciesPageSubmoduleInteractor.m in Sources */,

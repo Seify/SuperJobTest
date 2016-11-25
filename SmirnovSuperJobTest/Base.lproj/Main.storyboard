@@ -210,12 +210,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="compensationLabel" destination="2cv-Lv-N5f" id="CfX-gj-O8d"/>
                         <outlet property="dateLabel" destination="3ED-EY-ZtL" id="ZFx-l0-ptp"/>
                         <outlet property="educationLabel" destination="2ly-xr-csM" id="6Ni-26-axv"/>
                         <outlet property="experienceLabel" destination="cmT-70-Tet" id="fyg-XP-PNG"/>
                         <outlet property="paymentLabel" destination="xBN-3j-wNp" id="PfR-2h-Azz"/>
                         <outlet property="professionLabel" destination="whU-LE-nkh" id="dio-nh-Mn5"/>
-                        <outlet property="scheduleLabel" destination="2cv-Lv-N5f" id="xgq-0r-pzU"/>
                         <outlet property="townLabel" destination="E9Z-6e-vlI" id="Shw-vn-zc0"/>
                     </connections>
                 </viewController>

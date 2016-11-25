@@ -26,6 +26,7 @@
 @end
 
 @interface ShowVacanciesPageSubmoduleView : UIViewController<ShowVacanciesPageSubmoduleViewInput>
+@property ShowVacanciesPageSubmoduleViewTableMaster *tableMaster;
 @property VacanciesPageModel *page;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;

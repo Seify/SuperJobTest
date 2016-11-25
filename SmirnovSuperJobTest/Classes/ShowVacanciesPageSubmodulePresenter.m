@@ -74,5 +74,11 @@
     }
 };
 
+#pragma mark - ShowVacanciesPageSubmoduleViewTableMasterOutput methods
+
+- (void)didSelectVacancy:(VacancyModel *)vacancy
+{
+    [self.router showNextModuleWithVacancy:vacancy];
+}
 
 @end

@@ -20,6 +20,7 @@
 @property NSString *experienceName;
 @property NSString *date_published;
 @property NSString *firmName;
+@property NSString *compensation;
 @end
 
 @interface VacanciesPageModel : NSObject

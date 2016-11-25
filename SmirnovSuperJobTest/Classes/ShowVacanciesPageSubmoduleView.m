@@ -10,20 +10,9 @@
 
 @interface ShowVacanciesPageSubmoduleView()
 @property (weak) UIAlertController *alert;
-@property ShowVacanciesPageSubmoduleViewTableMaster *tableMaster;
 @end
 
 @implementation ShowVacanciesPageSubmoduleView
-
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder])
-    {
-        self.tableMaster = [[ShowVacanciesPageSubmoduleViewTableMaster alloc] init];
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {

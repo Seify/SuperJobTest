@@ -27,7 +27,9 @@
 @property BOOL showErrorCalled;
 @property BOOL dismissErrorCalled;
 @property BOOL showPrevModuleCalled;
+@property BOOL isRouteToNextModuleCalled;
 @property VacanciesPageModel *page;
+@property VacancyModel *vacancyPassedToRouter;
 @end
 
 @implementation testShowVacanciesPageSubmodulePresenter
@@ -55,7 +57,8 @@
     self.showErrorCalled = NO;
     self.dismissErrorCalled = NO;
     self.showPrevModuleCalled = NO;
-
+    self.isRouteToNextModuleCalled = NO;
+    self.vacancyPassedToRouter = nil;
     [super tearDown];
 }
 
@@ -100,9 +103,10 @@
     self.showPrevModuleCalled = YES;
 };
 
-- (void)showNextModuleWithVacancy:(id)vacancy
+- (void)showNextModuleWithVacancy:(VacancyModel *)vacancy
 {
-    
+    self.isRouteToNextModuleCalled = YES;
+    self.vacancyPassedToRouter = vacancy;
 };
 
 #pragma mark - Tests
@@ -243,6 +247,19 @@
     
     //then
     XCTAssertTrue(self.showPrevModuleCalled);
+}
+
+- (void)testCallsRouteToNextModuleWhenVacancySelected
+{
+    //given
+    VacancyModel *testVacancy = [[VacancyModel alloc] init];
+    
+    //when
+    [self.presenter didSelectVacancy:testVacancy];
+    
+    //then
+    XCTAssertTrue(self.isRouteToNextModuleCalled);
+    XCTAssertEqualObjects(self.vacancyPassedToRouter, testVacancy);
 }
 
 @end

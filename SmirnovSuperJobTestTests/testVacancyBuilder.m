@@ -150,6 +150,7 @@
                                       @"education" : @{@"title" : @"высшее"},
                                       @"experience" : @{@"title" : @"без опыта"},
                                       @"firm_name" : @"Правительство РФ",
+                                      @"compensation" : @"Полнaя занятость."
                                       };
     
     //when
@@ -164,6 +165,7 @@
     XCTAssertEqualObjects(vm.educationName, @"высшее");
     XCTAssertEqualObjects(vm.experienceName, @"без опыта");
     XCTAssertEqualObjects(vm.firmName, @"Правительство РФ");
+    XCTAssertEqualObjects(vm.compensation, @"Полнaя занятость.");
 }
 
 - (void)testInternalReturnsErrorForJSONWithError

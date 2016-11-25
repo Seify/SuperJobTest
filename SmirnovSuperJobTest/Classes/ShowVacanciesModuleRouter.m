@@ -9,6 +9,7 @@
 #import "ShowVacanciesModuleRouter.h"
 #import "ShowVacanciesPageSubmoduleAssembler.h"
 #import "ShowVacanciesPageSubmoduleView.h"
+#import "ShowVacancyDetailsModuleAssembler.h"
 
 @interface ShowVacanciesModuleRouter()
 @property NSMutableArray *submodules;
@@ -66,7 +67,8 @@
 
 - (void)routeToNextModuleWithVacancy:(id)vacancy
 {
-#warning Realize this!
+    UIViewController *nextModuleView = [ShowVacancyDetailsModuleAssembler moduleWithRootController:self.rootController Vacancy:vacancy];
+    [self.rootController pushViewController:nextModuleView animated:YES];
 };
 
 @end

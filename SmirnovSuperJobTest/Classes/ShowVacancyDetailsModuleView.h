@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *paymentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *professionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *townLabel;
-@property (weak, nonatomic) IBOutlet UILabel *scheduleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *compensationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *experienceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *educationLabel;
 @property id<ShowVacancyDetailsModuleViewOutput>output;

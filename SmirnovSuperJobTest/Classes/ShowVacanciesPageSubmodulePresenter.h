@@ -12,7 +12,7 @@
 #import "ShowVacanciesPageSubmodulePresenter.h"
 #import "ShowVacanciesPageSubmoduleRouter.h"
 
-@protocol ShowVacanciesPageSubmodulePresenterInput<ShowVacanciesPageSubmoduleViewOutput, ShowVacanciesPageSubmoduleInteractorOutput, ShowVacanciesPageSubmoduleRouterOutput>
+@protocol ShowVacanciesPageSubmodulePresenterInput<ShowVacanciesPageSubmoduleViewOutput, ShowVacanciesPageSubmoduleInteractorOutput, ShowVacanciesPageSubmoduleRouterOutput, ShowVacanciesPageSubmoduleViewTableMasterOutput>
 @end
 
 @protocol ShowVacanciesPageSubmodulePresenterOutput

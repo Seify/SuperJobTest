@@ -29,7 +29,7 @@
     self.view = [storyboard instantiateViewControllerWithIdentifier:@"SearchVacancyModuleView"];
     self.view.output = self;
     [self.view view]; //to call ViewDidLoad
-    [self waitForDidLoad:2];
+    [self waitForDidLoad:1];
 }
 
 - (void)tearDown

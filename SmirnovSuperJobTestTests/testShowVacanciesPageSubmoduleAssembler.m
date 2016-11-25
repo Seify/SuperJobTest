@@ -43,17 +43,20 @@
     
     //when
     ShowVacanciesPageSubmoduleView *view = (ShowVacanciesPageSubmoduleView *)[ShowVacanciesPageSubmoduleAssembler submoduleWithParentRouter:parentRouter Page:0 Keyword:@"грузчик"];
+    ShowVacanciesPageSubmoduleViewTableMaster *tableMaster = (ShowVacanciesPageSubmoduleViewTableMaster *)view.tableMaster;
     ShowVacanciesPageSubmodulePresenter *presenter = (ShowVacanciesPageSubmodulePresenter *)view.output;
     ShowVacanciesPageSubmoduleInteractor *interactor = (ShowVacanciesPageSubmoduleInteractor *)presenter.interactor;
     ShowVacanciesPageSubmoduleRouter *router = (ShowVacanciesPageSubmoduleRouter *)presenter.router;
     
     //then
     XCTAssert( [view isMemberOfClass:[ShowVacanciesPageSubmoduleView class]] );
+    XCTAssert( [tableMaster isMemberOfClass:[ShowVacanciesPageSubmoduleViewTableMaster class]] );
     XCTAssert( [presenter isMemberOfClass:[ShowVacanciesPageSubmodulePresenter class]] );
     XCTAssert( [interactor isMemberOfClass:[ShowVacanciesPageSubmoduleInteractor class]] );
     XCTAssert( [router isMemberOfClass:[ShowVacanciesPageSubmoduleRouter class]] );
     
     XCTAssert( view.output == presenter );
+    XCTAssert( view.tableMaster == tableMaster );
     XCTAssert( presenter.view == view );
     XCTAssert( presenter.interactor == interactor );
     XCTAssert( presenter.router == router );

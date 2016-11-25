@@ -92,7 +92,7 @@
 + (VacancyModel *)vacancyFromDictionary:(NSDictionary *)objectDict
 {
     VacancyModel *vm = [[VacancyModel alloc] init];
-
+    
     vm.profession               = objectDict[@"profession"];
     vm.date_published           = [self dateFromUnixtime:[objectDict[@"date_published"] intValue]];
     vm.work                     = objectDict[@"work"];
@@ -102,6 +102,7 @@
     vm.educationName            = [objectDict[@"education"] objectForKey:@"title"];
     vm.experienceName           = [objectDict[@"experience"] objectForKey:@"title"];
     vm.firmName                 = objectDict[@"firm_name"];
+    vm.compensation             = objectDict[@"compensation"];
 
     return vm;
 }

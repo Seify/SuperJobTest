@@ -8,6 +8,15 @@
 
 #import "ShowVacancyDetailsModulePresenter.h"
 
+@interface ShowVacancyDetailsModulePresenter()
+@property BOOL viewLoaded;
+@end
+
 @implementation ShowVacancyDetailsModulePresenter
+
+- (void)viewDidLoad
+{
+    [self.view showVacancyDetails:self.vacancy];
+}
 
 @end

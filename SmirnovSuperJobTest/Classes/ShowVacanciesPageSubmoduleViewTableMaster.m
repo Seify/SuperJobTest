@@ -8,9 +8,10 @@
 
 #import "ShowVacanciesPageSubmoduleViewTableMaster.h"
 #import "ShowVacanciesPageSubmoduleViewVacancyCell.h"
-#import "VacancyModel.h"
 
 @implementation ShowVacanciesPageSubmoduleViewTableMaster
+
+#pragma mark - UITableViewDataSource methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -29,5 +30,12 @@
 
     return cell;
 };
+
+#pragma mark - UITableViewDelegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.output didSelectVacancy:self.vacancies[indexPath.row]];
+}
 
 @end

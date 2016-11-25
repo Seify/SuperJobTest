@@ -14,24 +14,23 @@
 
 @implementation ShowVacancyDetailsModuleView
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self.output viewDidLoad];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark - ShowVacancyDetailsModuleViewInput methods
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+- (void)showVacancyDetails:(VacancyModel *)vm
+{
+    self.dateLabel.text = vm.date_published;
+    self.paymentLabel.text = vm.payment;
+    self.professionLabel.text = vm.profession;
+    self.townLabel.text = vm.townName;
+    self.compensationLabel.text = vm.compensation;
+    self.experienceLabel.text = vm.experienceName;
+    self.educationLabel.text = vm.educationName;
+};
 
 @end

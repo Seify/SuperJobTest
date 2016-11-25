@@ -12,9 +12,10 @@
 #import "ShowVacanciesPageSubmoduleViewVacancyCell.h"
 #import "ShowVacanciesPageSubmoduleView.h"
 
-@interface testShowVacanciesPageSubmoduleViewTableMaster : XCTestCase
+@interface testShowVacanciesPageSubmoduleViewTableMaster : XCTestCase<ShowVacanciesPageSubmoduleViewTableMasterOutput>
 @property ShowVacanciesPageSubmoduleViewTableMaster *tableMaster;
 @property UITableView *tableView;
+@property BOOL isVacancySelectedCalledOnOutput;
 @end
 
 @implementation testShowVacanciesPageSubmoduleViewTableMaster
@@ -29,14 +30,23 @@
     UIStoryboard *s = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ShowVacanciesPageSubmoduleView *vc = [s instantiateViewControllerWithIdentifier:@"ShowVacanciesPageSubmoduleView"];
     self.tableView = vc.tableView;
+    self.tableMaster.output = self;
 }
 
 - (void)tearDown
 {
+    self.isVacancySelectedCalledOnOutput = NO;
     self.tableMaster = nil;
     self.tableView = nil;
     [super tearDown];
 }
+
+#pragma mark - ShowVacanciesPageSubmoduleViewTableMasterOutput methods
+
+- (void)didSelectVacancy:(VacancyModel *)vacancy
+{
+    self.isVacancySelectedCalledOnOutput = YES;
+};
 
 #pragma mark - Helpers
 
@@ -82,6 +92,17 @@
     XCTAssertEqual(cell.dateLabel.text, vm2.date_published);
     XCTAssertEqual(cell.compensationLabel.text, vm2.payment);
     XCTAssertEqual(cell.employerLabel.text, vm2.firmName);
+}
+
+- (void)testNotifiesViewWhenCellSelected
+{
+    //given
+    
+    //when
+    [self.tableMaster tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    
+    //then
+    XCTAssert(self.isVacancySelectedCalledOnOutput);
 }
 
 @end

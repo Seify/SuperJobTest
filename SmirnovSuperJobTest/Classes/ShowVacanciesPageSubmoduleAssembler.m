@@ -22,6 +22,8 @@
     ShowVacanciesPageSubmoduleInteractor *interactor = [[ShowVacanciesPageSubmoduleInteractor alloc] init];
     ShowVacanciesPageSubmoduleRouter *router = [[ShowVacanciesPageSubmoduleRouter alloc] init];
     view.output = presenter;
+    view.tableMaster = [[ShowVacanciesPageSubmoduleViewTableMaster alloc] init];
+    view.tableMaster.output = presenter;
     presenter.view = view;
     presenter.interactor = interactor;
     presenter.router = router;

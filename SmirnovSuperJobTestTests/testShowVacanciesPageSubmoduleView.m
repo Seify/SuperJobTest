@@ -12,7 +12,6 @@
 #import "ShowVacanciesPageSubmoduleViewVacancyCell.h"
 
 @interface ShowVacanciesPageSubmoduleView()
-@property ShowVacanciesPageSubmoduleViewTableMaster *tableMaster;
 @property (weak) UIAlertController *alert;
 @end
 
